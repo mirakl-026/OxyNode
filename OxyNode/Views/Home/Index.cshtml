@@ -1,15 +1,340 @@
 ﻿
 @{
-    Layout = null;
+
 }
 
-<!DOCTYPE html>
+<header class="header">
+    <a class="logo" href="#">LOGO</a>
+    <ul class="menu">
+        <li class="menu__item">
+            <a class="menu__link drop" href="#">Приборы</a>
+            <div class="drop_menu">
+                <a href="#" class="drop_menu__link">Стационарные</a>
+                <a href="#" class="drop_menu__link">Переносные</a>
+                <a href="#" class="drop_menu__link">Индивидуальные</a>
+                <a href="#" class="drop_menu__link">Комплектующие</a>
+                <a href="#" class="drop_menu__link">Дополнительное оборудование</a>
+            </div>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link drop" href="#">Услуги</a>
+            <div class="drop_menu">
+                <a href="#" class="drop_menu__link">Ремонт</a>
+                <a href="#" class="drop_menu__link">Калибровка</a>
+                <a href="#" class="drop_menu__link">Поверка</a>
+            </div>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link drop" href="#">База знаний</a>
+            <div class="drop_menu">
+                <a href="#" class="drop_menu__link">Сертификаты и свидетельства</a>
+                <a href="#" class="drop_menu__link">Техническая документация</a>
+                <a href="#" class="drop_menu__link">Методики выполнения измерений</a>
+            </div>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link" href="#">О нас</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link" href="#">Контакты</a>
+        </li>
+    </ul>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-</body>
-</html>
+    <div class="search_wrapper">
+        <input class="search" type="search" placeholder="Найти..." onfocus="popup_display()" onblur="popup_none()" autocomplete="off">
+        <a href="#" class="icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.3187 18.0273L13.232 11.9406C14.1766 10.7195 14.6875 9.22656 14.6875 7.65625C14.6875 5.77656 13.9539 4.01406 12.6273 2.68516C11.3008 1.35625 9.53359 0.625 7.65625 0.625C5.77891 0.625 4.01172 1.35859 2.68516 2.68516C1.35625 4.01172 0.625 5.77656 0.625 7.65625C0.625 9.53359 1.35859 11.3008 2.68516 12.6273C4.01172 13.9562 5.77656 14.6875 7.65625 14.6875C9.22656 14.6875 10.7172 14.1766 11.9383 13.2344L18.025 19.3187C18.0428 19.3366 18.064 19.3508 18.0874 19.3604C18.1107 19.3701 18.1357 19.3751 18.1609 19.3751C18.1862 19.3751 18.2112 19.3701 18.2345 19.3604C18.2578 19.3508 18.279 19.3366 18.2969 19.3187L19.3187 18.2992C19.3366 18.2814 19.3508 18.2602 19.3604 18.2369C19.3701 18.2135 19.3751 18.1885 19.3751 18.1633C19.3751 18.138 19.3701 18.113 19.3604 18.0897C19.3508 18.0664 19.3366 18.0452 19.3187 18.0273ZM11.3688 11.3688C10.375 12.3602 9.05781 12.9062 7.65625 12.9062C6.25469 12.9062 4.9375 12.3602 3.94375 11.3688C2.95234 10.375 2.40625 9.05781 2.40625 7.65625C2.40625 6.25469 2.95234 4.93516 3.94375 3.94375C4.9375 2.95234 6.25469 2.40625 7.65625 2.40625C9.05781 2.40625 10.3773 2.95 11.3688 3.94375C12.3602 4.9375 12.9062 6.25469 12.9062 7.65625C12.9062 9.05781 12.3602 10.3773 11.3688 11.3688Z" fill="black" />
+            </svg>
+        </a>
+    </div>
+</header>
+<!-- header -->
+
+<div class="popup" onmousedown="return false">
+    <a class="tag">Водоканал</a>
+    <a class="tag">Газпром</a>
+    <a class="tag">Металлургия</a>
+    <a class="tag">Выбросы</a>
+    <a class="tag">Говно</a>
+    <a class="tag">Жопа</a>
+    <a class="tag">Говно</a>
+    <a class="tag">Жопа</a>
+    <a class="tag">Ничего</a>
+    <a class="tag">Всё</a>
+    <a class="tag">Водоканал</a>
+    <a class="tag">Газпром</a>
+    <a class="tag">Металлургия</a>
+    <a class="tag">Выбросы</a>
+    <a class="tag">Говно</a>
+    <a class="tag">Жопа</a>
+    <a class="tag">Говно</a>
+    <a class="tag">Жопа</a>
+    <a class="tag">Ничего</a>
+    <a class="tag">Всё</a>
+    <a class="tag">Водоканал</a>
+    <a class="tag">Газпром</a>
+    <a class="tag">Металлургия</a>
+    <a class="tag">Выбросы</a>
+    <a class="tag">Говно</a>
+    <a class="tag">Жопа</a>
+    <a class="tag">Говно</a>
+    <a class="tag">Жопа</a>
+    <a class="tag">Ничего</a>
+    <a class="tag">Всё</a>
+</div>
+
+<section style="margin-top: 20px; font-size: 20px;">
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia obcaecati illo temporibus corporis eligendi nihil fugiat quibusdam? Dolores, iure hic veritatis obcaecati doloribus nobis non neque, consectetur molestias mollitia laborum.
+    <br>
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi, veniam ab? Labore sed suscipit optio dicta natus ea quos veritatis tempore voluptate magni. Aut quae doloribus ex eligendi qui eum?
+    <br>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas temporibus reiciendis deserunt unde maiores velit praesentium aliquam? Voluptates pariatur sed laborum nemo tempora blanditiis quod odit, harum rerum numquam recusandae!
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum rerum rem voluptatem! Assumenda aliquid iste doloribus magni quam repellat architecto, debitis ad illo, sed, officia fugit ipsum distinctio a similique?
+    Animi delectus sit voluptatibus quibusdam soluta nulla hic, libero nihil autem tempore, ab perferendis debitis. Et aut voluptate facere quae quis rem quidem temporibus perferendis cupiditate sapiente! Ea, alias officiis.
+    Ad, adipisci minus quidem ullam nulla harum culpa nobis voluptas perspiciatis aspernatur maxime possimus. Sapiente, provident, ea cupiditate sint aliquam nostrum temporibus qui sunt eius distinctio, enim quam nesciunt maxime?
+    Excepturi tenetur ipsa necessitatibus assumenda voluptas ad repudiandae nesciunt, atque aliquam deserunt labore fugiat? Doloribus quibusdam error placeat dolorum esse saepe cumque facilis magni animi autem asperiores, sed obcaecati consequatur.
+    Consequatur doloribus modi dicta. Corrupti iure assumenda perspiciatis, velit magni perferendis. Labore expedita ullam eligendi quidem nam laboriosam molestiae nihil tempora aliquam. Cumque, at. Aliquam amet totam saepe nobis pariatur?
+    Obcaecati, enim. Labore quisquam facere, vel, impedit magnam, aut sunt ipsa expedita atque incidunt ipsum blanditiis dolore consectetur aperiam! Numquam ad ut autem architecto voluptate expedita animi modi minima molestiae!
+    Aut aliquid ratione quam. Autem rerum sunt doloribus temporibus! Omnis, illo quam id esse sequi quo nulla accusamus magni ratione! Suscipit dolor hic distinctio aliquid quam expedita officiis recusandae ipsum?
+    Consequuntur ab obcaecati cumque illum quaerat quo pariatur et consectetur saepe tempore, voluptatem cupiditate distinctio ex reprehenderit veniam velit deserunt eius quam doloribus blanditiis culpa quae, inventore nesciunt! Pariatur, excepturi.
+    Impedit nisi consequatur unde laborum quae neque eum odio debitis eius laboriosam cumque, obcaecati ex voluptates temporibus modi. Officiis voluptatibus, veniam nobis officia dolorem fugiat ad deserunt rem dolore odio.
+    Commodi alias consequatur voluptatem corporis explicabo culpa est illum et dolor! Sed et nesciunt quo ea molestiae rem nam exercitationem, provident harum, minus temporibus est. Esse atque nam ea quia.
+    Delectus eveniet debitis alias molestias eum voluptatem quisquam magni laudantium hic, in dicta laboriosam aperiam neque nam vitae minus perspiciatis quibusdam! Distinctio harum natus odio culpa ratione facere sunt labore?
+    Vitae praesentium, labore tempora veritatis dolor aliquam ullam assumenda odit excepturi hic eaque dolore, natus, quam voluptatum commodi? Voluptate eaque optio a ad iusto, nostrum atque deserunt recusandae doloribus vero.
+    Minima at aut nam optio quae voluptates incidunt sequi enim impedit nobis. Assumenda quae quisquam repellendus officia ipsum recusandae minus nam ea saepe qui, aspernatur, reiciendis veniam laudantium est culpa?
+    Fugiat quaerat cupiditate nihil est porro deserunt corporis molestiae. Accusamus, eaque corporis praesentium iure temporibus fuga recusandae reiciendis tempora harum dicta doloremque commodi minus, aspernatur soluta omnis suscipit, ipsum deserunt!
+    Aliquid iusto illo ratione nostrum asperiores ut ipsum dignissimos perferendis vitae non, sapiente voluptas, inventore adipisci unde nesciunt voluptatum vero, modi cupiditate. Doloribus earum, saepe deserunt id quasi praesentium ipsam.
+    Excepturi vitae totam dolor recusandae sed vel impedit nisi quibusdam magnam culpa, obcaecati at natus aliquam non ullam sapiente similique, eveniet beatae? Non atque consequuntur maxime molestias itaque hic animi?
+    Dolor minima quos cupiditate eos et facere dolorum explicabo vel libero rerum veniam unde quod hic, distinctio error ex modi cumque totam dicta quisquam impedit quibusdam architecto numquam quas? Quasi.
+    Architecto mollitia voluptatem ea nesciunt pariatur ipsum impedit? Quo soluta explicabo provident blanditiis ratione, ea amet obcaecati expedita laboriosam unde nemo tempora harum facilis, numquam magni architecto repudiandae fugiat et.
+    Impedit fugit fuga minus quia voluptates. Obcaecati quis beatae modi dolorem ipsa nostrum quam eum, architecto aspernatur maxime eos et minus saepe magni asperiores blanditiis dolores repellat. Sapiente, autem blanditiis.
+    Dicta nihil voluptatem totam asperiores ullam cumque accusamus dolorem vero non eligendi consequuntur illum architecto quae corporis perferendis vitae, aperiam laudantium praesentium voluptate labore quidem dolores repellat! Soluta, laboriosam earum.
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat exercitationem, corporis eaque quos magnam minima aperiam. Sed aliquam consectetur dolores? Dolore neque assumenda iste repudiandae tempora facere eius id nihil.
+    At, tempore cupiditate quas obcaecati facere, facilis animi sunt, atque iusto ad impedit incidunt nam? Excepturi modi voluptatibus, aliquam qui veniam enim explicabo? Aliquam voluptates a adipisci iste aperiam temporibus?
+    Nulla animi, modi perferendis possimus, voluptatum eaque provident nam tenetur dicta voluptates, voluptatibus qui. Ipsum aperiam voluptate fuga, at harum quos eligendi adipisci deleniti, cumque sapiente molestias, asperiores autem fugiat?
+    Debitis error architecto inventore quam tempora? Quibusdam, itaque excepturi in quaerat voluptates ab. Quae, quis autem exercitationem dolore similique nulla, nobis natus porro voluptates vitae unde blanditiis provident eius explicabo.
+    Reiciendis numquam officiis inventore, cupiditate labore asperiores quibusdam, ad id recusandae non culpa tempora illo cum. Esse ducimus optio minus distinctio. Fugit voluptatibus impedit unde quidem ullam omnis quis corrupti!
+    Accusantium beatae mollitia, reiciendis sit ut tenetur sequi, maxime, sapiente iure porro repudiandae quidem ipsum quis obcaecati. Ipsam, culpa necessitatibus. Modi, laborum explicabo quas dolorum quod quibusdam at reprehenderit velit.
+    Voluptatibus, quidem provident consectetur expedita harum natus laborum optio beatae dolorum reiciendis quis laboriosam tenetur! Eos odit iusto quidem nisi, at vero voluptatibus natus culpa, aliquid amet veniam suscipit sequi.
+    Vel vitae, corporis fugit in doloribus exercitationem sit nulla consectetur voluptatibus alias officiis! Ad dolorem maxime, tenetur fuga, reiciendis dolor dolorum atque velit libero minima, voluptatem excepturi debitis. Qui, maxime!
+    Quae voluptates nulla, aliquid ipsum dolorum ullam omnis enim facere assumenda laborum alias consequuntur mollitia optio? Id, doloribus consectetur reiciendis corporis possimus qui et amet quos autem, fugiat minima voluptate!
+    Aliquid omnis nemo nam consectetur! Atque molestias error cupiditate, voluptatibus fugit aut nam eligendi minus ipsa, commodi laboriosam sapiente aspernatur accusamus similique? Aperiam ut accusamus corporis reiciendis recusandae repudiandae? Minima!
+</section>
+
+
+
+
+body {
+  max-width: 1110px;
+  margin: 0 auto;
+  /*   border-left: 1px solid black;
+  border-right: 1px solid black; */
+  font-family: arial;
+}
+
+.header {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  background-color: #fff;
+  top: 0;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0 20px;
+  line-height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+}
+.menu__item {
+  transition: all 200ms;
+  display: flex;
+  border-radius: 4px;
+}
+
+.menu__link {
+  padding: 0 16px;
+  text-decoration: none;
+  color: #062847;
+  font-size: 16px;
+}
+
+.logo {
+}
+
+.drop::after {
+  margin-left: 4px;
+  display: inline-block;
+  content: url("data:image/svg+xml, %3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.20759 6.47063C4.6079 6.99064 5.3921 6.99064 5.79241 6.47063L8.95678 2.36C9.46298 1.70243 8.99421 0.750001 8.16437 0.750001L1.83563 0.750001C1.00579 0.750001 0.537025 1.70243 1.04322 2.36L4.20759 6.47063Z' fill='%23062847'/%3E%3C/svg%3E%0A");
+  transition: transform 200ms;
+  transform-origin: 50% 54%;
+}
+
+.menu__item:hover {
+  background-color: #BDBDBD;
+}
+
+.menu__item:hover .drop_menu{
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu__item:hover .drop::after {
+  transform: rotate(180deg);
+}
+
+.drop_menu {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  background-color: #BDBDBD;
+  border-radius: 4px;
+  padding: 6px;
+  top: 40px;
+  transition: all 200ms;
+}
+
+.drop_menu__link {
+  display: block;
+  text-decoration: none;
+  color: #062847;
+  border-radius: 4px;
+  padding: 0 10px;
+  /*   transition: all 200ms; */
+}
+
+.drop_menu__link:hover {
+  background-color: #fff;
+}
+
+
+
+
+.search_wrapper {
+  display: flex;
+  height: 40px;
+}
+.search {
+  width: 380px;
+  border-radius: 6px 0 0 6px;
+  border: 2px solid #90A4AE;
+  padding-left: 16px;
+  outline: none;
+  transition: all 200ms;
+}
+.search::placeholder {
+}
+.search:focus{
+  box-shadow: 0 0 5px #1890FF;
+  border-color: #1890FF;
+}
+.search:focus + .icon {
+  box-shadow: 0 0 5px #1890FF;
+  background-color: #1890FF;
+}
+.search:focus + .icon path{
+  fill: white;
+  transition: fill 200ms;
+}
+
+.icon {
+  width: 64px;
+  text-align: center;
+  border-radius: 0 6px 6px 0;
+  background-color: #90A4AE;
+  transition: all 200ms;
+}
+.icon svg {
+  padding-top: 10px;
+}
+
+
+.popup {
+  width: 400px;
+  float: right;
+  margin-left: -100%;
+  background-color: #fff;
+  position: sticky;
+  top: 50px;
+  padding: 10px;
+  border: 1px solid #CFD8DC;
+  border-radius: 6px;
+  margin-top: 10px;
+  box-shadow: 0 0 10px #90A4AE;
+  cursor: default;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 200ms;
+}
+
+.display {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tag {
+  text-decoration: none;
+  color: black;
+  background-color: #90A4AE;
+  padding: 6px 10px;
+  border-radius: 1em;
+  line-height: 40px;
+  transition: all 0.2;
+}
+
+.tag:hover {
+  background-color: #B0BEC5;
+  cursor: pointer;
+}
+
+.tag_disable {
+  text-decoration: none;
+  color: black;
+  background-color: #FFCCBC;
+  padding: 6px 10px;
+  border-radius: 1em;
+  line-height: 40px;
+  transition: all 0.2;
+  cursor: default;
+}
+
+
+
+
+
+
+
+
+
+
+let tags = document.querySelectorAll(".tag");
+let search = document.querySelector(".search");
+let popup = document.querySelector(".popup");
+
+function popup_display() {
+    popup.classList.add("display");
+}
+
+function popup_none() {
+    popup.classList.remove("display");
+}
+
+tags.forEach(function (item, i ,arr){
+    item.addEventListener('click', tag_input);
+    console.log(item);
+});
+
+function tag_input() {
+  search.value += "#" + this.innerHTML + " ";
+  // this.classList.add("tag_disable");
+  // this.classList.remove("tag");
+  // this.removeEventListener('click', tag_input);
+}

@@ -1,15 +1,21 @@
-﻿
-@{
-    Layout = null;
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
 
-<!DOCTYPE html>
+        <title>@ViewBag.Title</title>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>_Layout</title>
-</head>
-<body>
-</body>
+        <!-- Подключение стилей через частичное представление-->
+        <partial name="Partial/_Styles" />
+    </head>
+
+    <body>
+        @*<partial name="Partial/_Header" />*@
+
+        @RenderBody()
+
+        @*<partial name="Partial/_Footer" />*@
+
+        <partial name="Partial/_Scripts" />
+    </body>
 </html>
