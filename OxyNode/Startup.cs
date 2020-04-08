@@ -5,20 +5,34 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+/*
+ * Проект OxyNode - совмещает GazoShop, Gazillion и NewsMaker для создания сайта продажи газоанализаторов
+ */
 
 namespace OxyNode
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        // конфигурация приложения из файла appsettings.json
+        public IConfiguration Config { get; }
+
+        public Startup(IConfiguration appCfg)
         {
+            // подключение файла конфигурации
+            Config = appCfg;
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            // MVC роутинг
+            services.AddControllersWithViews();
+        }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -26,14 +40,20 @@ namespace OxyNode
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
+
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllerRoute(
+                    name: "admin",
+                    pattern: "{area:exists}/{controller=Panel}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
