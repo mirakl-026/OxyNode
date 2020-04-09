@@ -1,20 +1,22 @@
 ﻿
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
+    <head>
+        <meta charset="utf-8" />
 
-    <title>@ViewBag.Title</title>
+        <title>@ViewBag.Title</title>
 
-    <!-- Подключение стилей через частичное представление - для Админки-->
-    <partial name="Partial/_Styles" />
-</head>
+        <!-- Подключение стилей через частичное представление - для Админки-->
+        <partial name="Partial/_Styles" />
+    </head>
 
-<body>
-    <a asp-area="default" asp-controller="Home" asp-action="Index">Вернуться на главную</a>
+    <body>
+        <a asp-area="default" asp-controller="Home" asp-action="Index">Вернуться на главную</a>
 
-    @RenderBody()
+        @RenderBody()
 
-    <partial name="Partial/_Scripts" />
-</body>
+        <partial name="Partial/_Scripts" />
+    </body>
+
+    @RenderSection("Scripts", false);
 </html>

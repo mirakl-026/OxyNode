@@ -67,7 +67,6 @@ namespace OxyNode.Areas.admin.Controllers
 
 
         // Delete
-        [HttpGet]
         public async Task<IActionResult> DeleteContacts()
         {
             await _db.DeleteContacts();

@@ -1,6 +1,124 @@
-﻿
+﻿@model OxyNode.Models.Contacts
+
 @{
     ViewData["Title"] = "Admin | Contacts | Create";
 }
 
+<h4>@ViewData["Title"]</h4>
+<hr />
 
+<form asp-action="CreateContacts" method="post">
+    <div>
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="CompanyName" class="control-label"></label>
+                <input asp-for="CompanyName" class="form-control" />
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+            </div>
+
+            <!-- Телефоны -->
+                @*<div class="form-group">
+                <label asp-for="PhoneNumbers" class="control-label"></label>
+                <input asp-for="PhoneNumbers" class="form-control" multiple="" />
+                <span asp-validation-for="PhoneNumbers" class="text-danger"></span>
+            </div>*@
+            <button type="button" onclick="addPhoneNumber()">+ Телефон</button>
+
+            <div id="phoneNumbers">
+
+            </div>
+            <script>
+                var pC = 0;
+                function addPhoneNumber() {
+                    var pn = document.getElementById("phoneNumbers");
+                    var phoneNumber = document.createElement("div");
+
+
+                    // AdditionalInfoKey
+                    var phoneNumberLabel = document.createElement("label");
+                    var phoneNumberLabelText = document.createTextNode("Телефон" + pC + ": ");
+                    phoneNumberLabel.appendChild(phoneNumberLabelText);
+                    phoneNumber.appendChild(phoneNumberLabel);
+
+                    // Input for AdditionalKey
+                    var phoneNumberInput = document.createElement("input");
+                    phoneNumberInput.setAttribute("type", "text");
+                    phoneNumberInput.setAttribute("name", "PhoneNumbers[" + pC + "]");
+                    phoneNumber.appendChild(phoneNumberInput);
+
+                    pn.appendChild(phoneNumber);
+                    pC++;
+                }
+            </script>
+
+
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PathToScheme" class="control-label"></label>
+                <input asp-for="PathToScheme" class="form-control" />
+                <span asp-validation-for="PathToScheme" class="text-danger"></span>
+            </div>
+
+
+            <!-- Дополнительная информация -->
+            <button type="button" onclick="addAdditionalKeyValue()">+ Доп.информация</button>
+
+            <div id="additional_KeysValues">
+
+            </div>
+            <script>
+                var i = 0;
+                function addAdditionalKeyValue() {
+                    var ft = document.getElementById("additional_KeysValues");
+                    var feature = document.createElement("div");
+
+
+                    // AdditionalInfoKey
+                    var featureNameLabel = document.createElement("label");
+                    var featureNameLabelText = document.createTextNode("Название " + i);
+                    featureNameLabel.appendChild(featureNameLabelText);
+                    feature.appendChild(featureNameLabel);
+
+                    // Input for AdditionalKey
+                    var featureNameInput = document.createElement("input");
+                    featureNameInput.setAttribute("type", "text");
+                    featureNameInput.setAttribute("name", "AdditionalInfoKeys[" + i + "]");
+                    feature.appendChild(featureNameInput);
+
+
+                    // AdditionalInfoValue
+                    var featureValueLabel = document.createElement("label");
+                    var featureValueLabelText = document.createTextNode("Значение " + i);
+                    featureValueLabel.appendChild(featureValueLabelText);
+                    feature.appendChild(featureValueLabel);
+
+                    // Input for AdditionalInfoValue
+                    var featureValueInput = document.createElement("input");
+                    featureValueInput.setAttribute("type", "text");
+                    featureValueInput.setAttribute("name", "AdditionalInfoValues[" + i + "]");
+                    feature.appendChild(featureValueInput);
+
+                    ft.appendChild(feature);
+                    i++;
+                }
+            </script>
+
+            <div class="form-group">
+                <input type="submit" value="Сохранить" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <partial name="Partial/_ValidationScriptsPartial" />
+}

@@ -24,8 +24,8 @@ namespace OxyNode.Models
 
 
         [Display(Name = "Телефон")]
-        [Required(ErrorMessage = "Телефон обязателен", AllowEmptyStrings = false)]
-        [StringLength(30, MinimumLength = 11, ErrorMessage = "Категория должна иметь от 11 до 30 символов")]
+        //[Required(ErrorMessage = "Телефон обязателен", AllowEmptyStrings = false)]
+        //[StringLength(30, MinimumLength = 11, ErrorMessage = "Категория должна иметь от 11 до 30 символов")]
         public List<string> PhoneNumbers { get; set; }
 
 

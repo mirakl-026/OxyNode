@@ -15,7 +15,6 @@ namespace OxyNode.Services
     public class ContactsService
     {
         private IMongoCollection<Contacts> ContactsCollection;
-        private bool HasContacts = false;   // поскольку "Контакты" в единственном числе
 
         public ContactsService()
         {
@@ -39,22 +38,22 @@ namespace OxyNode.Services
         public async Task CreateContacts(Contacts c)
         {
             // если до текущего момента в БД нет документа "Контакты", то документ - создаётся
-            if (HasContacts == false)
+            if (ContactsCollection.Find(new BsonDocument()) == null)
             {
                 await ContactsCollection.InsertOneAsync(c);
-                HasContacts = true;
             }
             // если на текущий момент в БД уже есть документ "Контакты", то он заменяется
             else
             {
-                await ContactsCollection.ReplaceOneAsync(new BsonDocument(), c);
+                ContactsCollection.DeleteOne(new BsonDocument());
+                await ContactsCollection.InsertOneAsync(c);
             }            
         }
 
         // Read
         public async Task<Contacts> ReadContacts()
         {
-            if (HasContacts == true)
+            if (ContactsCollection.Find(new BsonDocument()).ToList().Count > 0)
             {
                 // поскольку документ 1, ожно получить пустым Find
                 return await ContactsCollection.Find(new BsonDocument()).FirstOrDefaultAsync();
@@ -99,15 +98,15 @@ namespace OxyNode.Services
         public async Task UpdateContacts(Contacts c)
         {
             // если до текущего момента в БД нет документа "Контакты", то документ - создаётся
-            if (HasContacts == false)
+            if (ContactsCollection.Find(new BsonDocument()).ToList().Count == 0)
             {
                 await ContactsCollection.InsertOneAsync(c);
-                HasContacts = true;
             }
             // если на текущий момент в БД уже есть документ "Контакты", то он заменяется
             else
             {
-                await ContactsCollection.ReplaceOneAsync(new BsonDocument(), c);
+                ContactsCollection.DeleteOne(new BsonDocument());
+                await ContactsCollection.InsertOneAsync(c);
             }
         }
 
@@ -115,9 +114,8 @@ namespace OxyNode.Services
         public async Task DeleteContacts()
         {
             // Если "Контакты" есть - удалить их
-            if (HasContacts == true)
+            if (ContactsCollection.Find(new BsonDocument()).ToList().Count > 0)
             {
-                HasContacts = false;    // установка флага, что "Контактов" нет
                 await ContactsCollection.DeleteOneAsync(new BsonDocument());
             }
         }
