@@ -67,8 +67,8 @@ namespace OxyNode.Services
                     CompanyName = "_Имя_компании",
                     PhoneNumbers = new List<string>()
                     {
-                        "8(123)4567890",
-                        "8(234)5678910"
+                        "81234567890",
+                        "82345678910"
                     },
                     Email = "info@имя_компании.com",
 
@@ -88,7 +88,7 @@ namespace OxyNode.Services
                         "поют романсы...",
                         "24/7/365"
                     },
-                    PathToScheme = "<div style=\"position:relative; overflow: hidden; \"><a href=\"https://yandex.ru/maps/org/mospolitekh/1701016484/?utm_medium=mapframe&utm_source=maps\" style=\"color:#eee;font-size:12px;position:absolute;top:0px;\">Мосполитех</a><a href=\"https://yandex.ru/maps/213/moscow/category/university_college/?utm_medium=mapframe&utm_source=maps\" style=\"color:#eee;font-size:12px;position:absolute;top:14px;\">ВУЗ в Москве</a><iframe src=\"https://yandex.ru/map-widget/v1/-/CKce5ROb\" width=\"560\" height=\"400\" frameborder=\"1\" allowfullscreen=\"true\" style=\"position:relative;\"></iframe></div>"
+                    PathToScheme = "<div style=\"position:relative; overflow: hidden; \"><a href=\"https://yandex.ru/maps/213/moscow/?utm_medium=mapframe&utm_source=maps\" style=\"color:#eee;font-size:12px;position:absolute;top:0px;\">Москва</a><a href=\"https://yandex.ru/maps/213/moscow/?ll=37.647903%2C55.704237&utm_medium=mapframe&utm_source=maps&z=18\" style=\"color:#eee;font-size:12px;position:absolute;top:14px;\">Карта Москвы с улицами и номерами домов онлайн — Яндекс.Карты</a><iframe src=\"https://yandex.ru/map-widget/v1/-/CKcNyLMy\" width=\"560\" height=\"400\" frameborder=\"1\" allowfullscreen=\"true\" style=\"position:relative;\"></iframe></div>"
                 };
             }
 

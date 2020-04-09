@@ -40,10 +40,9 @@ namespace OxyNode.Models
         public string PathToScheme { get; set; }
 
         [Display(Name = "Дополнительная информация - key")]
-        public string Description { get; set; }
+        public List<string> AdditionalInfoKeys { get; set; }
 
         [Display(Name = "Дополнительная информация - values")]
-        public List<string> AdditionalInfoKeys { get; set; }
         public List<string> AdditionalInfoValues { get; set; }
     }
 }
