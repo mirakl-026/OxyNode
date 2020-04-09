@@ -8,5 +8,6 @@ namespace OxyNode.Models
     // Модель данных для страницы "Контакты"
     public class Contacts
     {
+
     }
 }

@@ -11,7 +11,7 @@ namespace OxyNode.Controllers
     {
         public async Task<IActionResult> Index()
         {
-            // await на связь с БДыыыы
+            // await на связь с БД
             return View();
         }
     }
