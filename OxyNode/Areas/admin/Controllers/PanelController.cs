@@ -9,6 +9,7 @@ namespace OxyNode.Areas.admin.Controllers
     [Area("admin")]
     public class PanelController : Controller
     {
+        // основная страница панели
         public IActionResult Index()
         {
             return View();
