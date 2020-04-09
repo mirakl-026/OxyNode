@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using OxyNode.Services;
+
 /*
  * Проект OxyNode - совмещает GazoShop, Gazillion и NewsMaker для создания сайта продажи газоанализаторов
  */
@@ -29,6 +31,9 @@ namespace OxyNode
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // сервис управления содержимым страницы "Контакты"
+            services.AddTransient<ContactsService>();
+
             // MVC роутинг
             services.AddControllersWithViews();
         }
