@@ -16,28 +16,36 @@
             </tr>
 
             <!-- Номер телефона -->
-            @if (Model.PhoneNumbers != null)
+            @for (int i = 0; i < Model.PhoneNumbers.Count; i++)
             {
-                @for (int i = 0; i < Model.PhoneNumbers.Count; i++)
+                string currentNumber = Model.PhoneNumbers[i];
+                string phoneToShow = "";
+                if (currentNumber.Length == 11)
                 {
-                    string currentNumber = Model.PhoneNumbers[i];
-                    string phoneToShow = "+7 (" + currentNumber.Substring(1, 3) + ") " + currentNumber.Substring(4, 3) + "-" + currentNumber.Substring(7, 2) + "-" + currentNumber.Substring(9);
-                    if (i == 0)
-                    {
-                        <tr>
-                            <td>Номер телефона: </td>
-                            <td><a href="tel:@Model.PhoneNumbers[i]">@phoneToShow</a></td>
-                        </tr>
-                    }
-                    else
-                    {
-                        <tr>
-                            <td></td>
-                            <td><a href="tel:@Model.PhoneNumbers[i]">@phoneToShow</a></td>
-                        </tr>
-                    }
+                    phoneToShow = "+7 (" + currentNumber.Substring(1, 3) + ") " + currentNumber.Substring(4, 3) + "-" + currentNumber.Substring(7, 2) + "-" + currentNumber.Substring(9);
                 }
+                else
+                {
+                    phoneToShow = currentNumber;
+                }
+                
+                if (i == 0)
+                {
+                    <tr>
+                        <td>Номер телефона: </td>
+                        <td><a href="tel:@Model.PhoneNumbers[i]">@phoneToShow</a></td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td></td>
+                        <td><a href="tel:@Model.PhoneNumbers[i]">@phoneToShow</a></td>
+                    </tr>
+                }
+                    
             }
+            
 
 
             <!-- E-mail -->
@@ -47,15 +55,12 @@
             </tr>
 
             <!-- Дополнительная информация -->
-            @if (Model.AdditionalInfoKeys != null)
+            @for (int i = 0; i < Model.AdditionalInfoKeys.Count; i++)
             {
-                @for (int i = 0; i < Model.AdditionalInfoKeys.Count; i++)
-                {
-                    <tr>
-                        <td>@Model.AdditionalInfoKeys[i]</td>
-                        <td>@Model.AdditionalInfoValues[i]</td>
-                    </tr>
-                }
+                <tr>
+                    <td>@Model.AdditionalInfoKeys[i]</td>
+                    <td>@Model.AdditionalInfoValues[i]</td>
+                </tr>
             }
         </tbody>
     </table>
