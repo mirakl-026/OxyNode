@@ -1,6 +1,86 @@
-﻿
+﻿@model OxyNode.Models.Contacts
 @{
     ViewData["Title"] = "Admin | Contacts | Read";
 }
 
+<h4>Содержимое страницы "Контакты"</h4>
+<hr />
+
+<div>
+    <h3>Контакты</h3>
+    <table>
+        <tbody>
+            <!-- Название компании -->
+            <tr>
+                <td>Название компании: </td>
+                <td>@Model.CompanyName</td>
+            </tr>
+
+            <!-- Номер телефона -->
+            @if (Model.PhoneNumbers != null)
+            {
+                @for (int i = 0; i < Model.PhoneNumbers.Count; i++)
+                {
+                    string currentNumber = Model.PhoneNumbers[i];
+                    string phoneToShow = "";
+                    if (currentNumber.Length == 11)
+                    {
+                        phoneToShow = "+7 (" + currentNumber.Substring(1, 3) + ") " + currentNumber.Substring(4, 3) + "-" + currentNumber.Substring(7, 2) + "-" + currentNumber.Substring(9);
+                    }
+                    else
+                    {
+                        phoneToShow = currentNumber;
+                    }
+
+                    if (i == 0)
+                    {
+                        <tr>
+                            <td>Номер телефона: </td>
+                            <td><a href="tel:@Model.PhoneNumbers[i]">@phoneToShow</a></td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td></td>
+                            <td><a href="tel:@Model.PhoneNumbers[i]">@phoneToShow</a></td>
+                        </tr>
+                    }
+
+                }
+            }
+
+
+            <!-- E-mail -->
+            <tr>
+                <td>E-mail: </td>
+                <td><a href="mailto:@Model.Email">@Model.Email</a></td>
+            </tr>
+
+            <!-- Дополнительная информация -->
+            @if (Model.AdditionalInfoKeys != null)
+            {
+                @for (int i = 0; i < Model.AdditionalInfoKeys.Count; i++)
+                {
+                    <tr>
+                        <td>@Model.AdditionalInfoKeys[i]</td>
+                        <td>@Model.AdditionalInfoValues[i]</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <!-- Карта проезда -->
+    @if (Model.PathToScheme != null)
+    {
+        <div>
+            Карта проезда:
+        </div>
+
+        <div>
+            @Html.Raw(Model.PathToScheme)
+        </div>
+    }
+</div>
 

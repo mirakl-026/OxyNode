@@ -29,7 +29,6 @@
             </div>
 
 
-
             <h3>Необязательные поля для заполнения</h3>
 
             <div class="form-group">
@@ -48,21 +47,23 @@
                 </table>
             </div>
 
-
             <!-- Телефоны -->
             <h4>Телефоны</h4>
             <div class="form-group">
                 <table id="phoneNumbers">
-                    @for(int i = 0; i < Model.PhoneNumbers.Count; i++)
+                    @if (Model.PhoneNumbers != null)
                     {
-                        <tr>
-                            <td>
-                                <label>Телефон @i : </label>
-                            </td>
-                            <td>
-                                <input type="text" name="PhoneNumbers[@i]" value="@Model.PhoneNumbers[i]" />
-                            </td>
-                        </tr>
+                        @for (int i = 0; i < Model.PhoneNumbers.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    <label>Телефон @i : </label>
+                                </td>
+                                <td>
+                                    <input type="text" name="PhoneNumbers[@i]" value="@Model.PhoneNumbers[i]" />
+                                </td>
+                            </tr>
+                        }
                     }
                 </table>
             </div>
@@ -97,29 +98,29 @@
                 }
             </script>
 
-
-
-
             <!-- Дополнительная информация -->
             <h4>Дополнительная информация</h4>
             <div class="form-group">
                 <table id="additional_KeysValues">
-                    @for (int j = 0; j < Model.AdditionalInfoKeys.Count; j++)
+                    @if (Model.AdditionalInfoKeys != null)
                     {
-                        <tr>
-                            <td>
-                                <label>Название @j</label>
-                            </td>
-                            <td>
-                                <input type="text" name="AdditionalInfoKeys[@j]" value="@Model.AdditionalInfoKeys[j]" />
-                            </td>
-                            <td>
-                                <label>Значение @j</label>
-                            </td>
-                            <td>
-                                <input type="text" name="AdditionalInfoValues[@j]" value="@Model.AdditionalInfoValues[j]" />
-                            </td>
-                        </tr>
+                        @for (int j = 0; j < Model.AdditionalInfoKeys.Count; j++)
+                        {
+                            <tr>
+                                <td>
+                                    <label>Название @j</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="AdditionalInfoKeys[@j]" value="@Model.AdditionalInfoKeys[j]" />
+                                </td>
+                                <td>
+                                    <label>Значение @j</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="AdditionalInfoValues[@j]" value="@Model.AdditionalInfoValues[j]" />
+                                </td>
+                            </tr>
+                        }
                     }
                 </table>
             </div>
@@ -170,9 +171,6 @@
                     adk++;
                 }
             </script>
-
-
-
 
             <div class="form-group">
                 <input type="submit" value="Сохранить" />
