@@ -1,6 +1,188 @@
-﻿
+﻿@model OxyNode.Models.Contacts
+
 @{
     ViewData["Title"] = "Admin | Contacts | Update";
 }
 
+
+<h4>Изменение страницы "Контакты"</h4>
+<hr />
+
+<form asp-action="CreateContacts" method="post">
+    <div>
+        <div>
+            <h3>Обязательные поля для заполнения</h3>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <td><label asp-for="CompanyName" class="control-label"></label></td>
+                        <td><input asp-for="CompanyName" class="form-control" value="@Model.CompanyName" /><span asp-validation-for="CompanyName" class="text-danger"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Email" class="control-label"></label></td>
+                        <td><input asp-for="Email" class="form-control" value="@Model.Email" /><span asp-validation-for="Email" class="text-danger"></span></td>
+                    </tr>
+                </table>
+            </div>
+
+
+
+            <h3>Необязательные поля для заполнения</h3>
+
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <td><label asp-for="PathToScheme" class="control-label"></label></td>
+                        @if (Model.PathToScheme != null)
+                        {
+                            <td><input asp-for="PathToScheme" class="form-control" value="@Model.PathToScheme"/><span asp-validation-for="PathToScheme" class="text-danger"></span></td>
+                        }
+                        else
+                        {
+                            <td><input asp-for="PathToScheme" class="form-control" /><span asp-validation-for="PathToScheme" class="text-danger"></span></td>
+                        }
+                    </tr>
+                </table>
+            </div>
+
+
+            <!-- Телефоны -->
+            <h4>Телефоны</h4>
+            <div class="form-group">
+                <table id="phoneNumbers">
+                    @for(int i = 0; i < Model.PhoneNumbers.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <label>Телефон @i : </label>
+                            </td>
+                            <td>
+                                <input type="text" name="PhoneNumbers[@i]" value="@Model.PhoneNumbers[i]" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <button type="button" onclick="addPhoneNumber()">+ Телефон</button>
+
+            <script>
+                var pC = 0;
+                function addPhoneNumber() {
+                    var table_pn = document.getElementById("phoneNumbers");
+                    var tr = document.createElement("tr");
+
+
+                    // +Phone - label
+                    var td_ik = document.createElement("td");
+                    var phoneNumberLabel = document.createElement("label");
+                    var phoneNumberLabelText = document.createTextNode("Телефон " + pC + ": ");
+                    phoneNumberLabel.appendChild(phoneNumberLabelText);
+                    td_ik.appendChild(phoneNumberLabel);
+                    tr.appendChild(td_ik);
+
+                    // +Phone - input
+                    var td_input4ik = document.createElement("td");
+                    var phoneNumberInput = document.createElement("input");
+                    phoneNumberInput.setAttribute("type", "text");
+                    phoneNumberInput.setAttribute("name", "PhoneNumbers[" + pC + "]");
+                    phoneNumberInput.setAttribute("value", "81002223344");
+                    td_input4ik.appendChild(phoneNumberInput);
+                    tr.appendChild(td_input4ik);
+
+                    table_pn.appendChild(tr);
+                    pC++;
+                }
+            </script>
+
+
+
+
+            <!-- Дополнительная информация -->
+            <h4>Дополнительная информация</h4>
+            <div class="form-group">
+                <table id="additional_KeysValues">
+                    @for (int j = 0; j < Model.AdditionalInfoKeys.Count; j++)
+                    {
+                        <tr>
+                            <td>
+                                <label>Название @j</label>
+                            </td>
+                            <td>
+                                <input type="text" name="AdditionalInfoKeys[@j]" value="@Model.AdditionalInfoKeys[j]" />
+                            </td>
+                            <td>
+                                <label>Значение @j</label>
+                            </td>
+                            <td>
+                                <input type="text" name="AdditionalInfoValues[@j]" value="@Model.AdditionalInfoValues[j]" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <button type="button" onclick="addAdditionalKeyValue()">+ Доп.информация</button>
+            <script>
+                var adk = 0;
+                function addAdditionalKeyValue() {
+                    var table_adkv = document.getElementById("additional_KeysValues");
+                    var tr_adkv = document.createElement("tr");
+
+
+                    // AdditionalInfoKey
+                    var td_adk = document.createElement("td");
+                    var featureNameLabel = document.createElement("label");
+                    var featureNameLabelText = document.createTextNode("Название " + adk);
+                    featureNameLabel.appendChild(featureNameLabelText);
+                    td_adk.appendChild(featureNameLabel);
+                    tr_adkv.appendChild(td_adk);
+
+                    // Input for AdditionalKey
+                    var td_input4adk = document.createElement("td");
+                    var featureNameInput = document.createElement("input");
+                    featureNameInput.setAttribute("type", "text");
+                    featureNameInput.setAttribute("name", "AdditionalInfoKeys[" + adk + "]");
+                    featureNameInput.setAttribute("value", "...");
+                    td_input4adk.appendChild(featureNameInput);
+                    tr_adkv.appendChild(td_input4adk);
+
+
+                    // AdditionalInfoValue
+                    var td_adv = document.createElement("td");
+                    var featureValueLabel = document.createElement("label");
+                    var featureValueLabelText = document.createTextNode("Значение " + adk);
+                    featureValueLabel.appendChild(featureValueLabelText);
+                    td_adv.appendChild(featureValueLabel);
+                    tr_adkv.appendChild(td_adv);
+
+                    // Input for AdditionalInfoValue
+                    var td_input4adv = document.createElement("td");
+                    var featureValueInput = document.createElement("input");
+                    featureValueInput.setAttribute("type", "text");
+                    featureValueInput.setAttribute("name", "AdditionalInfoValues[" + adk + "]");
+                    featureValueInput.setAttribute("value", "...");
+                    td_input4adv.appendChild(featureValueInput);
+                    tr_adkv.appendChild(td_input4adv);
+
+                    table_adkv.appendChild(tr_adkv);
+                    adk++;
+                }
+            </script>
+
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Сохранить" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <partial name="Partial/_ValidationScriptsPartial" />
+}
 
