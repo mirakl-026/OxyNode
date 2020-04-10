@@ -10,70 +10,116 @@
 <form asp-action="CreateContacts" method="post">
     <div>
         <div>
+            <h3>Обязательные поля для заполнения</h3>
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="CompanyName" class="control-label"></label>
-                <input asp-for="CompanyName" class="form-control" />
-                <span asp-validation-for="CompanyName" class="text-danger"></span>
+                <table>
+                    <tr>
+                        <td><label asp-for="CompanyName" class="control-label"></label></td>
+                        <td><input asp-for="CompanyName" class="form-control" /><span asp-validation-for="CompanyName" class="text-danger"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Email" class="control-label"></label></td>
+                        <td><input asp-for="Email" class="form-control" /><span asp-validation-for="Email" class="text-danger"></span></td>
+                    </tr>
+                </table>
             </div>
+
+
+
+            <h3>Необязательные поля для заполнения</h3>
+
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <td><label asp-for="PathToScheme" class="control-label"></label></td>
+                        <td><input asp-for="PathToScheme" class="form-control" /><span asp-validation-for="PathToScheme" class="text-danger"></span></td>
+                    </tr>
+                </table>
+            </div>
+
 
             <!-- Телефоны -->
-                @*<div class="form-group">
-                <label asp-for="PhoneNumbers" class="control-label"></label>
-                <input asp-for="PhoneNumbers" class="form-control" multiple="" />
-                <span asp-validation-for="PhoneNumbers" class="text-danger"></span>
-            </div>*@
+            @*<button type="button" onclick="addPhoneNumber()">+ Телефон</button>
+
+        <div id="phoneNumbers" class="form-group">
+
+        </div>
+
+        <script>
+            var pC = 0;
+            function addPhoneNumber() {
+                var pn = document.getElementById("phoneNumbers");
+                var phoneNumber = document.createElement("div");
+
+
+                // AdditionalInfoKey
+                var phoneNumberLabel = document.createElement("label");
+                var phoneNumberLabelText = document.createTextNode("Телефон" + pC + ": ");
+                phoneNumberLabel.appendChild(phoneNumberLabelText);
+                phoneNumber.appendChild(phoneNumberLabel);
+
+                // Input for AdditionalKey
+                var phoneNumberInput = document.createElement("input");
+                phoneNumberInput.setAttribute("type", "text");
+                phoneNumberInput.setAttribute("name", "PhoneNumbers[" + pC + "]");
+                phoneNumber.appendChild(phoneNumberInput);
+
+                pn.appendChild(phoneNumber);
+                pC++;
+            }
+        </script>*@
+
+            <!-- новая версия через таблицу -->
+
+
+            <h4>Телефоны</h4>
+            <div class="form-group">
+                <table id="phoneNumbers">
+                </table>
+            </div>
             <button type="button" onclick="addPhoneNumber()">+ Телефон</button>
 
-            <div id="phoneNumbers">
-
-            </div>
             <script>
                 var pC = 0;
                 function addPhoneNumber() {
-                    var pn = document.getElementById("phoneNumbers");
-                    var phoneNumber = document.createElement("div");
+                    var table_pn = document.getElementById("phoneNumbers");
+                    var tr = document.createElement("tr");
 
 
                     // AdditionalInfoKey
+                    var td_ik = document.createElement("td");
                     var phoneNumberLabel = document.createElement("label");
                     var phoneNumberLabelText = document.createTextNode("Телефон" + pC + ": ");
                     phoneNumberLabel.appendChild(phoneNumberLabelText);
-                    phoneNumber.appendChild(phoneNumberLabel);
+                    td_ik.appendChild(phoneNumberLabel);
+                    tr.appendChild(td_ik);
 
                     // Input for AdditionalKey
+                    var td_input4ik = document.createElement("td");
                     var phoneNumberInput = document.createElement("input");
                     phoneNumberInput.setAttribute("type", "text");
                     phoneNumberInput.setAttribute("name", "PhoneNumbers[" + pC + "]");
-                    phoneNumber.appendChild(phoneNumberInput);
+                    td_input4ik.appendChild(phoneNumberInput);
+                    tr.appendChild(td_input4ik);
 
-                    pn.appendChild(phoneNumber);
+
+                    table_pn.appendChild(tr);
                     pC++;
                 }
             </script>
 
 
 
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="PathToScheme" class="control-label"></label>
-                <input asp-for="PathToScheme" class="form-control" />
-                <span asp-validation-for="PathToScheme" class="text-danger"></span>
-            </div>
-
 
             <!-- Дополнительная информация -->
-            <button type="button" onclick="addAdditionalKeyValue()">+ Доп.информация</button>
-
+            @*<h4>Дополнительная информация</h4>
             <div id="additional_KeysValues">
 
             </div>
+            <button type="button" onclick="addAdditionalKeyValue()">+ Доп.информация</button>
             <script>
                 var i = 0;
                 function addAdditionalKeyValue() {
@@ -109,7 +155,62 @@
                     ft.appendChild(feature);
                     i++;
                 }
+            </script>*@
+
+            <h4>Дополнительная информация</h4>
+            <div class="form-group">
+                <table id="additional_KeysValues" >
+
+                </table>
+            </div>
+            <button type="button" onclick="addAdditionalKeyValue()">+ Доп.информация</button>
+            <script>
+                var adk = 0;
+                function addAdditionalKeyValue() {
+                    var table_adkv = document.getElementById("additional_KeysValues");
+                    var tr_adkv = document.createElement("tr");
+
+
+                    // AdditionalInfoKey
+                    var td_adk = document.createElement("td");
+                    var featureNameLabel = document.createElement("label");
+                    var featureNameLabelText = document.createTextNode("Название " + adk);
+                    featureNameLabel.appendChild(featureNameLabelText);
+                    td_adk.appendChild(featureNameLabel);
+                    tr_adkv.appendChild(td_adk);
+
+                    // Input for AdditionalKey
+                    var td_input4adk = document.createElement("td");
+                    var featureNameInput = document.createElement("input");
+                    featureNameInput.setAttribute("type", "text");
+                    featureNameInput.setAttribute("name", "AdditionalInfoKeys[" + adk + "]");
+                    td_input4adk.appendChild(featureNameInput);
+                    tr_adkv.appendChild(td_input4adk);
+
+
+                    // AdditionalInfoValue
+                    var td_adv = document.createElement("td");
+                    var featureValueLabel = document.createElement("label");
+                    var featureValueLabelText = document.createTextNode("Значение " + adk);
+                    featureValueLabel.appendChild(featureValueLabelText);
+                    td_adv.appendChild(featureValueLabel);
+                    tr_adkv.appendChild(td_adv);
+
+                    // Input for AdditionalInfoValue
+                    var td_input4adv = document.createElement("td");
+                    var featureValueInput = document.createElement("input");
+                    featureValueInput.setAttribute("type", "text");
+                    featureValueInput.setAttribute("name", "AdditionalInfoValues[" + adk + "]");
+                    td_input4adv.appendChild(featureValueInput);
+                    tr_adkv.appendChild(td_input4adv);
+
+                    table_adkv.appendChild(tr_adkv);
+                    adk++;
+                }
             </script>
+
+
+
 
             <div class="form-group">
                 <input type="submit" value="Сохранить" />
