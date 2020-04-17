@@ -1,5 +1,22 @@
-﻿
+﻿@model OxyNode.Models.About
 @{
     ViewData["Title"] = "Admin | About | Update";
 }
 
+<h4>Изменение описания на странице "О нас"</h4>
+<hr />
+
+<form asp-area="admin" asp-controller="EditAbout" asp-action="UpdateAbout" method="post">
+    <table>
+        <tr>
+            <td>
+                <input type="text" asp-for="DescriptionHtml5" value="@Model.DescriptionHtml5"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Сохранить" />
+            </td>
+        </tr>
+    </table>
+</form>

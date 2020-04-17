@@ -1,4 +1,23 @@
-﻿
+﻿@model OxyNode.Models.About
+
 @{
     ViewData["Title"] = "Admin | About | Create";
 }
+
+<h4>Заполнение описания страницы "О нас"</h4>
+<hr />
+
+<form asp-area="admin" asp-controller="EditAbout" asp-action="CreateAbout" method="post">
+    <table>
+        <tr>
+            <td>
+                <input type="text" asp-for="DescriptionHtml5" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Сохранить" />
+            </td>
+        </tr>
+    </table>    
+</form>

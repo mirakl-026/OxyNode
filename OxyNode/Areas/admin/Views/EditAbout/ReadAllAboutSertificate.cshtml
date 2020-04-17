@@ -1,15 +1,41 @@
-﻿
+﻿@model List<OxyNode.Models.AboutSertificate>
+
 @{
-    Layout = null;
+    ViewData["Title"] = "Admin | About | All Sertificates";
 }
 
-<!DOCTYPE html>
+<h4>Все сертификаты страницы "О нас"</h4>
+<hr />
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ReadAllAboutSertificate</title>
-</head>
-<body>
-</body>
-</html>
+<table>
+    @if (Model != null)
+    {
+        @if (Model.Count > 0)
+        {
+            @foreach (var file in Model)
+            {
+                <tr>
+                    <td><a href="@file.SertificatePath">@file.SertificateName</a></td>
+                </tr>
+                <tr>
+                    <td><a asp-area="admin" asp-controller="EditAbout" asp-action="UpdateAboutSertificate" asp-route-id="@file.Id">Обновить файл сертификата</a></td>
+                </tr>
+                <tr>
+                    <td><a asp-area="admin" asp-controller="EditAbout" asp-action="DeleteAboutSertificate" asp-route-id="@file.Id">Удалить файл сертификата</a></td>
+                </tr>
+                <tr>
+                    <td>
+                        <hr />
+                    </td>
+                </tr>
+            }
+        }
+    }
+    else
+    {
+        <tr>
+            <td>Сертификатов нет</td>
+        </tr>
+    }
+</table>
+

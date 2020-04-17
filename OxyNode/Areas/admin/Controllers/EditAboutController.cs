@@ -125,15 +125,15 @@ namespace OxyNode.Areas.admin.Controllers
                 await _db_aboutSertificate.CreateAboutSertificate(newSertificate);
 
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Panel");
         }
 
 
         // показать файлы сертификатов на сервере
         [HttpGet]
-        public IActionResult ReadAllAboutSertificate()
+        public async Task<IActionResult> ReadAllAboutSertificate()
         {
-            var sertificates = _db_aboutSertificate.GetAllAboutSertificates();
+            var sertificates = await _db_aboutSertificate.GetAllAboutSertificates();
             return View(sertificates);
         }
 
@@ -178,7 +178,7 @@ namespace OxyNode.Areas.admin.Controllers
                     await newSertificate.CopyToAsync(fileStream);
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Panel");
         }
 
 
@@ -201,7 +201,7 @@ namespace OxyNode.Areas.admin.Controllers
             // удаление файла из Бд
             await _db_aboutSertificate.DeleteAboutSertificate(id);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Panel");
         }
 
 

@@ -1,15 +1,27 @@
-﻿
+﻿@model OxyNode.Models.AboutSertificate
+
 @{
-    Layout = null;
+    ViewData["Title"] = "Admin | About | One Sertificate";
 }
 
-<!DOCTYPE html>
+<h4>Cертификат страницы "О нас"</h4>
+<hr />
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ReadAboutSertificate</title>
-</head>
-<body>
-</body>
-</html>
+@if (Model != null)
+{
+    <table>
+        <tr>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <td>@Model.SertificateName</td>
+        </tr>
+        <tr>
+            <td>@Model.SertificatePath</td>
+        </tr>
+    </table>
+
+    <a asp-area="admin" asp-controller="Home" asp-action="UpdateFile" asp-route-id="@Model.Id">Обновить файл сертификата</a>
+}
+
+

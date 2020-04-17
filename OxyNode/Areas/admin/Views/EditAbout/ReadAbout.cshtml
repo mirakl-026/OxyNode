@@ -1,5 +1,26 @@
-﻿
+﻿@model OxyNode.ViewModels.AboutViewModel
 @{
     ViewData["Title"] = "Admin | About | Read";
 }
 
+<h4>Содержание страницы "О нас"</h4>
+<hr />
+<div>
+    @Html.Raw(Model.VM_About.DescriptionHtml5)
+
+    <h4>Наши сертификаты</h4>
+    @if (Model.VM_AboutSertificates == null || Model.VM_AboutSertificates.Count == 0)
+    {
+        <div>Пока нет сертификатов</div>
+    }
+    else
+    {
+        @foreach (var sertificate in Model.VM_AboutSertificates)
+        {
+
+            <div>sertificate.SertificateName</div>
+            <img src="@sertificate.SertificatePath" />
+            <hr />
+        }
+    }
+</div>
