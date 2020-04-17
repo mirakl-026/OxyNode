@@ -34,9 +34,9 @@ namespace OxyNode.Services
         }
 
         // получить все объекты коллекции - сертификаты
-        public List<AboutSertificate> GetAllAboutSertificates()
+        public async Task<List<AboutSertificate>> GetAllAboutSertificates()
         {
-            return AboutSertificateCollection.Find(new BsonDocument()).ToList();
+            return await AboutSertificateCollection.Find(new BsonDocument()).ToListAsync();
         }
 
 
@@ -49,20 +49,20 @@ namespace OxyNode.Services
         }
 
         // Read
-        public async Task<AboutSertificate> ReadFileAboutSertificate(string id)
+        public async Task<AboutSertificate> ReadAboutSertificate(string id)
         {
             // поскольку документ 1, ожно получить пустым Find
             return await AboutSertificateCollection.Find(new BsonDocument("_id", new ObjectId(id))).FirstOrDefaultAsync();
         }
 
         // Update
-        public async Task UpdateFile(AboutSertificate sertificate)
+        public async Task UpdateAboutSertificate(AboutSertificate sertificate)
         {
             await AboutSertificateCollection.ReplaceOneAsync(new BsonDocument("_id", new ObjectId(sertificate.Id)), sertificate);
         }
 
         // Delete
-        public async Task DeleteFile(string id)
+        public async Task DeleteAboutSertificate(string id)
         {
             await AboutSertificateCollection.DeleteOneAsync(new BsonDocument("_id", new ObjectId(id)));
         }

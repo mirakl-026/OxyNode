@@ -34,6 +34,10 @@ namespace OxyNode
             // сервис управления содержимым страницы "Контакты"
             services.AddTransient<ContactsService>();
 
+            // сервис управления содержимым страницы "О нас"
+            services.AddTransient<AboutService>();
+            services.AddTransient<AboutSertificateService>();
+
             // MVC роутинг
             services.AddControllersWithViews();
         }
