@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using OxyNode.Services;
 using OxyNode.Models;
 using OxyNode.ViewModels;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace OxyNode.Areas.admin.Controllers
 {
@@ -14,11 +17,16 @@ namespace OxyNode.Areas.admin.Controllers
     public class EditAboutController : Controller
     {
         // контроллер для редактирования содржимого страницы "О нас"
+
+        private string FilesPath = "/resources/about/sertificates/";
+        private IWebHostEnvironment _appEnvironment;
+
         private AboutService _db_about;
         private AboutSertificateService _db_aboutSertificate;
 
-        public EditAboutController(AboutService aboutContext, AboutSertificateService aboutSertificateContext)
+        public EditAboutController(IWebHostEnvironment appEnvironment, AboutService aboutContext, AboutSertificateService aboutSertificateContext)
         {
+            _appEnvironment = appEnvironment;
             _db_about = aboutContext;
             _db_aboutSertificate = aboutSertificateContext;
         }
@@ -79,6 +87,123 @@ namespace OxyNode.Areas.admin.Controllers
             await _db_about.DeleteAbout();
             return RedirectToAction("Index", "Panel");
         }
+
+        #endregion
+
+
+        #region Edit About-Sertificates
+
+        // загрузить файл на сервер
+        [HttpGet]
+        public IActionResult AddAboutSertificate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [RequestSizeLimit(52428800)]
+        public async Task<IActionResult> AddAboutSertificate(IFormFile uploadedSertificate)
+        {
+            if (uploadedSertificate != null)
+            {
+                // Определение пути 
+                string path = FilesPath + uploadedSertificate.FileName;
+
+                // Сохранение файла на сервере
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await uploadedSertificate.CopyToAsync(fileStream);
+                }
+
+                // Сохранение в БД
+                AboutSertificate newSertificate = new AboutSertificate()
+                {
+                    SertificateName = uploadedSertificate.FileName,
+                    SertificatePath = path
+                };
+
+                await _db_aboutSertificate.CreateAboutSertificate(newSertificate);
+
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        // показать файлы на сервере
+        [HttpGet]
+        public IActionResult ReadAllAboutSertificate()
+        {
+            var sertificates = _db_aboutSertificate.GetAllAboutSertificates();
+            return View(sertificates);
+        }
+
+
+        // показать файл на сервере 
+        [HttpGet]
+        public async Task<IActionResult> ReadAboutSertificate(string id)
+        {
+            var sertificate = await _db_aboutSertificate.ReadAboutSertificate(id);
+            return View(sertificate);
+        }
+
+
+        // обновить файл на сервере
+        [HttpGet]
+        public async Task<IActionResult> UpdateAboutSertificate(string id)
+        {
+            var sertificate = await _db_aboutSertificate.ReadAboutSertificate(id);
+            return View(sertificate);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateAboutSertificate(string id, IFormFile newSertificate)
+        {
+            if (newSertificate != null)
+            {
+                var currentSertificate = await _db_aboutSertificate.ReadAboutSertificate(id);
+
+                // Определение пути по текущему файлу сертификата
+                string pathToUpdate = FilesPath + currentSertificate.SertificateName;
+
+                // удаление файла сертификата с сервера
+                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToUpdate);
+                if (fi.Exists)
+                {
+                    fi.Delete();
+                }
+
+                // Сохранение файла сертификата на сервере
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + pathToUpdate, FileMode.Create))
+                {
+                    await newSertificate.CopyToAsync(fileStream);
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        // удалить файл с сервера
+        [HttpGet]
+        public async Task<IActionResult> DeleteAboutSertificate(string id)
+        {
+            var sertificate = await _db_aboutSertificate.ReadAboutSertificate(id);
+
+            // Определение пути
+            string pathToDelete = FilesPath + sertificate.SertificateName;
+
+            // удаление файла с сервера
+            FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToDelete);
+            if (fi.Exists)
+            {
+                fi.Delete();
+            }
+
+            // удаление файла из Бд
+            await _db_aboutSertificate.DeleteAboutSertificate(id);
+
+            return RedirectToAction("Index");
+        }
+
 
         #endregion
 

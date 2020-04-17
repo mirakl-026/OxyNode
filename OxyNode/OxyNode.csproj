@@ -12,4 +12,8 @@
     <PackageReference Include="MongoDB.Driver.GridFS" Version="2.10.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\resources\about\sertificates\" />
+  </ItemGroup>
+
 </Project>
