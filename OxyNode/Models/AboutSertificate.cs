@@ -11,6 +11,7 @@ using System.ComponentModel.DataAnnotations;
 namespace OxyNode.Models
 {
     // модель дл сертификатов страницы "О нас"
+    // подразумевается, что сертификат - картинка 
     public class AboutSertificate
     {
         [BsonRepresentation(BsonType.ObjectId)]
