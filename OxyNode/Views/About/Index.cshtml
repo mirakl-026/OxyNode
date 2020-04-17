@@ -1,8 +1,22 @@
-﻿
+﻿@model OxyNode.ViewModels.AboutViewModel
+
 @{
     ViewData["Title"] = "OxyNode | About";
 }
 
 <div>
     <h3>О компании</h3>
+    @Html.Raw(Model.VM_About.DescriptionHtml5);
+
+    @if (Model.VM_AboutSertificates != null)
+    {
+        <h4>Наши сертификаты</h4>
+        foreach (var sertificate in Model.VM_AboutSertificates)
+        {
+            <div>sertificate.SertificateName</div>
+            <img src="@sertificate.SertificatePath" />
+            <hr />
+        }
+    }
+
 </div>
