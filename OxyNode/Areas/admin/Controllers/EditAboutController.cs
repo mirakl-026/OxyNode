@@ -102,7 +102,7 @@ namespace OxyNode.Areas.admin.Controllers
 
         [HttpPost]
         [RequestSizeLimit(52428800)]
-        public async Task<IActionResult> AddAboutSertificate(IFormFile uploadedSertificate)
+        public async Task<IActionResult> AddAboutSertificate(string sertificateLabel, IFormFile uploadedSertificate)
         {
             if (uploadedSertificate != null)
             {
@@ -116,9 +116,19 @@ namespace OxyNode.Areas.admin.Controllers
                 }
 
                 // Сохранение в БД
+                string newSertLabel = "";
+                if (sertificateLabel == null || sertificateLabel.Length == 0)
+                {
+                    newSertLabel = uploadedSertificate.FileName;
+                }
+                else
+                {
+                    newSertLabel = sertificateLabel;
+                }
+
                 AboutSertificate newSertificate = new AboutSertificate()
                 {
-                    SertificateName = uploadedSertificate.FileName,
+                    SertificateName = newSertLabel,
                     SertificatePath = path
                 };
 
