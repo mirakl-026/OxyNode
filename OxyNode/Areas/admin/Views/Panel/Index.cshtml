@@ -5,23 +5,72 @@
 }
 
 <div>
-    Добро пожаловать, тварь Одмен!
+    Добро пожаловать, Одмен!
 </div>
 
 <!-- Действия со страницей "Контакты" -->
 <h4>Операции над страницей "Контакты" </h4>
-<a asp-area="admin" asp-controller="EditContacts" asp-action="CreateContacts">Создать "Контакты"</a>
-<a asp-area="admin" asp-controller="EditContacts" asp-action="ReadContacts">Посмотреть "Контакты"</a>
-<a asp-area="admin" asp-controller="EditContacts" asp-action="UpdateContacts">Редактировать "Контакты"</a>
-<a asp-area="admin" asp-controller="EditContacts" asp-action="DeleteContacts">Удалить "Контакты"</a>
+<table>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditContacts" asp-action="CreateContacts">Создать "Контакты"</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditContacts" asp-action="ReadContacts">Посмотреть "Контакты"</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditContacts" asp-action="UpdateContacts">Редактировать "Контакты"</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditContacts" asp-action="DeleteContacts">Удалить "Контакты"</a>
+        </td>
+    </tr>
+</table>
 
 <!-- Действия со страницкй "О нас" -->
 <h4>Операции над страницей "О нас"</h4>
-<a asp-area="admin" asp-controller="EditAbout" asp-action="CreateAbout">Добавить описание "О нас"</a>
-<a asp-area="admin" asp-controller="EditAbout" asp-action="ReadAbout">Посмотреть описание "О нас"</a>
-<a asp-area="admin" asp-controller="EditAbout" asp-action="UpdateAbout">Редактировать описание "О нас"</a>
-<a asp-area="admin" asp-controller="EditAbout" asp-action="DeleteAbout">Удалить описание "О нас"</a>
+<table>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditAbout" asp-action="CreateAbout">Добавить описание "О нас"</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditAbout" asp-action="ReadAbout">Посмотреть описание "О нас"</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditAbout" asp-action="UpdateAbout">Редактировать описание "О нас"</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditAbout" asp-action="DeleteAbout">Удалить описание "О нас"</a>
+        </td>
+    </tr>
+</table>
+
 <h5>Операции над сертификатами страницы "О нас"</h5>
-<a asp-area="admin" asp-controller="EditAbout" asp-action="ReadAllAboutSertificate">Посмотреть все сертификаты</a>
-<a asp-area="admin" asp-controller="EditAbout" asp-action="AddAboutSertificate">Добавить сертификат</a>
+<table>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditAbout" asp-action="ReadAllAboutSertificate">Посмотреть все сертификаты</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditAbout" asp-action="AddAboutSertificate">Добавить сертификат</a>
+        </td>
+    </tr>
+</table>
+
+
 
