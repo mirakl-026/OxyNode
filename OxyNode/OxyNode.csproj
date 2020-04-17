@@ -12,8 +12,4 @@
     <PackageReference Include="MongoDB.Driver.GridFS" Version="2.10.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\admin\Views\EditAbout\" />
-  </ItemGroup>
-
 </Project>
