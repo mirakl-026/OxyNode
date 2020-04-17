@@ -5,15 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
     <PackageReference Include="MongoDB.Bson" Version="2.10.3" />
     <PackageReference Include="MongoDB.Driver" Version="2.10.3" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.10.3" />
     <PackageReference Include="MongoDB.Driver.GridFS" Version="2.10.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\admin\Views\EditAbout\" />
   </ItemGroup>
 
 </Project>
