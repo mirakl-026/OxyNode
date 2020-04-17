@@ -93,7 +93,7 @@ namespace OxyNode.Areas.admin.Controllers
 
         #region Edit About-Sertificates
 
-        // загрузить файл на сервер
+        // загрузить файл сертификата на сервер
         [HttpGet]
         public IActionResult AddAboutSertificate()
         {
@@ -129,7 +129,7 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
 
-        // показать файлы на сервере
+        // показать файлы сертификатов на сервере
         [HttpGet]
         public IActionResult ReadAllAboutSertificate()
         {
@@ -138,7 +138,7 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
 
-        // показать файл на сервере 
+        // показать файл сертификат на сервере 
         [HttpGet]
         public async Task<IActionResult> ReadAboutSertificate(string id)
         {
@@ -147,7 +147,7 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
 
-        // обновить файл на сервере
+        // обновить файл сертификат на сервере
         [HttpGet]
         public async Task<IActionResult> UpdateAboutSertificate(string id)
         {
@@ -182,7 +182,7 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
 
-        // удалить файл с сервера
+        // удалить файл сертификата с сервера
         [HttpGet]
         public async Task<IActionResult> DeleteAboutSertificate(string id)
         {
