@@ -5,7 +5,9 @@
 }
 
 <div>
-    @Html.Raw(Model.VM_About.DescriptionHtml5)
+    <div>
+        @Html.Raw(Model.VM_About.DescriptionHtml5)
+    </div>    
 
     <h4>Наши сертификаты</h4>
     @if (Model.VM_AboutSertificates == null || Model.VM_AboutSertificates.Count == 0)
