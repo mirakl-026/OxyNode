@@ -1,8 +1,31 @@
-﻿
+﻿@model OxyNode.Models.KnowledgeBase
 @{
     ViewData["Title"] = "OxyNode | KnowledgeBase";
 }
 
 <div>
-    KB
+    @Html.Raw(Model.DescriptionHtml5)
 </div>
+
+<table>
+    <tr>
+        <td>
+            <a href="#">Нормативные документы</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#">Отраслевые решения</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#">Вопрос-ответ</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#">Статьи</a>
+        </td>
+    </tr>
+</table>

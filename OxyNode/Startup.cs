@@ -38,6 +38,9 @@ namespace OxyNode
             services.AddTransient<AboutService>();
             services.AddTransient<AboutSertificateService>();
 
+            // сервис управления содержимым страницы "База знаний"
+            services.AddTransient<KnowledgeBaseService>();
+
             // MVC роутинг
             services.AddControllersWithViews();
         }

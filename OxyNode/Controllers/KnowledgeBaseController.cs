@@ -4,13 +4,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+using OxyNode.Services;
+
 namespace OxyNode.Controllers
 {
     public class KnowledgeBaseController : Controller
     {
-        public IActionResult Index()
+        private KnowledgeBaseService _db;
+
+        public KnowledgeBaseController(KnowledgeBaseService context)
         {
-            return View();
+            _db = context;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var kb = await _db.ReadKnowledgeBase();
+            return View(kb);
         }
     }
 }

@@ -39,12 +39,12 @@ namespace OxyNode.Services
         // Create
         public async Task CreateAbout(About a)
         {
-            // если до текущего момента в БД нет документа "Контакты", то документ - создаётся
+            // если до текущего момента в БД нет документа "О нас", то документ - создаётся
             if (AboutCollection.Find(new BsonDocument()) == null)
             {
                 await AboutCollection.InsertOneAsync(a);
             }
-            // если на текущий момент в БД уже есть документ "Контакты", то он заменяется
+            // если на текущий момент в БД уже есть документ "О нас", то он заменяется
             else
             {
                 AboutCollection.DeleteOne(new BsonDocument());
@@ -60,7 +60,7 @@ namespace OxyNode.Services
                 // поскольку документ 1, ожно получить пустым Find
                 return await AboutCollection.Find(new BsonDocument()).FirstOrDefaultAsync();
             }
-            // если "Контакты" не созданы - вернуть заглушку
+            // если "О нас" не созданы - вернуть заглушку
             else
             {
                 return new About()
@@ -73,12 +73,12 @@ namespace OxyNode.Services
         // Update
         public async Task UpdateAbout (About a)
         {
-            // если до текущего момента в БД нет документа "Контакты", то документ - создаётся
+            // если до текущего момента в БД нет документа "О нас", то документ - создаётся
             if (AboutCollection.Find(new BsonDocument()).ToList().Count == 0)
             {
                 await AboutCollection.InsertOneAsync(a);
             }
-            // если на текущий момент в БД уже есть документ "Контакты", то он заменяется
+            // если на текущий момент в БД уже есть документ "О нас", то он заменяется
             else
             {
                 AboutCollection.DeleteOne(new BsonDocument());
@@ -89,7 +89,7 @@ namespace OxyNode.Services
         // Delete
         public async Task DeleteAbout()
         {
-            // Если "Контакты" есть - удалить их
+            // Если "О нас" есть - удалить их
             if (AboutCollection.Find(new BsonDocument()).ToList().Count > 0)
             {
                 await AboutCollection.DeleteOneAsync(new BsonDocument());
