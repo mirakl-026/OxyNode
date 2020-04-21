@@ -13,7 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\admin\Views\EditKnowledgeBase\" />
     <Folder Include="wwwroot\resources\about\sertificates\" />
+    <Folder Include="wwwroot\resources\knowledgeBase\regularDocuments\" />
+    <Folder Include="wwwroot\resources\knowledgeBase\industrySolutions\" />
+    <Folder Include="wwwroot\resources\knowledgeBase\quesAns\" />
+    <Folder Include="wwwroot\resources\knowledgeBase\notes\" />
   </ItemGroup>
 
 </Project>
