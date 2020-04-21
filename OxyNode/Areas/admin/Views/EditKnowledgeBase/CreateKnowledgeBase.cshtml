@@ -1,0 +1,34 @@
+﻿@model OxyNode.Models.KnowledgeBase
+@{
+    ViewData["Title"] = "Admin | KnowledgeBase | Create";
+}
+
+<h4>Заполнение страницы "База знаний"</h4>
+<hr />
+
+<form asp-area="admin" asp-controller="EditKnowledgeBase" asp-action="CreateKnowledgeBase" method="post">
+    <div>
+        <h3>Необязательные поля для заполнения</h3>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <table>
+                <tr>
+                    <td><label asp-for="DescriptionHtml5" class="control-label"></label></td>
+                    <td><input asp-for="DescriptionHtml5" class="form-control" /><span asp-validation-for="DescriptionHtml5" class="text-danger"></span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Сохранить" />
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <partial name="Partial/_ValidationScriptsPartial" />
+}
+
