@@ -27,9 +27,12 @@ namespace OxyNode.Models
         [Display(Name = "Текст ссылки на файл")]
         public string rd_Name { get; set; }
 
-
         // путь к файлу
         [Display(Name = "Путь к файлу")]
         public string rd_Path { get; set; }
+
+        // ссылка на иконку файла
+        [Display(Name = "Иконка")]
+        public string rd_IconPath { get; set; }
     }
 }

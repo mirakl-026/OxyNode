@@ -6,3 +6,25 @@
 
 @Html.Raw(Model.globalDescription)
 
+@if (Model.regularDocuments != null)
+{
+    @foreach (var rd in Model.regularDocuments)
+    {
+        <table style="background-color:lightgreen">
+            <tr>
+                <td>
+                    <img src="@rd.rd_IconPath" width="50" height="50" />
+                </td>
+                <td>
+                    <a href="@rd.rd_Path">@rd.rd_Name</a>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div>@rd.rd_ShortDescription</div>
+                </td>
+            </tr>
+        </table>
+    }
+}

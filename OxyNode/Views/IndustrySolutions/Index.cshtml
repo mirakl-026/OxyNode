@@ -6,3 +6,26 @@
 
 @Html.Raw(Model.globalDescription)
 
+@if (Model.industrySolutions != null)
+{
+    @foreach (var indSol in Model.industrySolutions)
+    {
+        <table style="background-color:lightblue">
+            <tr>
+                <td>
+                    <img src="@indSol.is_IconPath" width="50" height="50" />
+                </td>
+                <td>
+                    <a href="@indSol.is_Path">@indSol.is_Name</a>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div>@indSol.is_ShortDescription</div>
+                </td>
+            </tr>
+        </table>
+    }
+}
+
