@@ -1,4 +1,4 @@
-﻿
+﻿@model OxyNode.Models.KB_regularDocument
 @{
     ViewData["Title"] = "Admin | Regular Documents | Create";
 }
@@ -6,3 +6,38 @@
 
 <h4>Добавление файла в "Нормативные документы"</h4>
 <hr />
+
+<form asp-area="admin" asp-controller="EditRegularDocuments" asp-action="CreateRegularDocument" method="post" enctype="multipart/form-data">
+    <h3>Обязательные поля для заполнения</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <table>
+        <tr>
+            <!-- Краткое описание -->
+            <td><label asp-for="rd_ShortDescription" class="control-label"></label></td>
+            <td>
+                <input type="text" asp-for="rd_ShortDescription" class="form-control" />
+                <span asp-validation-for="rd_ShortDescription" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <!-- Файл -->
+            <td><label asp-for="rd_Path" class="control-label"></label></td>
+            <td>
+                <input type="file" name="uploadedRd" />
+            </td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h3>Необязательные поля для заполнения</h3>
+    <div class="form-group">
+        <table>
+            <tr>
+                <td><label asp-for="rd_Name" class="control-label"></label></td>
+                <td><input asp-for="rd_Name" class="form-control" /><span asp-validation-for="rd_Name" class="text-danger"></span></td>
+            </tr>
+        </table>
+    </div>
+
+    <input type="submit" value="Загрузить" />
+</form>

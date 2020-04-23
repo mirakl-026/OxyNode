@@ -173,7 +173,7 @@ namespace OxyNode.Areas.admin.Controllers
                 var currentSertificate = await _db_aboutSertificate.ReadAboutSertificate(id);
 
                 // Определение пути по текущему файлу сертификата
-                string pathToUpdate = FilesPath + currentSertificate.SertificateName;
+                string pathToUpdate = currentSertificate.SertificatePath;
 
                 // удаление файла сертификата с сервера
                 FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToUpdate);
@@ -199,7 +199,7 @@ namespace OxyNode.Areas.admin.Controllers
             var sertificate = await _db_aboutSertificate.ReadAboutSertificate(id);
 
             // Определение пути
-            string pathToDelete = FilesPath + sertificate.SertificateName;
+            string pathToDelete = FilesPath + sertificate.SertificatePath;
 
             // удаление файла с сервера
             FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToDelete);
@@ -213,7 +213,6 @@ namespace OxyNode.Areas.admin.Controllers
 
             return RedirectToAction("Index", "Panel");
         }
-
 
         #endregion
 

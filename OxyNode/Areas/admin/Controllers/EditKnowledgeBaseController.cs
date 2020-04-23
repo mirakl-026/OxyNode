@@ -18,18 +18,18 @@ namespace OxyNode.Areas.admin.Controllers
     {
         // контроллер для редактирования основной страницы - "База знаний"
 
-        private string KbPath = "/resources/knowledgeBase/";
-        private string Kb_rd_Path = "/resources/knowledgeBase/regularDocuments/";
-        private string Kb_is_Path = "/resources/knowledgeBase/industrySolutions/";
-        private string Kb_qa_Path = "/resources/knowledgeBase/quesAns/";
-        private string Kb_nt_Path = "/resources/knowledgeBase/notes/";
-
-        private IWebHostEnvironment _appEnvironment;
+        // private string KbPath = "/resources/knowledgeBase/";
+        // private string Kb_rd_Path = "/resources/knowledgeBase/regularDocuments/";
+        // private string Kb_is_Path = "/resources/knowledgeBase/industrySolutions/";
+        // private string Kb_qa_Path = "/resources/knowledgeBase/quesAns/";
+        // private string Kb_nt_Path = "/resources/knowledgeBase/notes/";
+        //
+        // private IWebHostEnvironment _appEnvironment;
         private KnowledgeBaseService _db_kb;
         
-        public EditKnowledgeBaseController(IWebHostEnvironment appEnvironment, KnowledgeBaseService kbContext)
+        public EditKnowledgeBaseController(KnowledgeBaseService kbContext)
         {
-            _appEnvironment = appEnvironment;
+            
             _db_kb = kbContext;        
         }
 
