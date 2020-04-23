@@ -1,6 +1,8 @@
-﻿
+﻿@model OxyNode.ViewModels.RegularDocumentsViewModel
+
 @{
     ViewData["Title"] = "OxyNode | Regular Documents";
 }
 
-<h4>Нормативные документы</h4>
+@Html.Raw(Model.globalDescription)
+

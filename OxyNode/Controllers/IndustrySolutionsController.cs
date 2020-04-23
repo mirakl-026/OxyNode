@@ -9,7 +9,7 @@ namespace OxyNode.Controllers
     [Route("KnowledgeBase/{controller}")]
     public class IndustrySolutionsController : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }
