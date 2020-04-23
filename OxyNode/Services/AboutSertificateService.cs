@@ -29,7 +29,7 @@ namespace OxyNode.Services
             // получаем доступ к самой БД
             IMongoDatabase db = client.GetDatabase(connection.DatabaseName);
 
-            // обращаемся к коллекции Contacts
+            // обращаемся к коллекции AboutSertificate
             AboutSertificateCollection = db.GetCollection<AboutSertificate>("AboutSertificateCollection");
         }
 
