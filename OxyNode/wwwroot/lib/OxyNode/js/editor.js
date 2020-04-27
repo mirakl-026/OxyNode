@@ -61,6 +61,7 @@ function add_h3() {
     let new_textarea = document.createElement('textarea');  // то создать новый блок textarea
     new_textarea.classList = "news__item news__h3";   // с классом взятым из имени кнопки (h3, h4, p)
     new_textarea.placeholder = "Заголовок";
+    new_textarea.name = "h3";
     news_field.append(new_textarea);                            // вставить новый блок textarea в поле новости
     new_textarea.addEventListener('focus', new_div);            // добавить прослушку на фокус нового блока textarea
     new_textarea.addEventListener('input', write);              // добавить прослушку на ввод текста в новый блок textarea
@@ -72,6 +73,7 @@ function add_h4() {
     let new_textarea = document.createElement('textarea');  // то создать новый блок textarea
     new_textarea.classList = "news__item news__h4";   // с классом взятым из имени кнопки (h3, h4, p)
     new_textarea.placeholder = "Подзаголовок";
+    new_textarea.name = "h4";
     news_field.append(new_textarea);                            // вставить новый блок textarea в поле новости
     new_textarea.addEventListener('focus', new_div);            // добавить прослушку на фокус нового блока textarea
     new_textarea.addEventListener('input', write);              // добавить прослушку на ввод текста в новый блок textarea
@@ -82,6 +84,7 @@ function add_p() {
     let new_textarea = document.createElement('textarea');  // то создать новый блок textarea
     new_textarea.classList = "news__item news__p";   // с классом параграфа
     new_textarea.placeholder = "Параграф";
+    new_textarea.name = "p";
     news_field.append(new_textarea);                            // вставить новый блок textarea в поле новости
     new_textarea.addEventListener('focus', new_div);            // добавить прослушку на фокус нового блока textarea
     new_textarea.addEventListener('input', write);              // добавить прослушку на ввод текста в новый блок textarea
@@ -133,9 +136,11 @@ function down_block() {
         alert("Блок не выбран");
     else {
         let parent_elem = focused_item.parentElement;
-        let next_elem = focused_item.nextElementSibling.nextElementSibling;
-        parent_elem.insertBefore(focused_item, next_elem);
-        focused_item.focus();
+        if (focused_item.nextElementSibling != null) {
+            let next_elem = focused_item.nextElementSibling.nextElementSibling;
+            parent_elem.insertBefore(focused_item, next_elem);
+            focused_item.focus();
+        }
     }
 }
 
@@ -190,6 +195,34 @@ document.onclick = function (e) {
     if (event.target.classList[1] === "file_manager_active") {
         document.querySelector(".file_manager").classList.remove("file_manager_active");
     }
+}
+
+const save_btn = document.querySelector(".save_button");
+save_btn.addEventListener('click', save_all);
+
+function save_all() {
+    // const news_field = document.querySelector(".news_field");
+    if (document.querySelector(".news__div") != null)
+        document.querySelector(".news__div").remove();
+    // news_div.remove();
+    const news_items = news_field.childNodes;
+    let news_value = "";
+    for (item of news_items) {
+        if (item.name == "h3") {
+            news_value += `<h3 class="` + item.classList + `">` + item.value + `</h3>`;
+        }
+        else if (item.name == "h4") {
+            news_value += `<h4 class="` + item.classList + `">` + item.value + `</h4>`;
+        }
+        else if (item.name == "p") {
+            news_value += `<p class="` + item.classList + `">` + item.value + `</p>`;
+        }
+        else false
+    }
+    console.log(news_value);
+    let new_item = document.createElement("div");
+    new_item.innerHTML = news_value;
+    news_field.append(new_item);
 }
 
     // window.onbeforeunload = function() {

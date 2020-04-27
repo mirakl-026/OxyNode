@@ -27,10 +27,28 @@
 
 <script>
     function saveChanges() {
-        var content = document.querySelector(".news_field").innerHTML;
+        // const news_field = document.querySelector(".news_field");
+        if (document.querySelector(".news__div") != null)
+            document.querySelector(".news__div").remove();
+        // news_div.remove();
+        const news_items = news_field.childNodes;
+        let news_value = "";
+        for (item of news_items) {
+            if (item.name == "h3") {
+                news_value += `<h3 class="` + item.classList + `">` + item.value + `</h3>`;
+            }
+            else if (item.name == "h4") {
+                news_value += `<h4 class="` + item.classList + `">` + item.value + `</h4>`;
+            }
+            else if (item.name == "p") {
+                news_value += `<p class="` + item.classList + `">` + item.value + `</p>`;
+            }
+            else false
+        }
+
 
         var formValue = document.getElementById("formContent");
-        formValue.setAttribute("value", content);
+        formValue.setAttribute("value", news_value);
     }
 </script>
 
@@ -52,14 +70,10 @@
         <button class="edit_panel__button delete_block" type="button" name="">Удалить блок</button>
         <button class="edit_panel__button up_block" type="button" name="">Блок вверх</button>
         <button class="edit_panel__button down_block" type="button" name="">Блок вниз</button>
-        <div class="div_src">
-            <!-- <input type="text"> -->
-            <button>OK</button>
-        </div>
-    </div>
-    <div class="news_field">
+        <button class="edit_panel__button edit_button">Редактировать</button>
 
     </div>
+    <div class="news_field"></div>
 
 
 
