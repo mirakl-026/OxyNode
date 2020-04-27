@@ -34,6 +34,9 @@
         const news_items = news_field.childNodes;
         let news_value = "";
         for (item of news_items) {
+            item.value = item.value.replace(/</g, "&lt");
+            item.value = item.value.replace(/>/g, "&gt");
+
             if (item.name == "h3") {
                 news_value += `<h3 class="` + item.classList + `">` + item.value + `</h3>`;
             }
