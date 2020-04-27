@@ -1,0 +1,33 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>@ViewBag.Title</title>
+
+        <!-- Подключение стилей через частичное представление - для Админки-->
+        <partial name="Partial/_Styles" />
+
+        @*Всё что касается редактора контента*@
+        <link href="~/lib/OxyNode/css/reset.css" rel="stylesheet" />
+        <link href="~/lib/OxyNode/css/editor.css" rel="stylesheet" />
+        <link href="~/lib/OxyNode/css/default_styles.css" rel="stylesheet" />
+
+    </head>
+
+    <body>
+        <a asp-area="default" asp-controller="Home" asp-action="Index">Вернуться на главную</a>
+        <a asp-area="admin" asp-controller="Panel" asp-action="Index">Вернуться на панель администратора</a>
+
+        @RenderBody()
+
+        <partial name="Partial/_Scripts" />
+
+        @*Всё что касается редактора контента*@
+        <script src="~/lib/OxyNode/js/editor.js"></script>
+    </body>
+
+    @RenderSection("Scripts", false)
+</html>
+
