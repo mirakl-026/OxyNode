@@ -166,7 +166,7 @@
     padding: 6px 10px;
     border-radius: 1em;
     line-height: 40px;
-    transition: all 0.2;
+    transition: all 0.2s;
 }
 
     .tag:hover {
@@ -181,6 +181,7 @@
     padding: 6px 10px;
     border-radius: 1em;
     line-height: 40px;
-    transition: all 0.2;
+    transition: all 0.2s;
     cursor: default;
 }
+
