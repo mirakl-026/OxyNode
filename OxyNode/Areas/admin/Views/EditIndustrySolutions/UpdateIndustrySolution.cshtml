@@ -1,4 +1,5 @@
-﻿
+﻿@model OxyNode.Models.KB_industrySolution
+
 @{
     ViewData["Title"] = "Admin | Industry Solutions | Update";
 }
@@ -6,3 +7,42 @@
 
 <h4>Изменение файла в "Отраслевые решения"</h4>
 <hr />
+
+<form asp-area="admin" asp-controller="EditIndustrySolutions" asp-action="UpdateIndustrySolution" method="post" enctype="multipart/form-data">
+    <h3>Обязательные поля для заполнения</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <table>
+        <tr>
+            <!-- Краткое описание -->
+            <td><label asp-for="is_ShortDescription" class="control-label"></label></td>
+            <td>
+                <input type="text" asp-for="is_ShortDescription" value="@Model.is_ShortDescription" class="form-control" />
+                <span asp-validation-for="is_ShortDescription" class="text-danger"></span>
+            </td>
+        </tr>
+        <tr>
+            <!-- Файл -->
+            <td><label asp-for="is_Path" class="control-label"></label></td>
+            <td>
+                <input type="file" name="newuploadedIS" />
+            </td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h3>Необязательные поля для заполнения</h3>
+    <div class="form-group">
+        <table>
+            <tr>
+                <td><label asp-for="is_Name" class="control-label"></label></td>
+                <td><input asp-for="is_Name" value="@Model.is_Name" class="form-control" /><span asp-validation-for="is_Name" class="text-danger"></span></td>
+            </tr>
+        </table>
+    </div>
+
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <input type="submit" value="Загрузить" />
+</form>
+
+<a asp-area="admin" asp-controller="Panel" asp-action="Index">Отмена</a>

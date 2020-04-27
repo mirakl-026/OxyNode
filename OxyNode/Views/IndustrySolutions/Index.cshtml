@@ -6,11 +6,11 @@
 
 @Html.Raw(Model.globalDescription)
 
-@if (Model.industrySolutions != null)
-{
-    @foreach (var indSol in Model.industrySolutions)
+<table style="background-color:lightblue">
+    @if (Model.industrySolutions != null && Model.industrySolutions.Count > 0)
     {
-        <table style="background-color:lightblue">
+        @foreach (var indSol in Model.industrySolutions)
+        {
             <tr>
                 <td>
                     <img src="@indSol.is_IconPath" width="50" height="50" />
@@ -25,7 +25,13 @@
                     <div>@indSol.is_ShortDescription</div>
                 </td>
             </tr>
-        </table>
+        }
     }
-}
+    else
+    {
+        <tr>
+            <td>Отраслевых решений нет</td>
+        </tr>
+    }
+</table>
 
