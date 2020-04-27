@@ -199,7 +199,7 @@ namespace OxyNode.Areas.admin.Controllers
             var sertificate = await _db_aboutSertificate.ReadAboutSertificate(id);
 
             // Определение пути
-            string pathToDelete = FilesPath + sertificate.SertificatePath;
+            string pathToDelete = sertificate.SertificatePath;
 
             // удаление файла с сервера
             FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToDelete);

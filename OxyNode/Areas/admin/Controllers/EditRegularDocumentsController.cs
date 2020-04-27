@@ -119,10 +119,11 @@ namespace OxyNode.Areas.admin.Controllers
                 var currentRd = await _db.ReadRegularDocument(id);
 
                 // Определение пути по текущему файлу нормативного документа
-                string pathToUpdate = FilesPath + currentRd.rd_Path;
+                string pathToDelete = currentRd.rd_Path;
+                string pathToUpdate = FilesPath + newUploadedRd.FileName;
 
                 // удаление файла нормативного документа с сервера
-                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToUpdate);
+                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToDelete);
                 if (fi.Exists)
                 {
                     fi.Delete();
@@ -170,12 +171,12 @@ namespace OxyNode.Areas.admin.Controllers
 
         // удалить файл сертификата с сервера
         [HttpGet]
-        public async Task<IActionResult> DeleteAboutSertificate(string id)
+        public async Task<IActionResult> DeleteRegularDocument(string id)
         {
             var currentRd = await _db.ReadRegularDocument(id);
 
             // Определение пути
-            string pathToDelete = FilesPath + currentRd.rd_Path;
+            string pathToDelete = currentRd.rd_Path;
 
             // удаление файла с сервера
             FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToDelete);

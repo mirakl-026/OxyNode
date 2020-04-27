@@ -11,11 +11,12 @@
 
 @Html.Raw(Model.globalDescription)
 
-@if (Model.regularDocuments != null)
-{
-    @foreach (var rd in Model.regularDocuments)
+<table style="background-color:lightgreen">
+    @if (Model.regularDocuments != null && Model.regularDocuments.Count > 0)
     {
-        <table style="background-color:lightgreen">
+        @foreach (var rd in Model.regularDocuments)
+        {
+
             <tr>
                 <td>
                     <img src="@rd.rd_IconPath" width="50" height="50" />
@@ -30,6 +31,21 @@
                     <div>@rd.rd_ShortDescription</div>
                 </td>
             </tr>
-        </table>
+            <tr>
+                <td></td>
+                <td><a asp-area="admin" asp-controller="EditRegularDocuments" asp-action="UpdateRegularDocument" asp-route-id="@rd.Id">Обновить файл нормативного документа</a></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><a asp-area="admin" asp-controller="EditRegularDocuments" asp-action="DeleteRegularDocument" asp-route-id="@rd.Id">Удалить файл нормативного документа</a></td>
+            </tr>
+
+        }
     }
-}
+    else
+    {
+        <tr>
+            <td>Нормативных документов нет</td>
+        </tr>
+    }
+</table>
