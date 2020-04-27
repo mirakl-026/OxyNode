@@ -10,13 +10,13 @@
 
 @Html.Raw(Model.globalDescription)
 
-<table style="background-color:lightgreen">
+<table>
     @if (Model.industrySolutions != null && Model.industrySolutions.Count > 0)
     {
         @foreach (var IS in Model.industrySolutions)
         {
 
-            <tr>
+            <tr style="@IS.is_fieldCssColor">
                 <td>
                     <img src="@IS.is_IconPath" width="50" height="50" />
                 </td>
@@ -24,21 +24,21 @@
                     <a href="@IS.is_Path">@IS.is_Name</a>
                 </td>
             </tr>
-            <tr>
+            <tr style="@IS.is_fieldCssColor">
                 <td></td>
                 <td>
                     <div>@IS.is_ShortDescription</div>
                 </td>
             </tr>
-            <tr>
+            <tr style="@IS.is_fieldCssColor">
                 <td></td>
                 <td><a asp-area="admin" asp-controller="EditIndustrySolutions" asp-action="ReadIndustrySolution" asp-route-id="@IS.Id">Посмотреть файл отраслевого решения</a></td>
             </tr>
-            <tr>
+            <tr style="@IS.is_fieldCssColor">
                 <td></td>
                 <td><a asp-area="admin" asp-controller="EditIndustrySolutions" asp-action="UpdateIndustrySolution" asp-route-id="@IS.Id">Обновить файл отраслевого решения</a></td>
             </tr>
-            <tr>
+            <tr style="@IS.is_fieldCssColor">
                 <td></td>
                 <td><a asp-area="admin" asp-controller="EditIndustrySolutions" asp-action="DeleteIndustrySolution" asp-route-id="@IS.Id">Удалить файл отраслевого решения</a></td>
             </tr>

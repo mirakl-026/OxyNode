@@ -36,5 +36,9 @@ namespace OxyNode.Models
         // ссылка на иконку файла
         [Display(Name = "Иконка")]
         public string is_IconPath { get; set; }
+
+        // цвет поля
+        [Display(Name = "Цвет поля файла")]
+        public string is_fieldCssColor { get; set; }
     }
 }

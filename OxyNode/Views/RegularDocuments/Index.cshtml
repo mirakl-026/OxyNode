@@ -6,12 +6,12 @@
 
 @Html.Raw(Model.globalDescription)
 
-<table style="background-color:lightgreen">
+<table>
     @if (Model.regularDocuments != null && Model.regularDocuments.Count > 0)
     {
         @foreach (var rd in Model.regularDocuments)
         {
-            <tr>
+            <tr style="@rd.rd_fieldCssColor">
                 <td>
                     <img src="@rd.rd_IconPath" width="50" height="50" />
                 </td>
@@ -19,7 +19,7 @@
                     <a href="@rd.rd_Path">@rd.rd_Name</a>
                 </td>
             </tr>
-            <tr>
+            <tr style="@rd.rd_fieldCssColor">
                 <td></td>
                 <td>
                     <div>@rd.rd_ShortDescription</div>

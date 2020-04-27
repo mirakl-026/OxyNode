@@ -10,7 +10,7 @@
 
 
 <table>
-    <tr>
+    <tr style="@Model.rd_fieldCssColor">
         <td>
             <img src="@Model.rd_IconPath" width="50" height="50" />
         </td>
@@ -18,17 +18,17 @@
             <a href="@Model.rd_Path">@Model.rd_Name</a>
         </td>
     </tr>
-    <tr>
+    <tr style="@Model.rd_fieldCssColor">
         <td></td>
         <td>
             <div>@Model.rd_ShortDescription</div>
         </td>
     </tr>
-    <tr>
+    <tr style="@Model.rd_fieldCssColor">
         <td></td>
         <td><a asp-area="admin" asp-controller="EditRegularDocuments" asp-action="UpdateRegularDocument" asp-route-id="@Model.Id">Обновить файл нормативного документа</a></td>
     </tr>
-    <tr>
+    <tr style="@Model.rd_fieldCssColor">
         <td></td>
         <td><a asp-area="admin" asp-controller="EditRegularDocuments" asp-action="DeleteRegularDocument" asp-route-id="@Model.Id">Удалить файл нормативного документа</a></td>
     </tr>

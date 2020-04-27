@@ -60,17 +60,30 @@ namespace OxyNode.Areas.admin.Controllers
                     rd.rd_Name = uploadedRd.FileName;
                 }
 
-                // иконка
+                // иконка и цвет поля
                 var ext = uploadedRd.FileName.Split('.').Last();
                 string icon_path = "/resources/partial/text.png";
+                rd.rd_fieldCssColor = "background-color:lightgrey";
                 if (ext.Equals("pdf"))
+                {
                     icon_path = "/resources/partial/pdf.png";
-                else if (ext.Equals("doc"))
+                    rd.rd_fieldCssColor = "background-color:lightpink";
+                }
+                else if (ext.Equals("doc") || ext.Equals("docx"))
+                {
                     icon_path = "/resources/partial/word.png";
-                else if (ext.Equals("zip"))
+                    rd.rd_fieldCssColor = "background-color:lightblue";
+                }
+                else if (ext.Equals("zip") || ext.Equals("rar") || ext.Equals("7z"))
+                {
                     icon_path = "/resources/partial/zip.png";
-                else if (ext.Equals("xls"))
+                    rd.rd_fieldCssColor = "background-color:lightyellow";
+                }
+                else if (ext.Equals("xls") || ext.Equals("xlsx"))
+                {
                     icon_path = "/resources/partial/excel.png";
+                    rd.rd_fieldCssColor = "background-color:lightgreen";
+                }
 
                 rd.rd_IconPath = icon_path;
 
@@ -142,17 +155,30 @@ namespace OxyNode.Areas.admin.Controllers
                     nrd.rd_Name = newUploadedRd.FileName;
                 }
 
-                // иконка
+                // иконка и цвет поля
                 var ext = newUploadedRd.FileName.Split('.').Last();
                 string icon_path = "/resources/partial/text.png";
+                nrd.rd_fieldCssColor = "background-color:lightgrey";
                 if (ext.Equals("pdf"))
+                {
                     icon_path = "/resources/partial/pdf.png";
-                else if (ext.Equals("doc"))
+                    nrd.rd_fieldCssColor = "background-color:lightpink";
+                }
+                else if (ext.Equals("doc") || ext.Equals("docx"))
+                {
                     icon_path = "/resources/partial/word.png";
-                else if (ext.Equals("zip"))
+                    nrd.rd_fieldCssColor = "background-color:lightblue";
+                }
+                else if (ext.Equals("zip") || ext.Equals("rar") || ext.Equals("7z"))
+                {
                     icon_path = "/resources/partial/zip.png";
-                else if (ext.Equals("xls"))
+                    nrd.rd_fieldCssColor = "background-color:lightyellow";
+                }
+                else if (ext.Equals("xls") || ext.Equals("xlsx"))
+                {
                     icon_path = "/resources/partial/excel.png";
+                    nrd.rd_fieldCssColor = "background-color:lightgreen";
+                }
 
                 nrd.rd_IconPath = icon_path;
 

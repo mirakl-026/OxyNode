@@ -10,7 +10,7 @@
 
 
 <table>
-    <tr>
+    <tr style="@Model.is_fieldCssColor">
         <td>
             <img src="@Model.is_IconPath" width="50" height="50" />
         </td>
@@ -18,17 +18,17 @@
             <a href="@Model.is_Path">@Model.is_Name</a>
         </td>
     </tr>
-    <tr>
+    <tr style="@Model.is_fieldCssColor">
         <td></td>
         <td>
             <div>@Model.is_ShortDescription</div>
         </td>
     </tr>
-    <tr>
+    <tr style="@Model.is_fieldCssColor">
         <td></td>
         <td><a asp-area="admin" asp-controller="EditIndustrySolutions" asp-action="UpdateIndustrySolution" asp-route-id="@Model.Id">Обновить файл отраслевого решения</a></td>
     </tr>
-    <tr>
+    <tr style="@Model.is_fieldCssColor">
         <td></td>
         <td><a asp-area="admin" asp-controller="EditIndustrySolutions" asp-action="DeleteIndustrySolution" asp-route-id="@Model.Id">Удалить файл отраслевого решения</a></td>
     </tr>

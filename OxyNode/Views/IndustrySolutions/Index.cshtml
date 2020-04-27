@@ -6,12 +6,12 @@
 
 @Html.Raw(Model.globalDescription)
 
-<table style="background-color:lightblue">
+<table>
     @if (Model.industrySolutions != null && Model.industrySolutions.Count > 0)
     {
         @foreach (var indSol in Model.industrySolutions)
         {
-            <tr>
+            <tr style="@indSol.is_fieldCssColor">
                 <td>
                     <img src="@indSol.is_IconPath" width="50" height="50" />
                 </td>
@@ -19,7 +19,7 @@
                     <a href="@indSol.is_Path">@indSol.is_Name</a>
                 </td>
             </tr>
-            <tr>
+            <tr style="@indSol.is_fieldCssColor">
                 <td></td>
                 <td>
                     <div>@indSol.is_ShortDescription</div>
