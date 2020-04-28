@@ -25,6 +25,39 @@
 </form>
 
 
+<form name="_loadImageForm" asp-area="admin" asp-controller="ImageManager" asp-action="LoadImage" method="post" enctype="multipart/form-data">
+    <input type="file" name="uploadedImage" />
+    <input type="submit" name="submit" value="Загрузить" />
+</form>
+
+<div id="_loadOutput">
+
+</div>
+
+<script>
+    // получили форму
+    var form = document.forms._loadImageForm;
+
+    // прикрепляем обработчик кнопки
+    form.submit.addEventListener("click", sendRequestImage);
+
+    // обработчик нажатия
+    function sendRequestImage(event) {
+
+        event.preventDefault();
+
+        var formData = new FormData(form);
+
+        var request = new XMLHttpRequest();
+        request.open("POST", form.action);
+
+
+
+        request.send(formData);
+    }
+</script>
+
+
 <script>
     function saveChanges() {
         // const news_field = document.querySelector(".news_field");
