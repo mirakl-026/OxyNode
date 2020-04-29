@@ -5,9 +5,15 @@
     ViewData["Title"] = "Admin | About | Create";
 }
 
+<h4>Заполнение страницы "О нас"</h4>
+<hr />
+
 <form asp-area="admin" asp-controller="EditAbout" asp-action="CreateAbout" method="post" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <input id="formContent" value="" type="hidden" asp-for="DescriptionHtml5">
     <input class="edit_panel__button save_button" type="submit" value="Сохранить"><span asp-validation-for="DescriptionHtml5" class="text-danger"></span>
 </form>
+
+@* Частичное представление редактора контента*@
+<partial name="Partial/_ContentEditor" />

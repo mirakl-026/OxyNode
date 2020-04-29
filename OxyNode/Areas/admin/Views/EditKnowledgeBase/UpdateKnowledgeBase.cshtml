@@ -1,34 +1,30 @@
 ﻿@model OxyNode.Models.KnowledgeBase
+@using System.Web;
 
 @{
+    Layout = "_LayoutAdminWithEditor";
     ViewData["Title"] = "Admin | KnowledgeBase | Update";
 }
 
 <h4>Редактирование содержания "База знаний"</h4>
 <hr />
 
-<form asp-area="admin" asp-controller="EditKnowledgeBase" asp-action="CreateKnowledgeBase" method="post">
-    <div>
-        <h3>Необязательные поля для заполнения</h3>
 
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form asp-area="admin" asp-controller="EditKnowledgeBase" asp-action="CreateKnowledgeBase" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        <div class="form-group">
-            <table>
-                <tr>
-                    <td><label asp-for="DescriptionHtml5" class="control-label"></label></td>
-                    <td><input asp-for="DescriptionHtml5" class="form-control" value="@Model.DescriptionHtml5" /><span asp-validation-for="DescriptionHtml5" class="text-danger"></span></td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="form-group">
-            <input type="submit" value="Сохранить" />
-        </div>
-    </div>
+    <input id="formContent" value="" type="hidden" asp-for="DescriptionHtml5">
+    <input class="edit_panel__button save_button" type="submit" value="Сохранить"><span asp-validation-for="DescriptionHtml5" class="text-danger"></span>
 </form>
 
-@section Scripts
-{
-    <partial name="Partial/_ValidationScriptsPartial" />
-}
+@* Частичное представление редактора контента*@
+<partial name="Partial/_ContentEditor" />
+
+<script>
+    var saved_news = document.createElement("div");
+    saved_news.classList = "saved_news";
+
+    var data = "@Html.Raw(HttpUtility.JavaScriptStringEncode(Model.DescriptionHtml5))";
+    saved_news.innerHTML = data;
+    document.querySelector(".news").appendChild(saved_news);
+</script>
