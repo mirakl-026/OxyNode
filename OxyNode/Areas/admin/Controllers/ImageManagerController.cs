@@ -40,7 +40,7 @@ namespace OxyNode.Areas.admin.Controllers
                 FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + path);
                 if (fi.Exists)
                 {
-                    return RedirectToAction("Index", "Panel");
+                    return new JsonResult(path);
                 }
 
                 // Сохранение файла на сервере
@@ -48,12 +48,26 @@ namespace OxyNode.Areas.admin.Controllers
                 {
                     await uploadedImage.CopyToAsync(fileStream);
                 }
+                return new JsonResult(path);
             }
-            return RedirectToAction("Index", "Panel");
+            return new JsonResult("");
+        }
+
+        // получить ссылки всех картинок
+        [HttpGet]
+        public IActionResult GetAllImages()
+        {
+            string[] images = Directory.GetFiles(_appEnvironment.WebRootPath + FilesPath);
+            for (int i = 0; i < images.Length; i++)
+            {
+                images[i] = images[i].Substring(_appEnvironment.WebRootPath.Length);
+            }
+            return new JsonResult(images);
         }
 
 
         // удалить картинку
+
 
 
         #endregion

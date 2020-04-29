@@ -22,10 +22,10 @@
 
         @RenderBody()
 
-        <partial name="Partial/_Scripts" />
+        @* Частичное представление редактора контента*@
+        <partial name="Partial/_ContentEditor" />
 
-        @*Всё что касается редактора контента*@
-        <script src="~/lib/OxyNode/js/editor.js"></script>
+        <partial name="Partial/_Scripts" />
     </body>
 
     @RenderSection("Scripts", false)
