@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +18,8 @@ namespace OxyNode.Models
         public string Id { get; set; }
 
         // обязательные описание - html5
+        [Required(ErrorMessage = "Описание обязательно", AllowEmptyStrings = false)]
+        [StringLength(100000, MinimumLength = 10, ErrorMessage = "лжно иметь от 10 до 100000 символов")]
         public string DescriptionHtml5 { get; set; }
     }
 }
