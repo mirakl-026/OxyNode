@@ -15,5 +15,10 @@ namespace OxyNode.ViewModels
         // описание страницы
         public string globalDescription = "<h3>Статьи</h3><p>Статьи статьи статьи статьи статьи статьи статьи статьи статьи статьи статьи статьи статьи статьи статьи статьи статьи статьи.</p>";
 
+        // номер текущей страницы статей
+        public int currentPageNumber;
+
+        // полоска номеров статей
+        public List<int> pagesNumbers;
     }
 }
