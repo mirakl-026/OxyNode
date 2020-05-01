@@ -16,7 +16,7 @@ namespace OxyNode.Areas.admin.Controllers
     [Area("admin")]
     public class EditAboutController : Controller
     {
-        // контроллер для редактирования содржимого страницы "О нас"
+        // контроллер для редактирования содержимого страницы "О нас"
 
         private string FilesPath = "/resources/about/sertificates/";
         private IWebHostEnvironment _appEnvironment;

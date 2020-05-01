@@ -16,7 +16,6 @@
     <Folder Include="wwwroot\resources\about\sertificates\" />
     <Folder Include="wwwroot\resources\knowledgeBase\regularDocuments\" />
     <Folder Include="wwwroot\resources\knowledgeBase\industrySolutions\" />
-    <Folder Include="wwwroot\resources\knowledgeBase\notes\" />
     <Folder Include="wwwroot\resources\partial\" />
     <Folder Include="wwwroot\resources\images\" />
   </ItemGroup>

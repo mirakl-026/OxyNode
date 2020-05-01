@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -59,7 +60,49 @@ namespace OxyNode
             }
 
             // создание папок ресурсов (если их нет)
+            string path = env.WebRootPath + "/resources/";
+            // папка для хранения сертификатов            - "/resources/about/sertificates/";
+            DirectoryInfo di_about = new DirectoryInfo(path + "/about/");
+            if(!di_about.Exists)
+            {
+                di_about.Create();
+            }
+            DirectoryInfo di_about_sertificates = new DirectoryInfo(path + "/about/sertificates/");
+            if (!di_about_sertificates.Exists)
+            {
+                di_about_sertificates.Create();
+            }
 
+            // папка для хранения отраслевых решений      - "/resources/knowledgeBase/industrySolutions/";
+            // папка для хранения нормативных документов  - "/resources/knowledgeBase/regularDocuments/";
+            // папка для хранения статей                  - "/resources/knowledgeBase/notes/";
+            DirectoryInfo di_knowledgeBase = new DirectoryInfo(path + "/knowledgeBase/");
+            if (!di_knowledgeBase.Exists)
+            {
+                di_knowledgeBase.Create();
+            }
+            DirectoryInfo di_knowledgeBase_IS = new DirectoryInfo(path + "/knowledgeBase/industrySolutions/");
+            if (!di_knowledgeBase_IS.Exists)
+            {
+                di_knowledgeBase_IS.Create();
+            }
+            DirectoryInfo di_knowledgeBase_RD = new DirectoryInfo(path + "/knowledgeBase/regularDocuments/");
+            if (!di_knowledgeBase_RD.Exists)
+            {
+                di_knowledgeBase_RD.Create();
+            }
+            DirectoryInfo di_knowledgeBase_NT = new DirectoryInfo(path + "/knowledgeBase/notes/");
+            if (!di_knowledgeBase_NT.Exists)
+            {
+                di_knowledgeBase_NT.Create();
+            }
+
+            // папка для хранения картинок html5 контента - "/resources/images/";
+            DirectoryInfo di_images = new DirectoryInfo(path + "/images/");
+            if (!di_images.Exists)
+            {
+                di_images.Create();
+            }
 
             app.UseStaticFiles();
             app.UseDefaultFiles();
