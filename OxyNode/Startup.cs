@@ -46,6 +46,8 @@ namespace OxyNode
             services.AddTransient<KB_regularDocumentService>();
             // сервис управления Отраслевыми решениями
             services.AddTransient<KB_industrySolutionService>();
+            // сервис управления статьями
+            services.AddTransient<KB_noteService>();
 
 
             // MVC роутинг

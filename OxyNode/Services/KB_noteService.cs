@@ -40,18 +40,20 @@ namespace OxyNode.Services
             return await NoteCollection.Find(new BsonDocument()).ToListAsync();
         }
 
-        // получить страницу статей (6 чтук)
-        public async Task<List<KB_note>> GetPageOfNotes(int pageNumber)
+        // получить страницу статей (pageSize чтук)
+        public async Task<List<KB_note>> GetPageOfNotes(int pageNumber, int pageSize)
         {
-            // общее кол-во статей в БД
-            //long notesCounter = NoteCollection.CountDocuments(new BsonDocument());
-
             // выборка по номеру страницы - 
-            // кол-во статей/6 - кол-во возможных страниц
-            // limit - 6, skip = (pageNumber-1)*6
-            return await NoteCollection.Find(new BsonDocument()).Skip((pageNumber-1)*6).Limit(6).ToListAsync();
+            // кол-во статей/pageSize - кол-во возможных страниц
+            // limit - pageSize, skip = (pageNumber-1)*pageSize
+            return await NoteCollection.Find(new BsonDocument()).Skip((pageNumber-1)*pageSize).Limit(pageSize).ToListAsync();
         }
 
+        // получить кол-во статей в БД
+        public async Task<long> GetNotesCount()
+        {
+            return await NoteCollection.CountDocumentsAsync(new BsonDocument());
+        }
 
 
         #region CRUD
