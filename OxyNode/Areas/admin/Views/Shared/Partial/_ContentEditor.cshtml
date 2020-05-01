@@ -35,30 +35,31 @@
 
 
 <script>
-    // window.onload = function (){
+    //images creator
+
     //-------------------------- news creator-------------------------------------
     // edit_panel
 
-    movable = false;        // флаг перемещения
+    let movable = false;        // флаг перемещения
 
     function create_edit_panel() {
         let edit_panel_dom = document.createElement("div");
         edit_panel_dom.classList = "edit_panel";
         edit_panel_dom.setAttribute("onmousedown", "return false");
         edit_panel_dom.innerHTML = `<div class="edit_panel__move">
-        <svg width="24" height="24" viewBox="0 0 24 24">
-        <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" /></svg>
-        </div>
-        <button class="edit_panel__button add_h3" type="button">Добавить заголовок</button>
-        <button class="edit_panel__button add_h4" type="button">Добавить подзаголовок</button>
-        <button class="edit_panel__button add_p" type="button">Добавить параграф</button>
-        <button class="edit_panel__button add_img" type="button">Добавить картинку</button>
-        <button class="edit_panel__button add_video" type="button">Добавить видео</button>
-        <button class="edit_panel__button add_author" type="button">Добавить автора</button>
-        <button class="edit_panel__button add_date" type="button">Добавить дату</button>
-        <button class="edit_panel__button delete_block" type="button">Удалить блок</button>
-        <button class="edit_panel__button up_block" type="button">Блок вверх</button>
-        <button class="edit_panel__button down_block" type="button">Блок вниз</button>`;
+    <svg width="24" height="24" viewBox="0 0 24 24">
+    <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" /></svg>
+    </div>
+    <button class="edit_panel__button add_h3" type="button">Добавить заголовок</button>
+    <button class="edit_panel__button add_h4" type="button">Добавить подзаголовок</button>
+    <button class="edit_panel__button add_p" type="button">Добавить параграф</button>
+    <button class="edit_panel__button add_img" type="button">Добавить картинку</button>
+    <button class="edit_panel__button add_video" type="button">Добавить видео</button>
+    <button class="edit_panel__button add_author" type="button">Добавить автора</button>
+    <button class="edit_panel__button add_date" type="button">Добавить дату</button>
+    <button class="edit_panel__button delete_block" type="button">Удалить блок</button>
+    <button class="edit_panel__button up_block" type="button">Блок вверх</button>
+    <button class="edit_panel__button down_block" type="button">Блок вниз</button>`;
 
         let news_section = document.querySelector(".news");
         news_section.insertBefore(edit_panel_dom, news_section.firstChild);
@@ -170,14 +171,30 @@
         request.open("GET", "/admin/ImageManager/GetAllImages", false);
         request.send();
         let sources = JSON.parse(request.response);
+
         for (src of sources) {
-            let new_img = document.createElement("div");
-            new_img.classList = "file_manager__image";
-            new_img.innerHTML = `<img src="` + src + `" alt=""></img>`;
-            imgs_body.appendChild(new_img);
+            let new_img_wrapper = document.createElement("div");
+            new_img_wrapper.classList = "file_manager__image";
+            // new_img_wrapper.innerHTML = `<img src="` + src + `" alt=""></img>`;
+            imgs_body.appendChild(new_img_wrapper);
+            let new_img = document.createElement("img");
+            // new_img.height = "200px";
+            new_img.src = src;
+            new_img_wrapper.appendChild(new_img);
+            new_img.addEventListener("click", append_img);
         }
         let file_manager = document.querySelector(".file_manager");
         file_manager.classList.add("file_manager_active");
+    }
+
+    function append_img() {
+        let news_field = document.querySelector(".news_field");
+        let news_img_wrapper = document.createElement("div");
+        news_img_wrapper.classList = "news_img_wrapper";
+        news_field.appendChild(news_img_wrapper);
+        let news_img = document.createElement("img");
+        news_img.src = this.src;
+        news_img_wrapper.appendChild(news_img);
     }
 
     function add_video() {
@@ -247,20 +264,30 @@
         let news_div = document.querySelector(".news__div");    // получить скрытый блок
         let value = this.value; // получить текст из textarea
         let new_value = "";     // новая строка для записи
-        //------- фильтрация от нескольких пробелов подряд -------//
-        for (let i in value) {
-            if (new_value.endsWith(" ") && value[i] == " ") { // если новая строка заканчивается на пробел и следующий символ тоже пробел,
+        for (let i of value) {
+            if (i == " ") {
                 new_value += "&nbsp";
-            }                                                 // то ничего не делать
-            else                        // иначе
-                new_value += value[i];  // добавить следующий символ в новую строку
+            }
+            else {
+                new_value += i;
+            }
         }
+        news_div.innerHTML = new_value;
 
-        this.value = new_value; // переписать текст в textarea
+        //------- фильтрация от нескольких пробелов подряд -------//
+        // for (let i in value){
+        //     if (new_value.endsWith(" ") &&  value[i] == " "){ // если новая строка заканчивается на пробел и следующий символ тоже пробел,
+        //         new_value += " ";
+        //     }                                                 // то ничего не делать
+        //     else                        // иначе
+        //         new_value += value[i];  // добавить следующий символ в новую строку
+        // }
+
+        // this.value = new_value; // переписать текст в textarea
         if ((this.value.endsWith("\n")) | (this.value.endsWith("\n "))) // если нажат enter или enter и пробел 
-            news_div.innerText = new_value + "\n";  // то в конец строки добавить \n (чтобы не было пустой строки)
+            news_div.innerHTML = new_value + "<br>";  // то в конец строки добавить \n (чтобы не было пустой строки)
         else                                // иначе
-            news_div.innerText = new_value; // вставить новый текст в скрытый блок
+            news_div.innerHTML = new_value; // вставить новый текст в скрытый блок
 
         let div_height = news_div.getBoundingClientRect().height;   // получить высоту скрытого блока
 
@@ -355,19 +382,58 @@
             if (item.name == "h3") {
                 let new_item = document.createElement("h3");
                 new_item.classList = item.classList;
-                new_item.innerText = item.value;
+                let value = item.value; // получить текст из textarea
+                let new_value = "";     // новая строка для записи
+                for (let i of value) {
+                    if (i == " ") {
+                        new_value += "&nbsp";
+                    }
+                    else if (i == "\n") {
+                        new_value += "<br>";
+                    }
+                    else {
+                        new_value += i;
+                    }
+                }
+                new_item.innerHTML = new_value;
                 saved_news.append(new_item);
             }
             else if (item.name == "h4") {
                 let new_item = document.createElement("h4");
                 new_item.classList = item.classList;
-                new_item.innerText = item.value;
+                let value = item.value; // получить текст из textarea
+                let new_value = "";     // новая строка для записи
+                for (let i of value) {
+                    if (i == " ") {
+                        new_value += "&nbsp";
+                    }
+                    else if (i == "\n") {
+                        new_value += "<br>";
+                    }
+                    else {
+                        new_value += i;
+                    }
+                }
+                new_item.innerHTML = new_value;
                 saved_news.append(new_item);
             }
             else if (item.name == "p") {
                 let new_item = document.createElement("p");
                 new_item.classList = item.classList;
-                new_item.innerText = item.value;
+                let value = item.value; // получить текст из textarea
+                let new_value = "";     // новая строка для записи
+                for (let i of value) {
+                    if (i == " ") {
+                        new_value += "&nbsp";
+                    }
+                    else if (i == "\n") {
+                        new_value += "<br>";
+                    }
+                    else {
+                        new_value += i;
+                    }
+                }
+                new_item.innerHTML = new_value;
                 saved_news.append(new_item);
             }
         }
@@ -395,6 +461,7 @@
     document.getElementById("loadImageButton").addEventListener("change", sendRequestImage);
 
     // обработчик нажатия
+
     function sendRequestImage(event) {
 
         event.preventDefault();
@@ -415,10 +482,8 @@
 
 
 
-    // window.onbeforeunload = function() {
-    //     return "Есть несохранённые изменения. Всё равно уходим?";
-    // };
-
-//   } //onload
+// window.onbeforeunload = function() {
+//     return "Есть несохранённые изменения. Всё равно уходим?";
+// };
 
 </script>

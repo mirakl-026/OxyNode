@@ -58,6 +58,9 @@ namespace OxyNode
                 app.UseDeveloperExceptionPage();
             }
 
+            // создание папок ресурсов (если их нет)
+
+
             app.UseStaticFiles();
             app.UseDefaultFiles();
 
