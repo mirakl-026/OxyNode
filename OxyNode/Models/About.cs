@@ -19,7 +19,7 @@ namespace OxyNode.Models
 
         // обязательные описание - html5
         [Required(ErrorMessage = "Описание обязательно", AllowEmptyStrings = false)]
-        [StringLength(100000, MinimumLength = 10, ErrorMessage = "лжно иметь от 10 до 100000 символов")]
+        [StringLength(100000, MinimumLength = 10, ErrorMessage = "Должно иметь от 10 до 100000 символов")]
         public string DescriptionHtml5 { get; set; }
     }
 }
