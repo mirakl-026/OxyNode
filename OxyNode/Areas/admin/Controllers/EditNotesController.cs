@@ -25,9 +25,22 @@ namespace OxyNode.Areas.admin.Controllers
             _db = context;
         }
 
-        public IActionResult ReadAllNotes()
+        public async Task<IActionResult> ReadAllNotes()
         {
-            return View();
+            // Вьюмодель для статей
+            NotesViewModel nvm = new NotesViewModel();
+
+            // передача во вьюмодель - общего ко-ва статей
+            long notesCount = await _db.GetNotesCount();
+            nvm.notesCount = notesCount;
+
+            // номер текущей страницы
+            nvm.currentPageNumber = 1;
+
+            // сами статьи
+            nvm.notes = await _db.GetAllNotes();
+
+            return View(nvm);
         }
 
         #region CRUD
@@ -46,9 +59,11 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
         // считать статью 
-        public IActionResult ReadNote()
+        [HttpGet]
+        public async Task<IActionResult> ReadNote(string id)
         {
-            return View();
+            var note = await _db.ReadNote(id);
+            return View(note);
         }
 
 
@@ -58,8 +73,10 @@ namespace OxyNode.Areas.admin.Controllers
             return View();
         }
 
-        public IActionResult DeleteNote()
+        [HttpGet]
+        public async Task<IActionResult> DeleteNote(string id)
         {
+            await _db.DeleteNote(id);
             return RedirectToAction("Index", "Panel");
         }
         #endregion

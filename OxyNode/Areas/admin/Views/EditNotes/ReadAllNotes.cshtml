@@ -1,5 +1,30 @@
-﻿
+﻿@model OxyNode.ViewModels.NotesViewModel
+
 @{
-    Layout = null;
+    ViewData["Title"] = "Admin | Notes | Read all";
 }
+
+<h3>Все статьи</h3>
+<hr />
+
+<div>
+    @foreach (var note in Model.notes)
+    {
+        <a asp-area="admin" asp-controller="EditNotes" asp-action="ReadNote" asp-route-id="@note.Id">@note.note_NoteName</a>
+        <div>
+            @note.note_ShortDescription
+        </div>
+        <a asp-area="admin" asp-controller="EditNotes" asp-action="DeleteNote" asp-route-id="@note.Id">Удалить новость</a>
+        <br />
+    }
+
+</div>
+
+<div>
+    Страница новости: @Model.currentPageNumber
+</div>
+<div>
+    Всего новостей: @Model.notesCount
+</div>
+
 

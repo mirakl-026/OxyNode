@@ -1,0 +1,32 @@
+﻿@model OxyNode.Models.KB_note
+@{
+    ViewData["Title"] = "Admin | Note";
+}
+
+<h4>Информация о статье</h4>
+<hr />
+<table>
+    <tr>
+        <td>ID</td>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <td>Название</td>
+        <td>@Model.note_NoteName</td>
+    </tr>
+    <tr>
+        <td>Краткое описание</td>
+        <td>@Model.note_ShortDescription</td>
+    </tr>
+    <tr>
+        <td>Ссылка на изображение</td>
+        <td>@Model.note_LinkToPreviewImage</td>
+    </tr>
+</table>
+
+
+<h4>Содержание статьи</h4>
+<hr />
+<div>
+    @Html.Raw(Model.note_ContentHtml5)
+</div>
