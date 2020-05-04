@@ -10,21 +10,24 @@
 <div>
     @foreach (var note in Model.notes)
     {
-        <a asp-area="admin" asp-controller="EditNotes" asp-action="ReadNote" asp-route-id="@note.Id">@note.note_NoteName</a>
-        <div>
-            @note.note_ShortDescription
-        </div>
-        <a asp-area="admin" asp-controller="EditNotes" asp-action="DeleteNote" asp-route-id="@note.Id">Удалить новость</a>
-        <br />
+        <p>
+            <a asp-area="admin" asp-controller="EditNotes" asp-action="ReadNote" asp-route-id="@note.Id">@note.note_NoteName</a>
+            <div>
+                @note.note_ShortDescription
+            </div>
+            <a asp-area="admin" asp-controller="EditNotes" asp-action="UpdateNote" asp-route-id="@note.Id">Редактировать статью</a>
+            <a asp-area="admin" asp-controller="EditNotes" asp-action="DeleteNote" asp-route-id="@note.Id">Удалить статью</a>
+            <br />
+        </p>
     }
 
 </div>
 
 <div>
-    Страница новости: @Model.currentPageNumber
+    Страница статей: @Model.currentPageNumber
 </div>
 <div>
-    Всего новостей: @Model.notesCount
+    Всего статей: @Model.notesCount
 </div>
 
 

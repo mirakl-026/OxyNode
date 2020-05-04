@@ -1,0 +1,41 @@
+﻿@model OxyNode.Models.KB_note
+@using System.Web;
+
+@{
+    Layout = "_LayoutAdminWithEditor";
+    ViewData["Title"] = "Admin | Notes | Update";
+}
+
+<h4>Изменение статьи</h4>
+<hr />
+
+<form asp-area="admin" asp-controller="EditNotes" asp-action="UpdateNote" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <table>
+        <tr>
+            <td><label asp-for="note_NoteName" class="control-label"></label></td>
+            <td><input asp-for="note_NoteName" value="@Model.note_NoteName" class="form-control" /><span asp-validation-for="note_NoteName" class="text-danger"></span></td>
+        </tr>
+        <tr>
+            <td><label asp-for="note_ShortDescription" class="control-label"></label></td>
+            <td><input asp-for="note_ShortDescription" value="@Model.note_ShortDescription" class="form-control" /><span asp-validation-for="note_NoteName" class="text-danger"></span></td>
+        </tr>
+    </table>
+
+
+    <input id="formContent" value="" type="hidden" asp-for="note_ContentHtml5">
+    <input class="edit_panel__button save_button" type="submit" value="Сохранить"><span asp-validation-for="note_ContentHtml5" class="text-danger"></span>
+</form>
+
+@* Частичное представление редактора контента*@
+<partial name="Partial/_ContentEditor" />
+
+<script>
+    var saved_news = document.createElement("div");
+    saved_news.classList = "saved_news";
+
+    var data = "@Html.Raw(HttpUtility.JavaScriptStringEncode(Model.note_ContentHtml5))";
+    saved_news.innerHTML = data;
+    document.querySelector(".news").appendChild(saved_news);
+</script>

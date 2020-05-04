@@ -54,9 +54,14 @@ namespace OxyNode.Areas.admin.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateNote(KB_note newNote)
         {
-            await _db.CreateNote(newNote);
-            return RedirectToAction("Index", "Panel");
+            if (ModelState.IsValid)
+            {
+                await _db.CreateNote(newNote);
+                return RedirectToAction("Index", "Panel");
+            }
+            return View(newNote);
         }
+
 
         // считать статью 
         [HttpGet]
@@ -67,12 +72,27 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
 
-
-        public IActionResult UpdateNote()
+        // обновить статью
+        [HttpGet]
+        public async Task<IActionResult> UpdateNote(string id)
         {
-            return View();
+            var noteToUpdate = await _db.ReadNote(id);
+            return View(noteToUpdate);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateNote(KB_note updatedNote)
+        {
+            if(ModelState.IsValid)
+            {
+                await _db.UpdateNote(updatedNote);
+                return RedirectToAction("Index", "Panel");
+            }
+            return View(updatedNote);
+        }
+
+
+        // удалить статью
         [HttpGet]
         public async Task<IActionResult> DeleteNote(string id)
         {

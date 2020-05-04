@@ -8,18 +8,20 @@
 <div>
     @foreach (var note in Model.notes)
     {
-        <a asp-controller="Notes" asp-action="ReadNote" asp-route-id="@note.Id">@note.note_NoteName</a>
-        <div>
-            @note.note_ShortDescription
-        </div>
-        <br />
+        <p>
+            <a asp-controller="Notes" asp-action="ReadNote" asp-route-id="@note.Id">@note.note_NoteName</a>
+            <div>
+                @note.note_ShortDescription
+            </div>
+            <br />
+        </p>
     }
 
 </div>
 
 <div>
-    Страница новости: @Model.currentPageNumber
+    Страница статей: @Model.currentPageNumber
 </div>
 <div>
-    Всего новостей: @Model.notesCount
+    Всего статей: @Model.notesCount
 </div>
