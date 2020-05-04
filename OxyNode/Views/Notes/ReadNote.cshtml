@@ -1,0 +1,9 @@
+﻿@model OxyNode.Models.KB_note
+
+@{
+    ViewData["Title"] = Model.note_NoteName;
+}
+
+<div>
+    @Html.Raw(Model.note_ContentHtml5)
+</div>

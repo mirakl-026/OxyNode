@@ -58,5 +58,12 @@ namespace OxyNode.Controllers
 
             return View(nvm);
         }
+
+        // конкретная новость
+        public async Task<IActionResult> ReadNote(string id)
+        {
+            var note = await _db.ReadNote(id);
+            return View(note);
+        }
     }
 }
