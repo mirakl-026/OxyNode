@@ -31,16 +31,27 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
         #region CRUD
-        // 
+        // Создать статью
+        [HttpGet]
         public IActionResult CreateNote()
         {
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateNote(KB_note newNote)
+        {
+            await _db.CreateNote(newNote);
+            return RedirectToAction("Index", "Panel");
+        }
+
+        // считать статью 
         public IActionResult ReadNote()
         {
             return View();
         }
+
+
 
         public IActionResult UpdateNote()
         {

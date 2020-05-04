@@ -1,0 +1,31 @@
+﻿@model OxyNode.Models.KB_note
+
+@{
+    Layout = "_LayoutAdminWithEditor";
+    ViewData["Title"] = "Admin | Notes | Create";
+}
+
+<h4>Заполнение страницы "О нас"</h4>
+<hr />
+
+<form asp-area="admin" asp-controller="EditNotes" asp-action="CreateNote" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <table>
+        <tr>
+            <td><label asp-for="note_NoteName" class="control-label"></label></td>
+            <td><input asp-for="note_NoteName" class="form-control" /><span asp-validation-for="note_NoteName" class="text-danger"></span></td>
+        </tr>
+        <tr>
+            <td><label asp-for="note_ShortDescription" class="control-label"></label></td>
+            <td><input asp-for="note_ShortDescription" class="form-control" /><span asp-validation-for="note_NoteName" class="text-danger"></span></td>
+        </tr>
+    </table>
+
+
+    <input id="formContent" value="" type="hidden" asp-for="note_ContentHtml5">
+    <input class="edit_panel__button save_button" type="submit" value="Сохранить"><span asp-validation-for="note_ContentHtml5" class="text-danger"></span>
+</form>
+
+@* Частичное представление редактора контента*@
+<partial name="Partial/_ContentEditor" />

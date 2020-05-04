@@ -18,16 +18,19 @@ namespace OxyNode.Models
         public string Id { get; set; }
 
         // обязательное название статьи
+        [Display(Name = "Название статьи")]
         [Required(ErrorMessage = "Название статьи обязательно", AllowEmptyStrings = false)]
         [StringLength(100, MinimumLength = 5, ErrorMessage = "Должно иметь от 5 до 100 символов")]
         public string note_NoteName { get; set; }
 
         // обязательные краткое описание
+        [Display(Name = "Краткое описание")]
         [Required(ErrorMessage = "Краткое описание обязательно", AllowEmptyStrings = false)]
         [StringLength(500, MinimumLength = 10, ErrorMessage = "Должно иметь от 10 до 500 символов")]
         public string note_ShortDescription { get; set; }
 
         // обязательные содержание - html5
+        [Display(Name = "Содержание")]
         [Required(ErrorMessage = "Содержимое обязательно", AllowEmptyStrings = false)]
         [StringLength(100000, MinimumLength = 10, ErrorMessage = "Должно иметь от 10 до 100000 символов")]
         public string note_ContentHtml5 { get; set; }

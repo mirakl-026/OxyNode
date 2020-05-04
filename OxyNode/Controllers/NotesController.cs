@@ -9,7 +9,7 @@ using OxyNode.ViewModels;
 
 namespace OxyNode.Controllers
 {
-    [Route("KnowledgeBase/{controller}")]
+    [Route("KnowledgeBase/{controller}/{action}")]
     public class NotesController : Controller
     {
         private KB_noteService _db;
@@ -26,37 +26,35 @@ namespace OxyNode.Controllers
         {
             // Вьюмодель для статей
             NotesViewModel nvm = new NotesViewModel();
-            
-            // текущая страница - 1
-            nvm.currentPageNumber = 1;
 
-            // разные страницы
+            // передача во вьюмодель - общего ко-ва статей
             long notesCount = await _db.GetNotesCount();
+            nvm.notesCount = notesCount;
 
-            long pageStep = 1;
-            int pageCounter = 0;
-            do
-            {
-                var stepResult = notesCount - (pageStep * pageSize);
-                if (stepResult > -6)
-                {
-                    pageStep++;
-                    pageCounter++;
-                    nvm.pagesNumbers.Add(pageCounter);
-                    if (nvm.pagesNumbers.Count > 5)
-                    {
-                        break;
-                    }
-                }
-                else
-                {
-                    break;
-                }
-            }
-            while (true);
+            // номер текущей страницы
+            nvm.currentPageNumber = 1;
 
             // сами статьи
             nvm.notes = await _db.GetPageOfNotes(1, pageSize);
+
+            return View(nvm);
+        }
+
+        // конкретная страница новостей
+        public async Task<IActionResult> Page(int pageNumber)
+        {
+            // Вьюмодель для статей
+            NotesViewModel nvm = new NotesViewModel();
+
+            // передача во вьюмодель - общего ко-ва статей
+            long notesCount = await _db.GetNotesCount();
+            nvm.notesCount = notesCount;
+
+            // номер текущей страницы
+            nvm.currentPageNumber = pageNumber;
+
+            // сами статьи
+            nvm.notes = await _db.GetPageOfNotes(pageNumber, pageSize);
 
             return View(nvm);
         }

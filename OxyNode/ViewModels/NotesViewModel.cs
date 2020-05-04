@@ -18,7 +18,8 @@ namespace OxyNode.ViewModels
         // номер текущей страницы статей
         public int currentPageNumber;
 
-        // полоска номеров статей
-        public List<int> pagesNumbers;
+        // общее кол-во статей
+        public long notesCount;
+
     }
 }
