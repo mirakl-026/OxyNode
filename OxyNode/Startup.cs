@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,7 +12,6 @@ using Microsoft.Extensions.Hosting;
 
 using OxyNode.Services;
 
-
 namespace OxyNode
 {
     public class Startup
@@ -22,7 +21,6 @@ namespace OxyNode
 
         public Startup(IConfiguration appCfg)
         {
-            
             Config = appCfg;
         }
 
@@ -35,9 +33,7 @@ namespace OxyNode
             
             services.AddTransient<AboutService>();
             services.AddTransient<AboutSertificateService>();
-
-            
-            
+          
             services.AddTransient<KnowledgeBaseService>();
             
             services.AddTransient<KB_regularDocumentService>();
