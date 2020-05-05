@@ -40,7 +40,7 @@ namespace OxyNode.Services
             return await NoteCollection.Find(new BsonDocument()).ToListAsync();
         }
 
-        // получить страницу статей (pageSize чтук)
+        // получить страницу статей (pageSize штук)
         public async Task<List<KB_note>> GetPageOfNotes(int pageNumber, int pageSize)
         {
             // выборка по номеру страницы - 

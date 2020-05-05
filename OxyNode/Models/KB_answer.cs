@@ -17,28 +17,28 @@ namespace OxyNode.Models
         // Id для хранения в MongoDb
         [BsonRepresentation(BsonType.ObjectId)]
         [HiddenInput(DisplayValue = false)]
-        string Id { get; set; }
+        public string Id { get; set; }
 
         // ФИО вопросителя - текст
         [Display(Name = "ФИО")]
         [StringLength(60, MinimumLength = 4, ErrorMessage = "ФИО должно быть от 4 до 60 символов")]
-        string FullNameQestionary { get; set; }
+        public string FullNameQestionary { get; set; }
 
         // содержание вопроса - текст
         [Display(Name = "Содержание вопроса")]
         [Required(ErrorMessage = "Содержание вопроса обязательно", AllowEmptyStrings = false)]
         [StringLength(500, MinimumLength = 10, ErrorMessage = "Вопрос должен быть от 10 до 500 символов")]
-        string questionText { get; set; }
+        public string questionText { get; set; }
 
         // содержание ответа - текст
         [Display(Name = "Содержание ответа")]
         [Required(ErrorMessage = "Содержание ответа обязательно", AllowEmptyStrings = false)]
         [StringLength(500, MinimumLength = 10, ErrorMessage = "Ответ должен быть от 10 до 500 символов")]
-        string answerText { get; set; }
+        public string answerText { get; set; }
 
         // флаг публикации - если True - ответ виден на сайте
         [Display(Name = "Флаг публикации на сайт")]
-        bool publishToSite { get; set; }
+        public bool publishToSite { get; set; }
 
     }
 }
