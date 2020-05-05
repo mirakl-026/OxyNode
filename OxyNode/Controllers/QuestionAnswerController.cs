@@ -29,5 +29,11 @@ namespace OxyNode.Controllers
         {
             return View();
         }
+
+        // форма задания вопроса
+        public IActionResult AskQuestion()
+        {
+            return View();
+        }
     }
 }

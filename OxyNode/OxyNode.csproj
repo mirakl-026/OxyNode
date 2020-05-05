@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\admin\Views\EditQuestions\" />
+    <Folder Include="Areas\admin\Views\EditAnswers\" />
     <Folder Include="wwwroot\resources\about\sertificates\" />
     <Folder Include="wwwroot\resources\knowledgeBase\notes\" />
     <Folder Include="wwwroot\resources\knowledgeBase\regularDocuments\" />

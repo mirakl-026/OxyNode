@@ -27,10 +27,9 @@ namespace OxyNode
 
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddTransient<ContactsService>();
 
-            
             services.AddTransient<AboutService>();
             services.AddTransient<AboutSertificateService>();
           
@@ -41,6 +40,9 @@ namespace OxyNode
             services.AddTransient<KB_industrySolutionService>();
             
             services.AddTransient<KB_noteService>();
+
+            services.AddTransient<KB_questionService>();
+            services.AddTransient<KB_answerService>();
 
 
             
