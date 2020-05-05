@@ -21,19 +21,19 @@ namespace OxyNode.Models
 
         // ФИО вопросителя - текст
         [Display(Name = "ФИО")]
-        [StringLength(60, MinimumLength = 4, ErrorMessage = "ABJ иметь от 4 до 60 символов")]
+        [StringLength(60, MinimumLength = 4, ErrorMessage = "ФИО должно быть от 4 до 60 символов")]
         string FullNameQestionary { get; set; }
 
-        // содержание - текст
+        // содержание вопроса - текст
         [Display(Name = "Содержание вопроса")]
-        [Required(ErrorMessage = "Содержание обязательно", AllowEmptyStrings = false)]
-        [StringLength(200, MinimumLength = 10, ErrorMessage = "Название должно иметь от 10 до 200 символов")]
+        [Required(ErrorMessage = "Содержание вопроса обязательно", AllowEmptyStrings = false)]
+        [StringLength(500, MinimumLength = 10, ErrorMessage = "Вопрос должен быть от 10 до 500 символов")]
         string questionText { get; set; }
 
-        // содержание - текст
-        [Display(Name = "Содержание вопроса")]
-        [Required(ErrorMessage = "Содержание обязательно", AllowEmptyStrings = false)]
-        [StringLength(200, MinimumLength = 10, ErrorMessage = "Название должно иметь от 10 до 200 символов")]
+        // содержание ответа - текст
+        [Display(Name = "Содержание ответа")]
+        [Required(ErrorMessage = "Содержание ответа обязательно", AllowEmptyStrings = false)]
+        [StringLength(500, MinimumLength = 10, ErrorMessage = "Ответ должен быть от 10 до 500 символов")]
         string answerText { get; set; }
 
         // флаг публикации - если True - ответ виден на сайте
