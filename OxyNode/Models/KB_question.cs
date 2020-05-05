@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+// касается вопрос-ответ
+// модель вопроса
 
 namespace OxyNode.Models
 {
-    // Модель - База знаний - Вопрос - Ответ
-    public class KB_qa
+    public class KB_question
     {
     }
 }
