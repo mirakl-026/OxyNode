@@ -12,45 +12,42 @@ using Microsoft.Extensions.Hosting;
 
 using OxyNode.Services;
 
-/*
- * Проект OxyNode - совмещает GazoShop, Gazillion и NewsMaker для создания сайта продажи газоанализаторов
- */
 
 namespace OxyNode
 {
     public class Startup
     {
-        // конфигурация приложения из файла appsettings.json
+        
         public IConfiguration Config { get; }
 
         public Startup(IConfiguration appCfg)
         {
-            // подключение файла конфигурации
+            
             Config = appCfg;
         }
 
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // сервис управления содержимым страницы "Контакты"
+            
             services.AddTransient<ContactsService>();
 
-            // сервис управления содержимым страницы "О нас"
+            
             services.AddTransient<AboutService>();
             services.AddTransient<AboutSertificateService>();
 
-            // База знаний
-            // сервис управления содержимым страницы "База знаний"
+            
+            
             services.AddTransient<KnowledgeBaseService>();
-            // сервис управления Нормативными документами
+            
             services.AddTransient<KB_regularDocumentService>();
-            // сервис управления Отраслевыми решениями
+            
             services.AddTransient<KB_industrySolutionService>();
-            // сервис управления статьями
+            
             services.AddTransient<KB_noteService>();
 
 
-            // MVC роутинг
+            
             services.AddControllersWithViews();
         }
 
@@ -61,9 +58,9 @@ namespace OxyNode
                 app.UseDeveloperExceptionPage();
             }
 
-            // создание папок ресурсов (если их нет)
+            
             string path = env.WebRootPath + "/resources/";
-            // папка для хранения сертификатов            - "/resources/about/sertificates/";
+            // "/resources/about/sertificates/";
             DirectoryInfo di_about = new DirectoryInfo(path + "/about/");
             if(!di_about.Exists)
             {
@@ -75,9 +72,9 @@ namespace OxyNode
                 di_about_sertificates.Create();
             }
 
-            // папка для хранения отраслевых решений      - "/resources/knowledgeBase/industrySolutions/";
-            // папка для хранения нормативных документов  - "/resources/knowledgeBase/regularDocuments/";
-            // папка для хранения статей                  - "/resources/knowledgeBase/notes/";
+            // "/resources/knowledgeBase/industrySolutions/";
+            // "/resources/knowledgeBase/regularDocuments/";
+            // "/resources/knowledgeBase/notes/";
             DirectoryInfo di_knowledgeBase = new DirectoryInfo(path + "/knowledgeBase/");
             if (!di_knowledgeBase.Exists)
             {
@@ -99,7 +96,7 @@ namespace OxyNode
                 di_knowledgeBase_NT.Create();
             }
 
-            // папка для хранения картинок html5 контента - "/resources/images/";
+            // "/resources/images/";
             DirectoryInfo di_images = new DirectoryInfo(path + "/images/");
             if (!di_images.Exists)
             {
