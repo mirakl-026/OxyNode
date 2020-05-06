@@ -1,39 +1,3 @@
-﻿@* Частичное представление для редактора контента*@
-
-
-<!---------------------------------- News creator ----------------------------------->
-<hr>
-<button class="edit_panel__button edit_button" type="button">Редактировать</button>
-
-
-<hr>
-
-<section class="news">
-</section>
-<div class="file_manager">
-    <div class="file_manager__window">
-        <div class="file_manager__header">
-
-            <form id="form_forImgLoad" name="_loadImageForm" asp-area="admin" asp-controller="ImageManager" asp-action="LoadImage" method="post" enctype="multipart/form-data">
-                <label class="download_img" for="loadImageButton">Загрузить изображение</label>
-                <input type="file" id="loadImageButton" name="uploadedImage" accept="image/jpg,image/jpeg,image/png,image/gif" style="display: none;">
-            </form>
-
-
-            <div class="file_manager__close">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13.2138 12L19.3661 4.66641C19.4692 4.54453 19.3825 4.35938 19.2231 4.35938H17.3528C17.2427 4.35938 17.1372 4.40859 17.0645 4.49297L11.9903 10.5422L6.91611 4.49297C6.84579 4.40859 6.74032 4.35938 6.62782 4.35938H4.75751C4.59814 4.35938 4.51142 4.54453 4.61454 4.66641L10.7669 12L4.61454 19.3336C4.59144 19.3608 4.57662 19.394 4.57184 19.4293C4.56706 19.4647 4.57252 19.5006 4.58757 19.533C4.60263 19.5653 4.62664 19.5926 4.65676 19.6117C4.68689 19.6308 4.72185 19.6408 4.75751 19.6406H6.62782C6.73798 19.6406 6.84345 19.5914 6.91611 19.507L11.9903 13.4578L17.0645 19.507C17.1349 19.5914 17.2403 19.6406 17.3528 19.6406H19.2231C19.3825 19.6406 19.4692 19.4555 19.3661 19.3336L13.2138 12Z" fill="black" />
-                </svg>
-            </div>
-        </div>
-
-        <div class="file_manager__body">
-        </div>
-    </div>
-</div>
-<script src="~/lib/OxyNode/js/editor.js"></script>
-
-@* <script>
     //images creator
 
 //-------------------------- news creator-------------------------------------
@@ -489,5 +453,3 @@ function sendRequestImage(event) {
 // window.onbeforeunload = function() {
 //     return "Есть несохранённые изменения. Всё равно уходим?";
 // };
-
-</script> *@
