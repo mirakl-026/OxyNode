@@ -28,8 +28,7 @@ namespace OxyNode.Controllers
             NotesViewModel nvm = new NotesViewModel();
 
             // передача во вьюмодель - общего ко-ва статей
-            long notesCount = await _db.GetNotesCount();
-            nvm.notesCount = notesCount;
+            nvm.notesCount = await _db.GetNotesCount();
 
             // номер текущей страницы
             nvm.currentPageNumber = 1;
@@ -47,8 +46,7 @@ namespace OxyNode.Controllers
             NotesViewModel nvm = new NotesViewModel();
 
             // передача во вьюмодель - общего ко-ва статей
-            long notesCount = await _db.GetNotesCount();
-            nvm.notesCount = notesCount;
+            nvm.notesCount = await _db.GetNotesCount();
 
             // номер текущей страницы
             nvm.currentPageNumber = pageNumber;

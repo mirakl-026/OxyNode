@@ -40,5 +40,10 @@ namespace OxyNode.Models
         [StringLength(60, MinimumLength = 6, ErrorMessage = "E-mail должен быть от 6 до 60 символов")]
         public string e_mail { get; set; }
 
+        // ссылка на Id ответа 
+        [Display(Name = "Ссылка на Id ответа")]
+        public string AnswerId { get; set; }
+
+
     }
 }

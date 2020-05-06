@@ -40,5 +40,9 @@ namespace OxyNode.Models
         [Display(Name = "Флаг публикации на сайт")]
         public bool publishToSite { get; set; }
 
+        // ссылка на Id вопроса 
+        [Display(Name = "Ссылка на Id вопроса")]
+        public string QuestionId { get; set; }
+
     }
 }

@@ -9,7 +9,7 @@ namespace OxyNode.ViewModels
 {
     public class NotesViewModel
     {
-        // список файлов - отраслевых решений
+        // список объектов - статей
         public List<KB_note> notes { get; set; }
 
         // номер текущей страницы статей
