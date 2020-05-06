@@ -89,14 +89,17 @@
 }
 .file_manager__image img {
   width: 100%;
+  cursor: pointer;
 }
 
-
+textarea:hover {
+  outline: 2px solid #1890FF;
+}
 
 .news__item:hover {
   /* background-color: #EF9A9A; */
   /* color: #757575; */
-  outline: 2px solid #1890FF;
+  /* outline: 2px solid #1890FF; */
 
 }
 
@@ -154,6 +157,18 @@
 }
 .news textarea.news__p {
   height: 20px;
+}
+
+.news_img_wrapper {
+  width: 300px;
+}
+
+.news_img_wrapper img {
+  width: 100%;
+}
+
+.focused_img {
+  outline: 2px solid #1890FF;
 }
 
 .news__div {
