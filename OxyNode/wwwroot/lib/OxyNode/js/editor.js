@@ -272,7 +272,8 @@ function write(){   // при вводе в textarea
     let new_value = "";     // новая строка для записи
     for (let i of value){
         if (i == " "){
-            new_value += "&nbsp";
+            // new_value += "&nbsp";
+            new_value += " ";
         }
         else{
             new_value += i;
