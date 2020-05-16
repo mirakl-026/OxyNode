@@ -16,7 +16,7 @@
     </div>
     @if (Model.AnswerId != null)
     {
-        <div>Id ответа: @Model.AnswerId</div>
+        <div>Id ответа: <a asp-area="admin" asp-controller="EditAnswers" asp-action="ReadOneAnswer" asp-route-answerId="@Model.AnswerId">@Model.AnswerId</a></div>
     }
     else
     {
