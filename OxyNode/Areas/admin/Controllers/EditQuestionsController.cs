@@ -36,14 +36,19 @@ namespace OxyNode.Areas.admin.Controllers
 
         // ответить на вопрос
         [HttpGet]
-        public async Task<IActionResult> AnswerToQuestion(string questionId)
+        public async Task<IActionResult> AnsToQuestion(string questionId)
         {
             var q = await _dbQ.ReadQuestion(questionId);
-            return View(q);
+            ViewData["questionId"] = q.Id;
+            ViewData["questionFullName"] = q.FullName;
+            ViewData["questionAddress"] = q.Address;
+            ViewData["questionEmail"] = q.e_mail;
+            ViewData["questionText"] = q.questionText;
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AnswerToQuestion(string questionId, KB_answer answer)
+        public async Task<IActionResult> AnsToQuestion(string questionId, KB_answer answer)
         {
             if (ModelState.IsValid)
             {
@@ -52,6 +57,7 @@ namespace OxyNode.Areas.admin.Controllers
 
                 var q = await _dbQ.ReadQuestion(questionId);
                 q.AnswerId = answer.Id;
+                await _dbQ.UpdateQuestion(q);
 
                 return RedirectToAction("Index", "Panel");
             }
@@ -70,6 +76,12 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
         // удалить вопрос
+        [HttpGet]
+        public async Task<IActionResult> DeleteQuestion(string questionId)
+        {
+            await _dbQ.DeleteQuestion(questionId);
+            return RedirectToAction("Index", "Panel");
+        }
 
         // редактировать вопрос
 

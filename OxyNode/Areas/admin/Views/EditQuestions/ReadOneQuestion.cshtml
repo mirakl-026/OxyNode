@@ -1,15 +1,30 @@
-﻿
+﻿@model OxyNode.Models.KB_question
+
 @{
-    Layout = null;
+    ViewData["Title"] = "Admin | QA | One question";
 }
 
-<!DOCTYPE html>
+<h4>Вопрос: </h4>
+<hr />
+<div>
+    <div>Имя: @Model.FullName</div>
+    <div>Адрес: @Model.Address </div>
+    <div>E-mail: @Model.e_mail</div>
+    <div>
+        Содержание:
+        @Model.questionText
+    </div>
+    @if (Model.AnswerId != null)
+    {
+        <div>Id ответа: @Model.AnswerId</div>
+    }
+    else
+    {
+        <div>Id ответа: нет</div>
+    }
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ReadOneQuestion</title>
-</head>
-<body>
-</body>
-</html>
+    <a asp-area="admin" asp-controller="EditQuestions" asp-action="AnsToQuestion" asp-route-questionId="@Model.Id">Ответить на вопрос</a>
+    <a asp-area="admin" asp-controller="EditQuestions" asp-action="DeleteQuestion" asp-route-questionId="@Model.Id">Удалить вопрос</a>
+    <br />
+    <br />
+</div>
