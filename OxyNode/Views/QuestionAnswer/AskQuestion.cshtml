@@ -3,5 +3,40 @@
     ViewData["Title"] = "OxyNode | Question & Answers | Ask question";
 }
 
+<h4>Задать вопрос</h4>
+<hr />
+
+<form asp-controller="QuestionAnswer" asp-action="AskQuestion" method="post">
+    <div>
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <td><label asp-for="FullName" class="control-label"></label></td>
+                        <td><input asp-for="FullName" class="form-control" /><span asp-validation-for="FullName" class="text-danger"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="Address" class="control-label"></label></td>
+                        <td><input asp-for="Address" class="form-control" /><span asp-validation-for="Address" class="text-danger"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="questionText" class="control-label"></label></td>
+                        <td><textarea asp-for="questionText" class="form-control" ></textarea><span asp-validation-for="questionText" class="text-danger"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label asp-for="e_mail" class="control-label"></label></td>
+                        <td><input asp-for="e_mail" class="form-control" /><span asp-validation-for="e_mail" class="text-danger"></span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Сохранить" />
+            </div>
+        </div>
+    </div>
+</form>
 
 
