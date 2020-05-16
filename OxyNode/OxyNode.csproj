@@ -13,8 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\admin\Views\EditQuestions\" />
-    <Folder Include="Areas\admin\Views\EditAnswers\" />
     <Folder Include="wwwroot\resources\about\sertificates\" />
     <Folder Include="wwwroot\resources\knowledgeBase\notes\" />
     <Folder Include="wwwroot\resources\knowledgeBase\regularDocuments\" />
@@ -22,5 +20,7 @@
     <Folder Include="wwwroot\resources\partial\" />
     <Folder Include="wwwroot\resources\images\" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties libman_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
