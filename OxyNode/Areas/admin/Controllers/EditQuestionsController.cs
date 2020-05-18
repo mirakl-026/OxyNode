@@ -79,7 +79,16 @@ namespace OxyNode.Areas.admin.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteQuestion(string questionId)
         {
-            await _dbQ.DeleteQuestion(questionId);
+            var q = await _dbQ.ReadQuestion(questionId);
+            if (q != null)
+            {
+                if (q.AnswerId != null)
+                {
+                    // если есть ответ - удалить и его
+                    await _dbA.DeleteAnswer(q.AnswerId);
+                }
+                await _dbQ.DeleteQuestion(questionId);
+            }            
             return RedirectToAction("Index", "Panel");
         }
 
