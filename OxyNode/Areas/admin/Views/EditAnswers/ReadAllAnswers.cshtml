@@ -11,7 +11,7 @@
     @foreach (var ans in Model.answers)
     {
         <p>
-            <a asp-area="admin" asp-controller="EditAnswers" asp-action="ReadOneAnswer" asp-route-answerId="@ans.Id">Вопрос: @ans.Id</a>
+            <a asp-area="admin" asp-controller="EditAnswers" asp-action="ReadOneAnswer" asp-route-answerId="@ans.Id">Ответ: @ans.Id</a>
             <div>Содержание ответа:
                     @ans.answerText
             </div>

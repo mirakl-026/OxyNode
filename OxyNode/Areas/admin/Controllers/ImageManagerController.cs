@@ -36,7 +36,7 @@ namespace OxyNode.Areas.admin.Controllers
                 // Определение пути 
                 string path = FilesPath + uploadedImage.FileName;
 
-                // удаление файла сертификата с сервера
+                // удаление файла картинки с сервера
                 FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + path);
                 if (fi.Exists)
                 {

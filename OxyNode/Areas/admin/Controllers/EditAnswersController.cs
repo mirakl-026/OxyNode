@@ -68,5 +68,27 @@ namespace OxyNode.Areas.admin.Controllers
             }
             return RedirectToAction("Index", "Panel");
         }
+
+        // установить флаг разрешения на отображение ответа-вопроса на главной странице
+        [HttpPost]
+        public async Task<IActionResult> PublishQuestionAnswer (string answerId)
+        {
+            var a = await _dbA.ReadAnswer(answerId);
+            a.publishToSite = true;
+            await _dbA.UpdateAnswer(a);
+            //return RedirectToAction("ReadOneAnswer", "EditAnswers", answerId);
+            return new JsonResult(a.publishToSite);
+        }
+
+        // снять флаг разрешения на отображение ответа-вопроса на главной странице
+        [HttpPost]
+        public async Task<IActionResult> HideQuestionAnswer (string answerId)
+        {
+            var a = await _dbA.ReadAnswer(answerId);
+            a.publishToSite = false;
+            await _dbA.UpdateAnswer(a);
+            //return RedirectToAction("ReadOneAnswer", "EditAnswers", answerId);
+            return new JsonResult(a.publishToSite);
+        }
     }
 }

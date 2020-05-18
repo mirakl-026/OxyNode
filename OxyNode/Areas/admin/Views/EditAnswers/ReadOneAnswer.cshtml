@@ -1,4 +1,5 @@
 ﻿@model OxyNode.Models.KB_answer
+@using System.Web;
 @{
     ViewData["Title"] = "Admin | QA | One answer";
 }
@@ -18,11 +19,48 @@
     <br />
 
     <div>Id ответа: @Model.Id </div>
-    <div>Флаг публикации: @Model.publishToSite</div>
+    @*<div>Флаг публикации: @Model.publishToSite</div>*@
+
+    @if (Model.publishToSite == false)
+    {
+        <input type="checkbox" id="_publishQA" />
+    }
+    else
+    {
+        <input type="checkbox" checked id="_publishQA" />
+    }
+
+    <label for="_publishQA">Опубликовать на сайт</label>
+
     <div>Ответ: @Model.answerText</div>
 
     <a asp-area="admin" asp-controller="EditAnswers" asp-action="DeleteAnswer" asp-route-answerId="@Model.Id">Удалить ответ</a>
     <br />
     <br />
 </div>
+
+<script>
+    var iQA = document.getElementById("_publishQA");
+
+    iQA.onchange = function () {
+        var request = new XMLHttpRequest();
+
+        if (iQA.checked) {
+            // опубликовать
+            //console.log(iQA.value);
+            console.log("опубликовать");
+            let url = "PublishQuestionAnswer?answerId=" + "@HttpUtility.JavaScriptStringEncode(Model.Id)";
+            request.open("POST", url);
+            request.send();
+        }
+        else {
+            // скрыть
+            //console.log(iQA.value);
+            console.log("скрыть");
+            let url = "HideQuestionAnswer?answerId=" + "@HttpUtility.JavaScriptStringEncode(Model.Id)";
+            request.open("POST", url);
+            request.send();
+        }
+    }
+</script>
 
