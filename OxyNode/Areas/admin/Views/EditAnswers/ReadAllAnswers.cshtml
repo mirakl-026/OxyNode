@@ -1,0 +1,43 @@
+﻿@model OxyNode.ViewModels.AnswersViewModel
+
+@{
+    ViewData["Title"] = "Admin | QA | Read all answers";
+}
+
+<h3>QA: Все ответы</h3>
+<hr />
+
+<div>
+    @foreach (var ans in Model.answers)
+    {
+        <p>
+            <a asp-area="admin" asp-controller="EditAnswers" asp-action="ReadOneAnswer" asp-route-answerId="@ans.Id">Вопрос: @ans.Id</a>
+            <div>Содержание ответа:
+                    @ans.answerText
+            </div>
+            <div>Флаг публикации на сайте: @ans.publishToSite </div>
+            @if (ans.QuestionId != null)
+            {
+                <div>Id вопроса: <a asp-area="admin" asp-controller="EditQuestions" asp-action="ReadOneQuestion" asp-route-questionId="@ans.QuestionId">@ans.QuestionId</a></div>
+            }
+            else
+            {
+                <div>Id вопроса: нет?</div>
+            }
+
+            <a asp-area="admin" asp-controller="EditAnswers" asp-action="DeleteAnswer" asp-route-answerId="@ans.Id">Удалить ответ</a>
+            <br />
+            <br />
+        </p>
+    }
+
+</div>
+
+<hr />
+<div>
+    Страница вопросов: @Model.currentPageNumber
+</div>
+<div>
+    Всего вопросов: @Model.answersCount
+</div>
+

@@ -23,6 +23,16 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
         // вывести список всех ответов
+        [HttpGet]
+        public async Task<IActionResult> ReadAllAnswers()
+        {
+            AnswersViewModel avm = new AnswersViewModel();
+            avm.answers = await _dbA.GetAllAnswers();
+            avm.currentPageNumber = 1;
+            avm.answersCount = await _dbA.GetAnswersCount();
+
+            return View(avm);
+        }
 
         // посмотреть конкретный ответ
         [HttpGet]
@@ -43,5 +53,20 @@ namespace OxyNode.Areas.admin.Controllers
         // редактировать ответ
 
         // удалить ответ
+        [HttpGet]
+        public async Task<IActionResult> DeleteAnswer(string answerId)
+        {
+            var ans = await _dbA.ReadAnswer(answerId);
+            if (ans != null)
+            {
+                // при удалении ответа - нужно отчистиь id ответа в поле вопроса
+                var q = await _dbQ.ReadQuestion(ans.QuestionId);
+                q.AnswerId = null;
+                await _dbQ.UpdateQuestion(q);
+
+                await _dbA.DeleteAnswer(answerId);
+            }
+            return RedirectToAction("Index", "Panel");
+        }
     }
 }
