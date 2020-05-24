@@ -1,4 +1,27 @@
-﻿
+﻿@model OxyNode.ViewModels.NewsItemsViewModel
+
 @{
     ViewData["Title"] = "OxyNode | News";
 }
+
+<hr />
+<div>
+    @foreach (var ni in Model.newsItems)
+    {
+        <p>
+            <a asp-controller="News" asp-action="ReadNews" asp-route-id="@ni.Id">@ni.news_Name</a>
+            <div>
+                @ni.news_ShortDescription
+            </div>
+            <br />
+        </p>
+    }
+
+</div>
+
+<div>
+    Страница новостей: @Model.currentPageNumber
+</div>
+<div>
+    Всего новостей: @Model.newsItemsCount
+</div>
