@@ -19,8 +19,7 @@
     <br />
 
     <div>Id ответа: @Model.Id </div>
-    @*<div>Флаг публикации: @Model.publishToSite</div>*@
-
+    <div>Ответ: @Model.answerText</div>
     @if (Model.publishToSite == false)
     {
         <input type="checkbox" id="_publishQA" />
@@ -31,8 +30,6 @@
     }
 
     <label for="_publishQA">Опубликовать на сайт</label>
-
-    <div>Ответ: @Model.answerText</div>
 
     <a asp-area="admin" asp-controller="EditAnswers" asp-action="DeleteAnswer" asp-route-answerId="@Model.Id">Удалить ответ</a>
     <br />

@@ -66,7 +66,7 @@ namespace OxyNode.Areas.admin.Controllers
 
                 await _dbA.DeleteAnswer(answerId);
             }
-            return RedirectToAction("Index", "Panel");
+            return RedirectToAction("ReadAllAnswers", "EditAnswers");
         }
 
         // установить флаг разрешения на отображение ответа-вопроса на главной странице
