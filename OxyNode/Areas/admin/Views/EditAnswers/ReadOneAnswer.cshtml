@@ -28,10 +28,9 @@
     {
         <input type="checkbox" checked id="_publishQA" />
     }
-
     <label for="_publishQA">Опубликовать на сайт</label>
 
-    <a asp-area="admin" asp-controller="EditAnswers" asp-action="DeleteAnswer" asp-route-answerId="@Model.Id">Удалить ответ</a>
+    <div><a asp-area="admin" asp-controller="EditAnswers" asp-action="DeleteAnswer" asp-route-answerId="@Model.Id">Удалить ответ</a></div>
     <br />
     <br />
 </div>

@@ -51,6 +51,24 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
         // редактировать ответ
+        [HttpGet]
+        public async Task<IActionResult> EditOneAnswer (string answerId)
+        {
+            var a = await _dbA.ReadAnswer(answerId);
+            return View(a);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditOneAnswer(KB_answer newAnswer)
+        {
+            if (ModelState.IsValid)
+            {
+                await _dbA.UpdateAnswer(newAnswer);
+                return RedirectToAction("GetAllQuestions", "EditQuestions");
+            }
+            return View(newAnswer);
+        }
+
 
         // удалить ответ
         [HttpGet]

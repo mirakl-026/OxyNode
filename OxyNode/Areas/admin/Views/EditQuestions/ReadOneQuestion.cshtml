@@ -17,14 +17,15 @@
     @if (Model.AnswerId != null)
     {
         <div>Id ответа: <a asp-area="admin" asp-controller="EditAnswers" asp-action="ReadOneAnswer" asp-route-answerId="@Model.AnswerId">@Model.AnswerId</a></div>
+        <div><a asp-area="admin" asp-controller="EditAnswers" asp-action="EditOneAnswer" asp-route-answerId="@Model.AnswerId">Редактировать ответ</a></div>
     }
     else
     {
         <div>Id ответа: нет</div>
+        <div><a asp-area="admin" asp-controller="EditQuestions" asp-action="AnsToQuestion" asp-route-questionId="@Model.Id">Ответить на вопрос</a></div>
     }
 
-    <a asp-area="admin" asp-controller="EditQuestions" asp-action="AnsToQuestion" asp-route-questionId="@Model.Id">Ответить на вопрос</a>
-    <a asp-area="admin" asp-controller="EditQuestions" asp-action="DeleteQuestion" asp-route-questionId="@Model.Id">Удалить вопрос</a>
+    <div><a asp-area="admin" asp-controller="EditQuestions" asp-action="DeleteQuestion" asp-route-questionId="@Model.Id">Удалить вопрос</a></div>
     <br />
     <br />
 </div>
