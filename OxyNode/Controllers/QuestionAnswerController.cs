@@ -37,6 +37,12 @@ namespace OxyNode.Controllers
 
             // сами вопрос-ответы
             qavm.answers = await _dbA.GetPageOfPublishedAnswers(1, pageSize);
+            qavm.questions = new List<KB_question>();
+            foreach (var ans in qavm.answers)
+            {
+                var q = await _dbQ.ReadQuestion(ans.QuestionId);
+                qavm.questions.Add(q);
+            }
 
             return View(qavm);
         }
@@ -55,6 +61,11 @@ namespace OxyNode.Controllers
 
             // сами вопрос-ответы
             qavm.answers = await _dbA.GetPageOfPublishedAnswers(pageNumber, pageSize);
+            foreach (var ans in qavm.answers)
+            {
+                var q = await _dbQ.ReadQuestion(ans.QuestionId);
+                qavm.questions.Add(q);
+            }
 
             return View(qavm);
         }
