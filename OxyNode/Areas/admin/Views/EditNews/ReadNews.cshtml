@@ -1,1 +1,32 @@
-﻿
+﻿@model OxyNode.Models.NewsItem
+@{
+    ViewData["Title"] = "Admin | News";
+}
+
+<h4>Новость: </h4>
+<hr />
+<table>
+    <tr>
+        <td>ID</td>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <td>Название</td>
+        <td>@Model.news_Name</td>
+    </tr>
+    <tr>
+        <td>Краткое описание</td>
+        <td>@Model.news_ShortDescription</td>
+    </tr>
+    <tr>
+        <td>Ссылка на изображение</td>
+        <td>@Model.news_LinkToPreviewImage</td>
+    </tr>
+</table>
+
+
+<h4>Содержание статьи</h4>
+<hr />
+<div>
+    @Html.Raw(Model.news_ContentHtml5)
+</div>
