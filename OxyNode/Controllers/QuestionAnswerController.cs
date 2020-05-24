@@ -27,32 +27,38 @@ namespace OxyNode.Controllers
         public async Task<IActionResult> Index()
         {
             // вьюмодель для передачи в представления
-            AnswersViewModel avm = new AnswersViewModel();
+            QAViewModel qavm = new QAViewModel();
 
             // передача во вьюмодель общего кол-ва ответов на вопросы
-            avm.answersCount = await _dbA.GetAnswersCount();
+            qavm.qaCount = await _dbA.GetPublisedAnswersCount();
 
             // номер текущей страницы
-            avm.currentPageNumber = 1;
+            qavm.currentPageNumber = 1;
 
-            // сами ответы
-            avm.answers = await _dbA.GetPageOfAnswers(1, pageSize);
+            // сами вопрос-ответы
+            qavm.answers = await _dbA.GetPageOfPublishedAnswers(1, pageSize);
 
-            return View(avm);
+            return View(qavm);
         }
 
         // конкретная страница с несколькими вопросами-ответами
         public async Task<IActionResult> Page(int pageNumber)
         {
-            AnswersViewModel avm = new AnswersViewModel();
-            avm.answersCount = await _dbA.GetAnswersCount();
+            // вьюмодель для передачи в представления
+            QAViewModel qavm = new QAViewModel();
 
-            avm.currentPageNumber = pageNumber;
+            // передача во вьюмодель общего кол-ва ответов на вопросы
+            qavm.qaCount = await _dbA.GetPublisedAnswersCount();
 
-            avm.answers = await _dbA.GetPageOfAnswers(pageNumber, pageSize);
+            // номер текущей страницы
+            qavm.currentPageNumber = pageNumber;
 
-            return View();
+            // сами вопрос-ответы
+            qavm.answers = await _dbA.GetPageOfPublishedAnswers(pageNumber, pageSize);
+
+            return View(qavm);
         }
+
 
         // конкретная страница вопроса - ответа
         public async Task<IActionResult> ReadQA(string id)

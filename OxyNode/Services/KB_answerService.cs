@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OxyNode.Models;
 using MongoDB.Driver;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 
 // Сервис для управлениями ответами в "QA"
 namespace OxyNode.Services
@@ -51,6 +52,35 @@ namespace OxyNode.Services
         {
             return await AnswerCollection.CountDocumentsAsync(new BsonDocument());
         }
+
+
+
+        // получить все объекты коллекции - ответы, с флагом публикации True
+        // "publishToSite" : true
+        public async Task<List<KB_answer>> GetAllPublishedAnswers()
+        {
+            var filter = Builders<KB_answer>.Filter.Eq("publishToSite", true);
+            return await AnswerCollection.Find(filter).ToListAsync();
+        }
+
+        // получить страницу ответов, с флагом публикации True (pageSize штук)
+        // "publishToSite" : true
+        public async Task<List<KB_answer>> GetPageOfPublishedAnswers(int pageNumber, int pageSize)
+        {
+            // выборка по номеру страницы - 
+            // кол-во статей/pageSize - кол-во возможных страниц
+            // limit - pageSize, skip = (pageNumber-1)*pageSize
+            var filter = Builders<KB_answer>.Filter.Eq("publishToSite", true);
+            return await AnswerCollection.Find(filter).Skip((pageNumber - 1) * pageSize).Limit(pageSize).ToListAsync();
+        }
+
+        // получить кол-во ответов в БД, готовых к публикации на основной сайт
+        public async Task<long> GetPublisedAnswersCount()
+        {
+            var filter = Builders<KB_answer>.Filter.Eq("publishToSite", true);
+            return await AnswerCollection.CountDocumentsAsync(filter);
+        }
+
 
 
         #region CRUD
