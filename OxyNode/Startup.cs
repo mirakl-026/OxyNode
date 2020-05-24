@@ -44,6 +44,8 @@ namespace OxyNode
             services.AddTransient<KB_questionService>();
             services.AddTransient<KB_answerService>();
 
+            services.AddTransient<NewsService>();
+
 
             
             services.AddControllersWithViews();

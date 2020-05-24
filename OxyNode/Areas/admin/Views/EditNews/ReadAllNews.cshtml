@@ -1,0 +1,34 @@
+﻿@model OxyNode.ViewModels.NewsItemsViewModel
+
+@{
+    ViewData["Title"] = "Admin | News | Read all";
+}
+
+
+<h3>Все новости</h3>
+<hr />
+
+<div>
+    @foreach (var ni in Model.newsItems)
+    {
+        <p>
+            <a asp-area="admin" asp-controller="EditNews" asp-action="ReadNews" asp-route-id="@ni.Id">@ni.news_Name</a>
+            <div>
+                @ni.news_ShortDescription
+            </div>
+            <a asp-area="admin" asp-controller="EditNews" asp-action="UpdateNews" asp-route-id="@ni.Id">Редактировать новость</a>
+            <a asp-area="admin" asp-controller="EditNews" asp-action="DeleteNews" asp-route-id="@ni.Id">Удалить новость</a>
+            <br />
+        </p>
+    }
+
+</div>
+
+<div>
+    Страница новостей: @Model.currentPageNumber
+</div>
+<div>
+    Всего новостей: @Model.newsItemsCount
+</div>
+
+

@@ -39,7 +39,7 @@ namespace OxyNode.Controllers
             return View(nvm);
         }
 
-        // конкретная страница новостей
+        // конкретная страница статей
         public async Task<IActionResult> Page(int pageNumber)
         {
             // Вьюмодель для статей
@@ -57,7 +57,7 @@ namespace OxyNode.Controllers
             return View(nvm);
         }
 
-        // конкретная новость
+        // конкретная статья
         public async Task<IActionResult> ReadNote(string id)
         {
             var note = await _db.ReadNote(id);

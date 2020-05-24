@@ -1,0 +1,31 @@
+﻿@model OxyNode.Models.NewsItem
+
+@{
+    Layout = "_LayoutAdminWithEditor";
+    ViewData["Title"] = "Admin | News | Create";
+}
+
+<h4>Создание новости</h4>
+<hr />
+
+<form asp-area="admin" asp-controller="EditNews" asp-action="CreateNews" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <table>
+        <tr>
+            <td><label asp-for="news_Name" class="control-label"></label></td>
+            <td><input asp-for="news_Name" class="form-control" /><span asp-validation-for="news_Name" class="text-danger"></span></td>
+        </tr>
+        <tr>
+            <td><label asp-for="news_ShortDescription" class="control-label"></label></td>
+            <td><input asp-for="news_ShortDescription" class="form-control" /><span asp-validation-for="news_ShortDescription" class="text-danger"></span></td>
+        </tr>
+    </table>
+
+
+    <input id="formContent" value="" type="hidden" asp-for="news_ContentHtml5">
+    <input class="edit_panel__button save_button" type="submit" value="Сохранить"><span asp-validation-for="news_ContentHtml5" class="text-danger"></span>
+</form>
+
+@* Частичное представление редактора контента*@
+<partial name="Partial/_ContentEditor" />
