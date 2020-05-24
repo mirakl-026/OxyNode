@@ -59,7 +59,7 @@ namespace OxyNode.Areas.admin.Controllers
                 q.AnswerId = answer.Id;
                 await _dbQ.UpdateQuestion(q);
 
-                return RedirectToAction("Index", "Panel");
+                return RedirectToAction("GetAllQuestions", "EditQuestions");
             }
             return View(answer);
         }
@@ -89,7 +89,7 @@ namespace OxyNode.Areas.admin.Controllers
                 }
                 await _dbQ.DeleteQuestion(questionId);
             }            
-            return RedirectToAction("Index", "Panel");
+            return RedirectToAction("GetAllQuestions", "EditQuestions");
         }
 
         // редактировать вопрос

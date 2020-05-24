@@ -11,11 +11,10 @@
     @foreach (var ans in Model.answers)
     {
         <p>
-            <a asp-area="admin" asp-controller="EditAnswers" asp-action="ReadOneAnswer" asp-route-answerId="@ans.Id">Ответ: @ans.Id</a>
+            <div><a asp-area="admin" asp-controller="EditAnswers" asp-action="ReadOneAnswer" asp-route-answerId="@ans.Id">Ответ: @ans.Id</a></div>
             <div>Содержание ответа:
                     @ans.answerText
             </div>
-            <div>Флаг публикации на сайте: @ans.publishToSite </div>
             @if (ans.QuestionId != null)
             {
                 <div>Id вопроса: <a asp-area="admin" asp-controller="EditQuestions" asp-action="ReadOneQuestion" asp-route-questionId="@ans.QuestionId">@ans.QuestionId</a></div>
@@ -24,8 +23,9 @@
             {
                 <div>Id вопроса: нет?</div>
             }
+            <div>Флаг публикации на сайте: @ans.publishToSite</div>
 
-            <a asp-area="admin" asp-controller="EditAnswers" asp-action="DeleteAnswer" asp-route-answerId="@ans.Id">Удалить ответ</a>
+            <div><a asp-area="admin" asp-controller="EditAnswers" asp-action="DeleteAnswer" asp-route-answerId="@ans.Id">Удалить ответ</a></div>
             <br />
             <br />
         </p>
@@ -35,9 +35,9 @@
 
 <hr />
 <div>
-    Страница вопросов: @Model.currentPageNumber
+    Страница ответов: @Model.currentPageNumber
 </div>
 <div>
-    Всего вопросов: @Model.answersCount
+    Всего ответов: @Model.answersCount
 </div>
 

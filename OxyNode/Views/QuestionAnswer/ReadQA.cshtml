@@ -1,4 +1,33 @@
-﻿
+﻿@model OxyNode.ViewModels.OneQAViewModel
+
 @{
     ViewData["Title"] = "OxyNode | QA ";
 }
+
+<div>
+    <table>
+
+        <tr style="background-color:beige">
+            <td> 
+                <div>@Model.question.FullName,</div>
+                <div>@Model.question.Address</div>
+            </td>
+            <td>
+                <div>Вопрос:</div>
+                <div>@Model.question.questionText</div>
+            </td>
+        </tr>
+
+        <tr style="background-color:lightgreen">
+            <td>
+
+            </td>
+            <td>
+                <div>Ответ: </div>
+                <div>@Model.answer.answerText</div>
+            </td>
+        </tr>
+            
+    </table>
+
+</div>
