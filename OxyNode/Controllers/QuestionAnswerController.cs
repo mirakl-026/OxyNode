@@ -72,10 +72,13 @@ namespace OxyNode.Controllers
 
 
         // конкретная страница вопроса - ответа
-        public async Task<IActionResult> ReadQA(string id)
+        public async Task<IActionResult> ReadQA(string answerId, string questionId)
         {
-            var answer = await _dbA.ReadAnswer(id);
-            return View(answer);
+            OneQAViewModel oqavm = new OneQAViewModel();
+            oqavm.answer = await _dbA.ReadAnswer(answerId);
+            oqavm.question = await _dbQ.ReadQuestion(questionId);
+
+            return View(oqavm);
         }
 
         // форма задания вопроса

@@ -28,7 +28,7 @@
                     <div>@Model.questions[i].Address</div>
                 </td>
                 <td>
-                    <div><a asp-controller="QuestionAnswer" asp-action="ReadQA" asp-route-id="@Model.questions[i].AnswerId">Вопос:</a></div>
+                    <div><a asp-controller="QuestionAnswer" asp-action="ReadQA" asp-route-answerId="@Model.questions[i].AnswerId" asp-route-questionId="@Model.questions[i].Id">Вопрос:</a></div>
                     <div>@Model.questions[i].questionText</div>
                 </td>
             </tr>
