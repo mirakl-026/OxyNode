@@ -4,15 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 
 namespace OxyNode.Controllers
 {
     public class KnowledgeBaseController : Controller
     {
-        private KnowledgeBaseService _db;
+        private IKnowledgeBaseService _db;
 
-        public KnowledgeBaseController(KnowledgeBaseService context)
+        public KnowledgeBaseController(IKnowledgeBaseService context)
         {
             _db = context;
         }

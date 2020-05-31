@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+
+
 using OxyNode.Models;
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.ViewModels;
 
 // Контроллер страницы - База Знаний - Вопрос-Ответ
@@ -14,10 +16,10 @@ namespace OxyNode.Controllers
     [Route("KnowledgeBase/{controller}/{action}")]
     public class QuestionAnswerController : Controller
     {
-        private KB_answerService _dbA;
-        private KB_questionService _dbQ;
+        private IKB_answerService _dbA;
+        private IKB_questionService _dbQ;
         private int pageSize = 6;
-        public QuestionAnswerController(KB_answerService contextA, KB_questionService contextQ)
+        public QuestionAnswerController(IKB_answerService contextA, IKB_questionService contextQ)
         {
             _dbA = contextA;
             _dbQ = contextQ;

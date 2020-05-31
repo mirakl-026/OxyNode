@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.ViewModels;
 
 namespace OxyNode.Controllers
@@ -12,9 +12,9 @@ namespace OxyNode.Controllers
     [Route("KnowledgeBase/{controller}")]
     public class IndustrySolutionsController : Controller
     {
-        private KB_industrySolutionService _db;
+        private IKB_industrySolutionService _db;
 
-        public IndustrySolutionsController(KB_industrySolutionService context)
+        public IndustrySolutionsController(IKB_industrySolutionService context)
         {
             _db = context;
         }

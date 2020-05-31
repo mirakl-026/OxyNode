@@ -4,15 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 
 namespace OxyNode.Controllers
 {
     // Страница "Контакты"
     public class ContactsController : Controller
     {
-        private ContactsService _db;
-        public ContactsController(ContactsService context)
+        private IContactsService _db;
+        public ContactsController(IContactsService context)
         {
             _db = context;
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.Models;
 using OxyNode.ViewModels;
 
@@ -14,10 +14,10 @@ namespace OxyNode.Controllers
     // Контроллер новостей
     public class NewsController : Controller
     {
-        private NewsService _db;
+        private INewsService _db;
         public int pageSize = 6;
 
-        public NewsController (NewsService context)
+        public NewsController (INewsService context)
         {
             _db = context;
         }
