@@ -13,11 +13,11 @@
             </div>
         </li>
         <li class="menu__item">
-            <a class="menu__link drop" href="#">Услуги</a>
+            <a class="menu__link drop" asp-controller="Actions" asp-action="Index">Услуги</a>
             <div class="drop_menu">
-                <a href="#" class="drop_menu__link">Ремонт</a>
-                <a href="#" class="drop_menu__link">Калибровка</a>
-                <a href="#" class="drop_menu__link">Поверка</a>
+                <a asp-controller="Repair" asp-action="Index" class="drop_menu__link">Ремонт</a>
+                <a asp-controller="Calibration" asp-action="Index" class="drop_menu__link">Калибровка</a>
+                <a asp-controller="Verification" asp-action="Index" class="drop_menu__link">Поверка</a>
             </div>
         </li>
         <li class="menu__item">
