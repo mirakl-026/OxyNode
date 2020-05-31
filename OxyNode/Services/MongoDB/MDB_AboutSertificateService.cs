@@ -13,6 +13,7 @@ using MongoDB.Bson.Serialization;
 
 namespace OxyNode.Services.MongoDB
 {
+    // MongoDb -> AboutSertificate / "Сертификаты" в странице "О нас"
     public class MDB_AboutSertificateService : IAboutSertificateService
     {
         private IMongoCollection<AboutSertificate> AboutSertificateCollection;
