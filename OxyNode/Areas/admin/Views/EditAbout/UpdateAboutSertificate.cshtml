@@ -3,8 +3,8 @@
     ViewData["Title"] = "Admin | About | Update Sertificate";
 }
 
-<form asp-controller="Home" asp-action="UpdateFile" method="post" enctype="multipart/form-data">
+<form asp-area="admin" asp-controller="EditAbout" asp-action="UpdateAboutSertificate" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="@Model.Id" />
-    <input type="file" name="newSertificate" value="@Model.SertificateName" />
+    <input type="file" name="newSertificate" />
     <input type="submit" value="Обновить" />
 </form>
