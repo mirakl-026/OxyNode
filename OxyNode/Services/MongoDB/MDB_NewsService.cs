@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using OxyNode.Infrastructure.Interfaces;
+
 using OxyNode.Models;
 
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 
-namespace OxyNode.Services
+
+// сервис управления новостями
+namespace OxyNode.Services.MongoDB
 {
-    // сервис управления новостями
-    public class NewsService
+    public class MDB_NewsService : INewsService
     {
         private IMongoCollection<NewsItem> NewsCollection;
 
-        public NewsService()
+        public MDB_NewsService()
         {
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";

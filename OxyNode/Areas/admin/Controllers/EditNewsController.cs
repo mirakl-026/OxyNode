@@ -4,13 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.ViewModels;
 using OxyNode.Models;
-using System.IO;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Hosting;
-using MongoDB.Bson;
 
 
 namespace OxyNode.Areas.admin.Controllers
@@ -18,9 +14,9 @@ namespace OxyNode.Areas.admin.Controllers
     [Area("admin")]
     public class EditNewsController : Controller
     {
-        private NewsService _db;
+        private INewsService _db;
 
-        public EditNewsController(NewsService context)
+        public EditNewsController(INewsService context)
         {
             _db = context;
         }

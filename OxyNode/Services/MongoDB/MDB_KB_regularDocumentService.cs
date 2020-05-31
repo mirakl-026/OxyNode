@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using OxyNode.Infrastructure.Interfaces;
+
 using OxyNode.Models;
 
 using MongoDB.Driver;
@@ -10,14 +12,14 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 
 
-namespace OxyNode.Services
+namespace OxyNode.Services.MongoDB
 {
     // Сервис по управлению файлами "Нормативный документ" - со стороны БД
-    public class KB_regularDocumentService
+    public class MDB_KB_regularDocumentService : IKB_regularDocumentService
     {
         private IMongoCollection<KB_regularDocument> RegularDocumentCollection;
 
-        public KB_regularDocumentService()
+        public MDB_KB_regularDocumentService()
         {
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";

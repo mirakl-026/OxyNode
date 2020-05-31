@@ -4,13 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.ViewModels;
 using OxyNode.Models;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
-using MongoDB.Bson;
+
 
 namespace OxyNode.Areas.admin.Controllers
 {
@@ -20,9 +20,9 @@ namespace OxyNode.Areas.admin.Controllers
         // Контроллер для редактирования "Нормативные документы" - файлов этой категории
         private string FilesPath = "/resources/knowledgeBase/regularDocuments/";
         private IWebHostEnvironment _appEnvironment;
-        private KB_regularDocumentService _db;
+        private IKB_regularDocumentService _db;
 
-        public EditRegularDocumentsController(IWebHostEnvironment appEnvironment, KB_regularDocumentService context)
+        public EditRegularDocumentsController(IWebHostEnvironment appEnvironment, IKB_regularDocumentService context)
         {
             _appEnvironment = appEnvironment;
             _db = context;

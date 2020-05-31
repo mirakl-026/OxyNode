@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.ViewModels;
 using OxyNode.Models;
 using System.IO;
@@ -21,10 +21,10 @@ namespace OxyNode.Areas.admin.Controllers
         // Контроллер для редактирования "Нормативные документы" - файлов этой категории
         private string FilesPath = "/resources/knowledgeBase/industrySolutions/";
         private IWebHostEnvironment _appEnvironment;
-        private KB_industrySolutionService _db;
+        private IKB_industrySolutionService _db;
 
 
-        public EditIndustrySolutionsController (IWebHostEnvironment appEnvironment, KB_industrySolutionService context)
+        public EditIndustrySolutionsController (IWebHostEnvironment appEnvironment, IKB_industrySolutionService context)
         {
             _appEnvironment = appEnvironment;
             _db = context;

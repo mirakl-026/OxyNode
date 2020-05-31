@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.Models;
 using OxyNode.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -21,10 +21,10 @@ namespace OxyNode.Areas.admin.Controllers
         private string FilesPath = "/resources/about/sertificates/";
         private IWebHostEnvironment _appEnvironment;
 
-        private AboutService _db_about;
-        private AboutSertificateService _db_aboutSertificate;
+        private IAboutService _db_about;
+        private IAboutSertificateService _db_aboutSertificate;
 
-        public EditAboutController(IWebHostEnvironment appEnvironment, AboutService aboutContext, AboutSertificateService aboutSertificateContext)
+        public EditAboutController(IWebHostEnvironment appEnvironment, IAboutService aboutContext, IAboutSertificateService aboutSertificateContext)
         {
             _appEnvironment = appEnvironment;
             _db_about = aboutContext;

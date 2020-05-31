@@ -4,17 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.ViewModels;
 
 namespace OxyNode.Controllers
 {
     public class AboutController : Controller
     {
-        private AboutService _db_about;
-        private AboutSertificateService _db_aboutSertificate;
+        private IAboutService _db_about;
+        private IAboutSertificateService _db_aboutSertificate;
 
-        public AboutController(AboutService aboutContext, AboutSertificateService aboutSertificateContext)
+        public AboutController(IAboutService aboutContext, IAboutSertificateService aboutSertificateContext)
         {
             _db_about = aboutContext;
             _db_aboutSertificate = aboutSertificateContext;

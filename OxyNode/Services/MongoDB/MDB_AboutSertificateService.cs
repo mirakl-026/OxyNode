@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using OxyNode.Models;
+using OxyNode.Infrastructure.Interfaces;
 
+using OxyNode.Models;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 
 
-namespace OxyNode.Services
+namespace OxyNode.Services.MongoDB
 {
     // MongoDb -> AboutSertificate / "Сертификаты" в странице "О нас"
-    public class AboutSertificateService
+    public class MDB_AboutSertificateService : IAboutSertificateService
     {
         private IMongoCollection<AboutSertificate> AboutSertificateCollection;
 
-        public AboutSertificateService()
+        public MDB_AboutSertificateService()
         {
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";

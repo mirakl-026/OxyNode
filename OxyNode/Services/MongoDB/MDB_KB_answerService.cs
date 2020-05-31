@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using OxyNode.Infrastructure.Interfaces;
+
 using OxyNode.Models;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 
 // Сервис для управлениями ответами в "QA"
-namespace OxyNode.Services
+namespace OxyNode.Services.MongoDB
 {
-    public class KB_answerService
+    public class MDB_KB_answerService : IKB_answerService
     {
         private IMongoCollection<KB_answer> AnswerCollection;
 
-        public KB_answerService()
+        public MDB_KB_answerService()
         {
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";

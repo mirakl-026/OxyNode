@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using OxyNode.Infrastructure.Interfaces;
+
 using OxyNode.Models;
 
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 
-namespace OxyNode.Services
+
+namespace OxyNode.Services.MongoDB
 {
     // Сервис -> mongoDB - Contacts
-    public class ContactsService
+    public class MDB_ContactsService : IContactsService
     {
         private IMongoCollection<Contacts> ContactsCollection;
 
-        public ContactsService()
+        public MDB_ContactsService()
         {
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";
@@ -47,7 +50,7 @@ namespace OxyNode.Services
             {
                 ContactsCollection.DeleteOne(new BsonDocument());
                 await ContactsCollection.InsertOneAsync(c);
-            }            
+            }
         }
 
         // Read
@@ -91,7 +94,7 @@ namespace OxyNode.Services
                 };
             }
 
-            
+
         }
 
         // Update

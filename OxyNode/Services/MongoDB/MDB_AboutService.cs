@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using OxyNode.Infrastructure.Interfaces;
+
 using OxyNode.Models;
 
 using MongoDB.Driver;
@@ -10,15 +12,15 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 
 
-namespace OxyNode.Services
+namespace OxyNode.Services.MongoDB
 {
     // Сервис MongoDB -> About / "О нас"
     // страница "О нас" так-же как и "Контакты" хранится в БД в единичном представлении
-    public class AboutService
+    public class MDB_AboutService : IAboutService
     {
         private IMongoCollection<About> AboutCollection;
 
-        public AboutService()
+        public MDB_AboutService()
         {
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";
@@ -71,7 +73,7 @@ namespace OxyNode.Services
         }
 
         // Update
-        public async Task UpdateAbout (About a)
+        public async Task UpdateAbout(About a)
         {
             // если до текущего момента в БД нет документа "О нас", то документ - создаётся
             if (AboutCollection.Find(new BsonDocument()).ToList().Count == 0)

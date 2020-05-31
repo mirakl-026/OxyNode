@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using OxyNode.Infrastructure.Interfaces;
+
 using OxyNode.Models;
 
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 
-namespace OxyNode.Services
+namespace OxyNode.Services.MongoDB
 {
-    // Сервис MongoDB -> KnowledgeBase / "База знаний"
-    // страница "База знаний" так-же как и "Контакты" хранится в БД в единичном представлении
-    public class KnowledgeBaseService
+    public class MDB_KnowledgeBaseService : IKnowledgeBaseService
     {
         private IMongoCollection<KnowledgeBase> KnowledgeBaseCollection;
 
-        public KnowledgeBaseService()
+        public MDB_KnowledgeBaseService()
         {
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";

@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using OxyNode.Infrastructure.Interfaces;
+
 using OxyNode.Models;
 
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 
-namespace OxyNode.Services
+
+namespace OxyNode.Services.MongoDB
 {
-    public class KB_noteService
+    public class MDB_KB_noteService : IKB_noteService
     {
         private IMongoCollection<KB_note> NoteCollection;
 
-        public KB_noteService()
+        public MDB_KB_noteService()
         {
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";
@@ -46,7 +49,7 @@ namespace OxyNode.Services
             // выборка по номеру страницы - 
             // кол-во статей/pageSize - кол-во возможных страниц
             // limit - pageSize, skip = (pageNumber-1)*pageSize
-            return await NoteCollection.Find(new BsonDocument()).Skip((pageNumber-1)*pageSize).Limit(pageSize).ToListAsync();
+            return await NoteCollection.Find(new BsonDocument()).Skip((pageNumber - 1) * pageSize).Limit(pageSize).ToListAsync();
         }
 
         // получить кол-во статей в БД

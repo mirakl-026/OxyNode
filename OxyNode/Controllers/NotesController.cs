@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.ViewModels;
 
 namespace OxyNode.Controllers
@@ -12,10 +12,10 @@ namespace OxyNode.Controllers
     [Route("KnowledgeBase/{controller}/{action}")]
     public class NotesController : Controller
     {
-        private KB_noteService _db;
+        private IKB_noteService _db;
         private int pageSize = 6;
 
-        public NotesController(KB_noteService context)
+        public NotesController(IKB_noteService context)
         {
             _db = context;
         }

@@ -4,13 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.ViewModels;
 using OxyNode.Models;
-using System.IO;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Hosting;
-using MongoDB.Bson;
 
 
 namespace OxyNode.Areas.admin.Controllers
@@ -18,9 +14,9 @@ namespace OxyNode.Areas.admin.Controllers
     [Area("admin")]
     public class EditNotesController : Controller
     {
-        private KB_noteService _db;
+        private IKB_noteService _db;
 
-        public EditNotesController(KB_noteService context)
+        public EditNotesController(IKB_noteService context)
         {
             _db = context;
         }

@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using OxyNode.Models;
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 
 namespace OxyNode.Areas.admin.Controllers
 {
     [Area("admin")]
     public class EditContactsController : Controller
     {
-        private ContactsService _db;
-        public EditContactsController(ContactsService context)
+        private IContactsService _db;
+        public EditContactsController(IContactsService context)
         {
             _db = context;
         }
