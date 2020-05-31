@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 // контроллер -> услуги | калибровка
 namespace OxyNode.Controllers
 {
+    [Route("Actions/{controller}/{action}")]
     public class CalibrationController : Controller
     {
         public IActionResult Index()

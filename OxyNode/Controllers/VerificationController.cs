@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 // контроллер -> услуги | поверка
 namespace OxyNode.Controllers
 {
+    [Route("Actions/{controller}/{action}")]
     public class VerificationController : Controller
     {
         public IActionResult Index()

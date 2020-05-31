@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 // Контроллер -> услуги | ремонт
 namespace OxyNode.Controllers
 {
+    [Route("Actions/{controller}/{action}")]
     public class RepairController : Controller
     {
         public IActionResult Index()
