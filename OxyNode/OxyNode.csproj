@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Infrastructure\Interfaces\" />
+    <Folder Include="Services\MongoDB\" />
     <Folder Include="wwwroot\resources\about\sertificates\" />
     <Folder Include="wwwroot\resources\knowledgeBase\notes\" />
     <Folder Include="wwwroot\resources\knowledgeBase\regularDocuments\" />
