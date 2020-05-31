@@ -4,12 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.Models;
-using OxyNode.ViewModels;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
+
 
 namespace OxyNode.Areas.admin.Controllers
 {
@@ -25,9 +22,9 @@ namespace OxyNode.Areas.admin.Controllers
         // private string Kb_nt_Path = "/resources/knowledgeBase/notes/";
         //
         // private IWebHostEnvironment _appEnvironment;
-        private KnowledgeBaseService _db_kb;
+        private IKnowledgeBaseService _db_kb;
         
-        public EditKnowledgeBaseController(KnowledgeBaseService kbContext)
+        public EditKnowledgeBaseController(IKnowledgeBaseService kbContext)
         {
             
             _db_kb = kbContext;        

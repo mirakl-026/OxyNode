@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.ViewModels;
 using OxyNode.Models;
 
@@ -13,10 +13,10 @@ namespace OxyNode.Areas.admin.Controllers
     [Area("admin")]
     public class EditQuestionsController : Controller
     {
-        private KB_questionService _dbQ;
-        private KB_answerService _dbA;
+        private IKB_questionService _dbQ;
+        private IKB_answerService _dbA;
 
-        public EditQuestionsController(KB_questionService contextQ, KB_answerService contextA)
+        public EditQuestionsController(IKB_questionService contextQ, IKB_answerService contextA)
         {
             _dbQ = contextQ;
             _dbA = contextA;
