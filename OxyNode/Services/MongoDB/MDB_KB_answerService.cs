@@ -13,7 +13,7 @@ using MongoDB.Bson.Serialization;
 // Сервис для управлениями ответами в "QA"
 namespace OxyNode.Services.MongoDB
 {
-    public class MDB_KB_answerService
+    public class MDB_KB_answerService : IKB_answerService
     {
         private IMongoCollection<KB_answer> AnswerCollection;
 
