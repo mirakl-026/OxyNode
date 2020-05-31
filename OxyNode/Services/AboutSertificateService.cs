@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using OxyNode.Models;
+using OxyNode.Infrastructure.Interfaces;
 
 using MongoDB.Driver;
 using MongoDB.Bson;
@@ -13,7 +14,7 @@ using MongoDB.Bson.Serialization;
 namespace OxyNode.Services
 {
     // MongoDb -> AboutSertificate / "Сертификаты" в странице "О нас"
-    public class AboutSertificateService
+    public class AboutSertificateService : IAboutSertificateService
     {
         private IMongoCollection<AboutSertificate> AboutSertificateCollection;
 

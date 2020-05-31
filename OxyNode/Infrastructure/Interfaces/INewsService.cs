@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OxyNode.Infrastructure.Interfaces
 {
-    interface IKnowledgeBase
+    interface INewsService
     {
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OxyNode.Infrastructure.Interfaces
 {
-    interface IContacts
+    interface IKB_noteService
     {
     }
 }

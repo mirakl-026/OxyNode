@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OxyNode.Infrastructure.Interfaces
 {
-    interface IKB_regularDocument
+    interface IKnowledgeBaseService
     {
     }
 }
