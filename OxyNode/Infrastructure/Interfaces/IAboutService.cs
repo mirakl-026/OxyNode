@@ -8,7 +8,24 @@ using OxyNode.Models;
 // интерфейс для сервиса управляющим страницей About
 namespace OxyNode.Infrastructure.Interfaces
 {
-    interface IAboutService
+    public interface IAboutService
     {
+        #region CRUD
+        // Create
+        public Task CreateAbout(About a);
+
+
+        // Read
+        public Task<About> ReadAbout();
+
+
+        // Update
+        public Task UpdateAbout(About a);
+
+
+        // Delete
+        public Task DeleteAbout();
+
+        #endregion
     }
 }
