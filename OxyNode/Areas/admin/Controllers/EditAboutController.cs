@@ -116,7 +116,7 @@ namespace OxyNode.Areas.admin.Controllers
                 }
 
                 // Сохранение в БД
-                string newSertLabel = "";
+                string newSertLabel;
                 if (sertificateLabel == null || sertificateLabel.Length == 0)
                 {
                     newSertLabel = uploadedSertificate.FileName;
@@ -182,11 +182,19 @@ namespace OxyNode.Areas.admin.Controllers
                     fi.Delete();
                 }
 
-                // Сохранение файла сертификата на сервере
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + pathToUpdate, FileMode.Create))
+                // Определение пути 
+                string path = FilesPath + newSertificate.FileName;
+
+                // Сохранение файла на сервере
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
                     await newSertificate.CopyToAsync(fileStream);
                 }
+
+                currentSertificate.SertificatePath = path;
+
+                await _db_aboutSertificate.UpdateAboutSertificate(currentSertificate);
+
             }
             return RedirectToAction("Index", "Panel");
         }
