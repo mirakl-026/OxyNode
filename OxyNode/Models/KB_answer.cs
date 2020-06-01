@@ -19,6 +19,7 @@ namespace OxyNode.Models
         [HiddenInput(DisplayValue = false)]
         public string Id { get; set; }
 
+        /*
         // ФИО вопросителя - текст
         [Display(Name = "ФИО")]
         [StringLength(60, MinimumLength = 4, ErrorMessage = "ФИО должно быть от 4 до 60 символов")]
@@ -29,6 +30,7 @@ namespace OxyNode.Models
         [Required(ErrorMessage = "Содержание вопроса обязательно", AllowEmptyStrings = false)]
         [StringLength(500, MinimumLength = 10, ErrorMessage = "Вопрос должен быть от 10 до 500 символов")]
         public string questionText { get; set; }
+        */
 
         // содержание ответа - текст
         [Display(Name = "Содержание ответа")]

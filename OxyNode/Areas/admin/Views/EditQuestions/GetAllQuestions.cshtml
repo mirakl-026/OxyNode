@@ -1,0 +1,50 @@
+﻿@model OxyNode.ViewModels.QuestionsViewModel
+
+@{
+    ViewData["Title"] = "Admin | QA | Read all questions";
+}
+
+<h3>QA: Все вопросы</h3>
+<hr />
+
+<div>
+    @foreach (var q in Model.questions)
+    {
+        <p>
+            <div><a asp-area="admin" asp-controller="EditQuestions" asp-action="ReadOneQuestion" asp-route-questionId="@q.Id">Вопрос: @q.Id</a></div>
+            <div>Имя: @q.FullName</div>
+            <div>Адрес: @q.Address </div>
+            <div>E-mail: @q.e_mail</div>
+            <div>
+                Содержание:
+                @q.questionText
+            </div>
+            @if(q.AnswerId != null)
+            {
+                <div>Id ответа: <a asp-area="admin" asp-controller="EditAnswers" asp-action="ReadOneAnswer" asp-route-answerId="@q.AnswerId">@q.AnswerId</a></div>
+                <a asp-area="admin" asp-controller="EditAnswers" asp-action="EditOneAnswer" asp-route-answerId="@q.AnswerId">Редактировать ответ</a>
+            }
+            else
+            {
+                <div>Id ответа: нет</div>
+                <div><a asp-area="admin" asp-controller="EditQuestions" asp-action="AnsToQuestion" asp-route-questionId="@q.Id">Ответить на вопрос</a></div>
+            }
+
+            
+            <div><a asp-area="admin" asp-controller="EditQuestions" asp-action="DeleteQuestion" asp-route-questionId="@q.Id">Удалить вопрос</a></div>
+            <br />
+            <br />
+        </p>
+    }
+
+</div>
+
+<hr />
+<div>
+    Страница вопросов: @Model.currentPageNumber
+</div>
+<div>
+    Всего вопросов: @Model.questionsCount
+</div>
+
+

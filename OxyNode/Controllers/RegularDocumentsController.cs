@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.ViewModels;
 
 namespace OxyNode.Controllers
@@ -12,9 +12,9 @@ namespace OxyNode.Controllers
     [Route("KnowledgeBase/{controller}")]
     public class RegularDocumentsController : Controller
     {
-        private KB_regularDocumentService _db;
+        private IKB_regularDocumentService _db;
 
-        public RegularDocumentsController(KB_regularDocumentService context)
+        public RegularDocumentsController(IKB_regularDocumentService context)
         {
             _db = context;
         }

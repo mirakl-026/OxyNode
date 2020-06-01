@@ -1,0 +1,9 @@
+﻿@model OxyNode.Models.NewsItem
+
+@{
+    ViewData["Title"] = Model.news_Name;
+}
+
+<div>
+    @Html.Raw(Model.news_ContentHtml5)
+</div>

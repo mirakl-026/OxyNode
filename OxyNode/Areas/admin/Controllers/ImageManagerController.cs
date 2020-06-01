@@ -4,9 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
-using OxyNode.Models;
-using OxyNode.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
@@ -36,7 +33,7 @@ namespace OxyNode.Areas.admin.Controllers
                 // Определение пути 
                 string path = FilesPath + uploadedImage.FileName;
 
-                // удаление файла сертификата с сервера
+                // удаление файла картинки с сервера
                 FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + path);
                 if (fi.Exists)
                 {

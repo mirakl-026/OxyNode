@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using OxyNode.Services;
+using OxyNode.Infrastructure.Interfaces;
 using OxyNode.Models;
 using OxyNode.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -21,10 +21,10 @@ namespace OxyNode.Areas.admin.Controllers
         private string FilesPath = "/resources/about/sertificates/";
         private IWebHostEnvironment _appEnvironment;
 
-        private AboutService _db_about;
-        private AboutSertificateService _db_aboutSertificate;
+        private IAboutService _db_about;
+        private IAboutSertificateService _db_aboutSertificate;
 
-        public EditAboutController(IWebHostEnvironment appEnvironment, AboutService aboutContext, AboutSertificateService aboutSertificateContext)
+        public EditAboutController(IWebHostEnvironment appEnvironment, IAboutService aboutContext, IAboutSertificateService aboutSertificateContext)
         {
             _appEnvironment = appEnvironment;
             _db_about = aboutContext;
@@ -116,7 +116,7 @@ namespace OxyNode.Areas.admin.Controllers
                 }
 
                 // Сохранение в БД
-                string newSertLabel = "";
+                string newSertLabel;
                 if (sertificateLabel == null || sertificateLabel.Length == 0)
                 {
                     newSertLabel = uploadedSertificate.FileName;
@@ -182,11 +182,19 @@ namespace OxyNode.Areas.admin.Controllers
                     fi.Delete();
                 }
 
-                // Сохранение файла сертификата на сервере
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + pathToUpdate, FileMode.Create))
+                // Определение пути 
+                string path = FilesPath + newSertificate.FileName;
+
+                // Сохранение файла на сервере
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
                     await newSertificate.CopyToAsync(fileStream);
                 }
+
+                currentSertificate.SertificatePath = path;
+
+                await _db_aboutSertificate.UpdateAboutSertificate(currentSertificate);
+
             }
             return RedirectToAction("Index", "Panel");
         }

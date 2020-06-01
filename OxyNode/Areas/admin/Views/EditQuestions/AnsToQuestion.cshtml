@@ -1,0 +1,48 @@
+﻿@model OxyNode.Models.KB_answer
+@{
+    ViewData["Title"] = "Admin | QA | One question";
+}
+
+<h4> Ответить на вопрос</h4>
+<hr />
+
+<div>
+    <div>Id вопроса: @ViewData["questionId"]</div>
+    <div>Имя: @ViewData["questionFullName"]</div>
+    <div>Адрес: @ViewData["questionAddress"]</div>
+    <div>E-mail: @ViewData["questionEmail"]</div>
+    <div>
+        Содержание:
+        @ViewData["questionText"]
+    </div>
+
+    <a asp-area="admin" asp-controller="EditQuestions" asp-action="DeleteQuestion" asp-route-questionId="@ViewData["questionId"]">Удалить вопрос</a>
+    <br />
+    <br />
+</div>
+
+
+<form asp-area="admin" asp-controller="EditQuestions" asp-action="AnsToQuestion" method="post">
+    <div>
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <td><label asp-for="answerText" class="control-label"></label></td>
+                        <td><textarea asp-for="answerText" class="form-control"></textarea><span asp-validation-for="answerText" class="text-danger"></span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div>
+                <input type="hidden" name="questionId" value="@ViewData["questionId"]" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Сохранить" />
+            </div>
+        </div>
+    </div>
+</form>

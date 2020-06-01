@@ -33,7 +33,7 @@
     </tr>
 </table>
 
-<!-- Действия со страницкй "О нас" -->
+<!-- Действия со страницей "О нас" -->
 <h4>Операции над страницей "О нас"</h4>
 <table>
     <tr>
@@ -72,7 +72,7 @@
     </tr>
 </table>
 
-<!-- Действия надстраницей "База знаний" -->
+<!-- Действия над страницей "База знаний" -->
 <h4>Операции над страницей "База знаний"</h4>
 <table>
     <tr>
@@ -135,6 +135,36 @@
     <tr>
         <td>
             <a asp-area="admin" asp-controller="EditNotes" asp-action="CreateNote">Добавить статью</a>
+        </td>
+    </tr>
+</table>
+
+<h4>Операции над страницей "Вопрос-Ответ"</h4>
+<table>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditQuestions" asp-action="GetAllQuestions">Посмотреть все вопросы</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditAnswers" asp-action="ReadAllAnswers" >Посмотреть все ответы</a>
+        </td>
+    </tr>
+</table>
+
+
+<!-- Действия с новостями-->
+<h4>Операции над страницей "Новости"</h4>
+<table>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditNews" asp-action="ReadAllNews">Посмотреть все новости</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a asp-area="admin" asp-controller="EditNews" asp-action="CreateNews">Добавить новость</a>
         </td>
     </tr>
 </table>

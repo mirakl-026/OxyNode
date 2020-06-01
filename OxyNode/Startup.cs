@@ -10,7 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-using OxyNode.Services;
+//using OxyNode.Services;
+
+using OxyNode.Infrastructure.Interfaces;
+using OxyNode.Services.MongoDB;
 
 namespace OxyNode
 {
@@ -28,21 +31,23 @@ namespace OxyNode
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddTransient<ContactsService>();
+            services.AddTransient<IContactsService, MDB_ContactsService>();
 
-            services.AddTransient<AboutService>();
-            services.AddTransient<AboutSertificateService>();
+            services.AddTransient<IAboutService, MDB_AboutService>();
+            services.AddTransient<IAboutSertificateService, MDB_AboutSertificateService>();
           
-            services.AddTransient<KnowledgeBaseService>();
+            services.AddTransient<IKnowledgeBaseService, MDB_KnowledgeBaseService>();
             
-            services.AddTransient<KB_regularDocumentService>();
+            services.AddTransient<IKB_regularDocumentService, MDB_KB_regularDocumentService>();
             
-            services.AddTransient<KB_industrySolutionService>();
+            services.AddTransient<IKB_industrySolutionService, MDB_KB_industrySolutionService>();
             
-            services.AddTransient<KB_noteService>();
+            services.AddTransient<IKB_noteService, MDB_KB_noteService>();
 
-            services.AddTransient<KB_questionService>();
-            services.AddTransient<KB_answerService>();
+            services.AddTransient<IKB_questionService, MDB_KB_questionService>();
+            services.AddTransient<IKB_answerService, MDB_KB_answerService>();
+
+            services.AddTransient<INewsService, MDB_NewsService>();
 
 
             
