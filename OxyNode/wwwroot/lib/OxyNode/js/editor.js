@@ -1,4 +1,5 @@
-    //images creator
+//images creator
+// version 2
 
 //-------------------------- news creator-------------------------------------
 // edit_panel
@@ -24,16 +25,25 @@ function create_edit_panel(){
     <svg width="24" height="24" viewBox="0 0 24 24">
     <path d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" /></svg>
     </div>
-    <button class="edit_panel__button add_h3" type="button">Добавить заголовок</button>
-    <button class="edit_panel__button add_h4" type="button">Добавить подзаголовок</button>
-    <button class="edit_panel__button add_p" type="button">Добавить параграф</button>
-    <button class="edit_panel__button add_img" type="button">Добавить картинку</button>
-    <button class="edit_panel__button add_video" type="button">Добавить видео</button>
-    <button class="edit_panel__button add_author" type="button">Добавить автора</button>
-    <button class="edit_panel__button add_date" type="button">Добавить дату</button>
-    <button class="edit_panel__button delete_block" type="button">Удалить блок</button>
-    <button class="edit_panel__button up_block" type="button">Блок вверх</button>
-    <button class="edit_panel__button down_block" type="button">Блок вниз</button>`;
+    <button class="create_button add_h3" type="button">Добавить заголовок</button>
+    <button class="create_button add_h4" type="button">Добавить подзаголовок</button>
+    <button class="create_button add_p" type="button">Добавить параграф</button>
+    <button class="create_button add_ol" type="button">Добавить список</button>
+    <button class="create_button add_img" type="button">Добавить картинку</button>
+    <button class="create_button add_video" type="button">Добавить видео</button>
+    <button class="create_button add_author" type="button">Добавить автора</button>
+    <button class="create_button add_date" type="button">Добавить дату</button>
+    <div class="align_wrapper">
+        <button class="edit_button align_wrapper__btn align_text align_left_btn" type="button"><img src="assets/img/icons/align_left.svg"></button>
+        <button class="edit_button align_wrapper__btn align_text align_center_btn" type="button"><img src="assets/img/icons/align_center.svg"></button>
+        <button class="edit_button align_wrapper__btn align_text align_right_btn" type="button"><img src="assets/img/icons/align_right.svg"></button>
+        <button class="edit_button align_wrapper__btn align_text align_width_btn" type="button"><img src="assets/img/icons/align_width.svg"></button>
+        <button class="edit_button align_wrapper__btn align_img img_in_text_btn" type="button"><img src="assets/img/icons/img_in_text.svg"></button>
+        <button class="edit_button align_wrapper__btn align_img img_out_text_btn" type="button"><img src="assets/img/icons/img_out_text.svg"></button>
+    </div>
+    <button class="align_text align_img edit_button delete_block" type="button">Удалить блок</button>
+    <button class="align_text align_img edit_button up_block" type="button">Блок вверх</button>
+    <button class="align_text align_img edit_button down_block" type="button">Блок вниз</button>`;
 
     let news_section = document.querySelector(".news");
     news_section.insertBefore(edit_panel_dom, news_section.firstChild);
@@ -41,8 +51,17 @@ function create_edit_panel(){
     document.querySelector(".add_h3").addEventListener('click', add_h3);
     document.querySelector(".add_h4").addEventListener('click', add_h4);
     document.querySelector(".add_p").addEventListener('click', add_p);
+    document.querySelector(".add_ol").addEventListener('click', add_ol);
     document.querySelector(".add_img").addEventListener('click', add_img);
     document.querySelector(".add_video").addEventListener('click', add_video);
+
+    document.querySelector(".align_left_btn").addEventListener('click', align_left);
+    document.querySelector(".align_center_btn").addEventListener('click', align_center);
+    document.querySelector(".align_right_btn").addEventListener('click', align_right);
+    document.querySelector(".align_width_btn").addEventListener('click', align_width);
+    document.querySelector(".img_in_text_btn").addEventListener('click', img_in_text);
+    document.querySelector(".img_out_text_btn").addEventListener('click', img_out_text);
+
     document.querySelector(".delete_block").addEventListener('click', delete_block);
     document.querySelector(".up_block").addEventListener('click', up_block);
     document.querySelector(".down_block").addEventListener('click', down_block);
@@ -93,47 +112,95 @@ function move (){
 
 
 
+
 // news fields
 
-document.querySelector(".edit_button").addEventListener('click', edit_all)
+document.querySelector(".editor_button").addEventListener('click', edit_all);
 document.querySelector(".save_button").addEventListener('click', save_all);
 
-const edit_btn = document.querySelector(".edit_button");
+const edit_btn = document.querySelector(".editor_button");
 
 function add_h3(){
+    let focused_item = choose_block();
+    let parent_elem = null;
+    if (focused_item != null){
+        parent_elem = focused_item.parentElement;
+    }
     const news_field = document.querySelector(".news_field");   // поле с новостью
-    let new_textarea = document.createElement('textarea');  // то создать новый блок textarea
-    new_textarea.classList = "news__h3 news__item";   // с классом взятым из имени кнопки (h3, h4, p)
-    new_textarea.placeholder = "Заголовок";
+    let new_textarea = document.createElement("h3");  // то создать новый блок h3
+    new_textarea.contentEditable = true;
+    new_textarea.classList = "news__h3 news__editable text_center";   // с классом взятым из имени кнопки (h3, h4, p)
     new_textarea.name = "h3";
-    news_field.append(new_textarea);                            // вставить новый блок textarea в поле новости
-    new_textarea.addEventListener('focus', new_div);            // добавить прослушку на фокус нового блока textarea
-    new_textarea.addEventListener('input', write);              // добавить прослушку на ввод текста в новый блок textarea
+    if ((focused_item != null) & (parent_elem != null)){
+        parent_elem.insertBefore(new_textarea, focused_item.nextSibling);
+    }
+    else{
+        news_field.append(new_textarea);                            // вставить новый блок textarea в поле новости
+    }
     new_textarea.focus();
 }
 
 function add_h4(){
+    let focused_item = choose_block();
+    let parent_elem = null;
+    if (focused_item != null){
+        parent_elem = focused_item.parentElement;
+    }
     const news_field = document.querySelector(".news_field");   // поле с новостью
-    let new_textarea = document.createElement('textarea');  // то создать новый блок textarea
-    new_textarea.classList = "news__h4 news__item";   // с классом взятым из имени кнопки (h3, h4, p)
-    new_textarea.placeholder = "Подзаголовок";
+    let new_textarea = document.createElement("h4");  // то создать новый блок textarea
+    new_textarea.contentEditable = true;
+    new_textarea.classList = "news__h4 news__editable text_center";   // с классом взятым из имени кнопки (h3, h4, p)
     new_textarea.name = "h4";
-    news_field.append(new_textarea);                            // вставить новый блок textarea в поле новости
-    new_textarea.addEventListener('focus', new_div);            // добавить прослушку на фокус нового блока textarea
-    new_textarea.addEventListener('input', write);              // добавить прослушку на ввод текста в новый блок textarea
+    if ((focused_item != null) & (parent_elem != null)){
+        parent_elem.insertBefore(new_textarea, focused_item.nextSibling);
+    }
+    else{
+        news_field.append(new_textarea);                            // вставить новый блок textarea в поле новости
+    }
     new_textarea.focus();
 }
 
 function add_p(){
+    let focused_item = choose_block();
+    let parent_elem = null;
+    if (focused_item != null){
+        parent_elem = focused_item.parentElement;
+    }
     const news_field = document.querySelector(".news_field");   // поле с новостью
-    let new_textarea = document.createElement('textarea');  // то создать новый блок textarea
-    new_textarea.classList = "news__p news__item";   // с классом параграфа
-    new_textarea.placeholder = "Параграф";
-    new_textarea.name = "p";
-    news_field.append(new_textarea);                            // вставить новый блок textarea в поле новости
-    new_textarea.addEventListener('focus', new_div);            // добавить прослушку на фокус нового блока textarea
-    new_textarea.addEventListener('input', write);              // добавить прослушку на ввод текста в новый блок textarea
+    let new_textarea = document.createElement("p");  // то создать новый блок textarea
+    new_textarea.contentEditable = true;
+    new_textarea.classList = "news__p news__editable text_left";   // с классом параграфа
+    if ((focused_item != null) & (parent_elem != null)){
+        parent_elem.insertBefore(new_textarea, focused_item.nextSibling);
+    }
+    else{
+        news_field.append(new_textarea);                            // вставить новый блок textarea в поле новости
+    }
     new_textarea.focus();
+}
+
+function add_ol(){
+    let focused_item = choose_block();
+    let parent_elem = null;
+    if (focused_item != null){
+        parent_elem = focused_item.parentElement;
+    }
+    const news_field = document.querySelector(".news_field");   // поле с новостью
+    let new_ol = document.createElement("ol");  // то создать новый блок textarea
+    new_ol.contentEditable = true;
+    new_ol.classList = "news__ol news__editable";   // с классом параграфа
+    if ((focused_item != null) & (parent_elem != null)){
+        parent_elem.insertBefore(new_ol, focused_item.nextSibling);
+    }
+    else{
+        news_field.append(new_ol);                            // вставить новый блок textarea в поле новости
+    }
+    //news_field.append(new_ol);                            // вставить новый блок textarea в поле новости
+    let new_li = document.createElement("li");
+    new_li.contentEditable = true;
+    new_li.innerText = "";
+    new_ol.append(new_li);
+    new_ol.focus();
 }
 
 function add_img(){
@@ -148,7 +215,15 @@ function add_img(){
     
     //----------------------------------до сюда
 
-
+    //----------------------------------Женек, ЗАкоменть!!!
+    // let test_response = `[
+    //     "https://avatars.mds.yandex.net/get-pdb/49816/68f4f375-08b6-4e33-ad9e-996e86871444/s1200",
+    //     "https://avatars.mds.yandex.net/get-pdb/1004346/d59ecfca-4e4f-428f-982b-3d3ddac1b44d/s1200",
+    //     "https://avatars.mds.yandex.net/get-pdb/2129646/a5fa83ae-8bb0-4ace-9d5b-1e5517125447/s1200",
+    //     "https://avatars.mds.yandex.net/get-pdb/368827/30382812-14fb-4c02-b021-9673e778a3ac/s1200"
+    // ]`;
+    // let sources = JSON.parse(test_response);
+    //----------------------------------до сюда
 
     for (src of sources){
         let new_img_wrapper = document.createElement("div");
@@ -164,10 +239,20 @@ function add_img(){
 }
 
 function append_img(){
+    let focused_item = choose_block();
+    let parent_elem = null;
+    if (focused_item != null){
+        parent_elem = focused_item.parentElement;
+    }
     let news_field = document.querySelector(".news_field");
     let news_img_wrapper = document.createElement("div");
-    news_img_wrapper.classList = "news_img_wrapper";
-    news_field.appendChild(news_img_wrapper);
+    news_img_wrapper.classList = "news_img_wrapper img_left img_out_text";
+    if ((focused_item != null) & (parent_elem != null)){
+        parent_elem.insertBefore(news_img_wrapper, focused_item.nextSibling);
+    }
+    else {
+        news_field.appendChild(news_img_wrapper);
+    }
     let news_img = document.createElement("img");
     news_img.src = this.src;
     news_img.addEventListener('click', focus_img);
@@ -180,20 +265,26 @@ function add_video(){
 
 function focus_img(){
     let focused_imgs = document.querySelectorAll(".focused_img");
-    for (let item of focused_imgs){
-        item.classList.remove("focused_img");
+    let edit_btns_arr = document.querySelectorAll(".edit_button");
+    let flag = true;
+    for (i of edit_btns_arr){
+        if (event.target == i){
+            flag = false;
+            break;
+        }
+    }
+    if (flag){
+        for (i of focused_imgs){
+            i.classList.remove("focused_img");
+        }
     }
     if (this.tagName == "IMG"){
         this.parentElement.classList += " focused_img";
-        let old_div = document.querySelector(".news__div");             // получить старый скрытый блок
-        if (old_div != null){   // если он получен
-            old_div.remove();   // то удалить его
-        }
     }
 }
 
 function choose_block(){
-    let focused_item = document.querySelector(".news__item:focus");
+    let focused_item = document.querySelector(".news__editable:focus");
     if (focused_item == null){
         focused_item = document.querySelector(".focused_img");
     }
@@ -206,13 +297,10 @@ function delete_block(){
         alert("Выбери блок для удаления")   // предупреждение
     }
     else {                      // иначе
-        focused_item.remove();  // удалить блок с фокусом
-        let old_div = document.querySelector(".news__div"); // получить скрытый блок для блока с фокусом
-        if (old_div != null){   // если он есть
-            if (old_div.previousElementSibling != null) // если есть предыдущий блок
-                old_div.previousElementSibling.focus(); // то уставновить на него фокус
-            old_div.remove();   // то удалить его
+        if (focused_item.previousElementSibling != null){
+            focused_item.previousElementSibling.focus();
         }
+        focused_item.remove();  // удалить блок с фокусом
     }
 }
 
@@ -232,7 +320,11 @@ function up_block(){
         //     focused_item.classList += " focused_img";
         // }
         // else
-            focused_item.focus();
+        focused_item.focus();
+        if (focused_item.classList[0] == "news_img_wrapper"){
+            focused_item.classList += " focused_img";
+        }
+        // focus_img();
     }
 }
 
@@ -246,182 +338,236 @@ function down_block(){
             let next_elem = focused_item.nextElementSibling.nextElementSibling;
             parent_elem.insertBefore(focused_item, next_elem);
             focused_item.focus();
+            // focus_img();
         }
     }
 }
-
-function new_div(){
-    const news_field = document.querySelector(".news_field");   // поле с новостью
-    let old_div = document.querySelector(".news__div");             // получить старый скрытый блок
-    if (old_div != null){   // если он получен
-        old_div.remove();   // то удалить его
-    }
-    let main_class = this.classList[0]; // получить класс для нового скрытого блока (первый в списке классов блока textarea с фокусом)
-    let new_div = document.createElement('div');    // создать новый скрытый блок
-    new_div.classList = main_class + " news__div ";  // с собственным классом и таким же классом как у teaxtarea с фокусом
-    new_div.innerText = this.value; // новому скрытому блоку присвоить значение текста teaxtarea с фокусом
-    news_field.append(new_div);     // вставить новый скрытый блок в поле новости
-}
-
-
-function write(){   // при вводе в textarea
-    let news_div = document.querySelector(".news__div");    // получить скрытый блок
-    let value = this.value; // получить текст из textarea
-    let new_value = "";     // новая строка для записи
-    for (let i of value){
-        if (i == " "){
-            new_value += "&nbsp";
-        }
-        else{
-            new_value += i;
-        }
-    }
-    news_div.innerText = new_value;
-
-    if ((this.value.endsWith("\n")) | (this.value.endsWith("\n "))) // если нажат enter или enter и пробел 
-        news_div.innerText = new_value + "<br>";  // то в конец строки добавить \n (чтобы не было пустой строки)
-    else                                // иначе
-        news_div.innerText = new_value; // вставить новый текст в скрытый блок
-    
-    let div_height = news_div.getBoundingClientRect().height;   // получить высоту скрытого блока
-    
-    if (div_height > 0){                        // если высота больше 0
-        this.style.height = div_height + "px";  // то присвоить такую же высоту для textarea
-    }
-    else {                          // иначе
-        this.style.height = null;   // сбросить стиль высоты для textarea
-    }
-}
-
-document.querySelector(".file_manager__close").addEventListener('click', function(){
-    document.querySelector(".file_manager").classList.remove("file_manager_active");
-});
-
-
 
 function edit_all(){
     create_edit_panel();
+    // if_focused();
+    window.addEventListener('click', if_focused);
     edit_btn.setAttribute("disabled", "true");
-
     const news_section = document.querySelector(".news");
     const saved_news = document.querySelector(".saved_news");
     let news_field = document.createElement("div");
-
     news_field.classList = "news_field";
     news_section.append(news_field);
-
     if (saved_news != null){
-        const news_items = saved_news.childNodes;
+        const news_items = saved_news.children;
+        console.log(news_items);
         for (item of news_items){
-            if (item.tagName == "H3"){
-                let new_item = document.createElement("textarea");
-                new_item.classList = item.classList;
-                new_item.value = item.innerText;
-                new_item.name = "h3";
-                new_item.style.height = item.getBoundingClientRect().height + "px";
-                new_item.addEventListener('focus', new_div);            // добавить прослушку на фокус нового блока textarea
-                new_item.addEventListener('input', write);              // добавить прослушку на ввод текста в новый блок textarea           
+            if ((item.tagName == "H3") || (item.tagName == "H4") || (item.tagName == "P") || (item.tagName == "OL")){
+                item.contentEditable = true;
+                let new_item = item.cloneNode(true);
+                new_item.classList.add("news__editable");
                 news_field.append(new_item);
-            }
-            else if (item.tagName == "H4"){
-                let new_item = document.createElement("textarea");
-                new_item.classList = item.classList;
-                new_item.value = item.innerText;
-                new_item.name = "h4";
-                new_item.style.height = item.getBoundingClientRect().height + "px";
-                new_item.addEventListener('focus', new_div);            // добавить прослушку на фокус нового блока textarea
-                new_item.addEventListener('input', write);              // добавить прослушку на ввод текста в новый блок textarea
-                news_field.append(new_item);
-            }
-            else if (item.tagName == "P"){
-                let new_item = document.createElement("textarea");
-                new_item.classList = item.classList;
-                new_item.value = item.innerText;
-                new_item.name = "p";
-                new_item.style.height = item.getBoundingClientRect().height + "px";
-                new_item.addEventListener('focus', new_div);            // добавить прослушку на фокус нового блока textarea
-                new_item.addEventListener('input', write);              // добавить прослушку на ввод текста в новый блок textarea
-                news_field.append(new_item);
-            }
-            else if (item.classList == "news_img_wrapper"){
+                }
+            else if (item.classList.contains('news_img_wrapper')){
                 let new_item = item.cloneNode(true);
                 new_item.firstChild.addEventListener('click', focus_img);
                 news_field.append(new_item);
             }
         }
-
         saved_news.remove();
-
     }
-
 }
 
-function preview(){
-    const news_field = document.querySelector(".news_field");   // поле с новостью
-    let edit_panel = document.querySelector(".edit_panel");
-    edit_panel.remove();
-
-    if (document.querySelector(".news__div") != null)
-        document.querySelector(".news__div").remove();
+function save_all(){
+    let news_field = document.querySelector(".news_field");   // поле с новостью
+    if (news_field == null){
+        news_field = document.querySelector('.saved_news');
+    }
+    const edit_panel = document.querySelector(".edit_panel");
+    if (edit_panel != null)
+        edit_panel.remove();
 
     const news_section = document.querySelector(".news");
+    const news_items = news_field.childNodes;
     let saved_news = document.createElement("div");
     saved_news.classList = "saved_news";
     
-    const news_items = news_field.childNodes;
     for (item of news_items){
-        if (item.name == "h3"){
-            let new_item = document.createElement("h3");
-            new_item.classList = item.classList;
-            new_item.innerHTML = norm_string(item.value);
-            saved_news.append(new_item);
-        }
-        else if (item.name == "h4"){
-            let new_item = document.createElement("h4");
-            new_item.classList = item.classList;
-            new_item.innerHTML = norm_string(item.value);
-            saved_news.append(new_item);
-        }
-        else if (item.name == "p"){
-            let new_item = document.createElement("p");
-            new_item.classList = item.classList;
-            new_item.innerHTML = norm_string(item.value);
+        if ((item.tagName == "H3") || (item.tagName == "H4") || (item.tagName == "P") || (item.tagName == "OL")){
+            item.classList.remove("news__editable");
+            item.contentEditable = false;
+            let new_item = item.cloneNode(true);
             saved_news.append(new_item);
         }
         else if (item.classList[0] == "news_img_wrapper"){
             let new_item = item.cloneNode(true);
+            new_item.firstChild.removeEventListener('click', focus_img);
             saved_news.append(new_item);
         }
-    }
+}
     news_field.remove();
     news_section.append(saved_news);
 
     edit_btn.removeAttribute("disabled");
+    document.getElementById("formContent").value = saved_news.innerHTML;
 }
 
-function norm_string(str){
-    let new_str = "";
-    for (let i of str){
-        if (i == " "){
-            new_str += "&nbsp";
-        }
-        else if (i == "\n"){
-            new_str += "<br>";
-        }
-        else{
-            new_str += i;
+function if_focused(){
+    let focused_item = choose_block();     // то получить элемент, на котором стоит фокус
+    // console.log(focused_item);
+    if (focused_item == null){
+        let align_btn_arr = document.querySelectorAll(".edit_button");
+        for (i of align_btn_arr){
+            i.setAttribute("disabled", "true");
         }
     }
-    return new_str;
+    else if ((focused_item.tagName == "H3") || (focused_item.tagName == "H4") || (focused_item.tagName == "P") || (focused_item.tagName == "OL")){
+        let align_img_btn_arr = document.querySelectorAll(".align_img");
+        for (i of align_img_btn_arr){
+            i.setAttribute("disabled", "true");
+        }
+        let align_text_btn_arr = document.querySelectorAll(".align_text");
+        for (i of align_text_btn_arr){
+            i.removeAttribute("disabled");
+        }
+    }
+    else if (focused_item.classList[0] == "news_img_wrapper"){
+        let align_text_btn_arr = document.querySelectorAll(".align_text");
+        for (i of align_text_btn_arr){
+            i.removeAttribute("disabled");
+        }
+        let align_img_btn_arr = document.querySelectorAll(".align_img");
+        for (i of align_img_btn_arr){
+            i.removeAttribute("disabled");
+        }
+    }
 }
 
-function save_all(){
-    preview();
-    let saved_news = document.querySelector(".saved_news");
-    document.getElementById("formContent").value = saved_news.innerHTML;
-    // console.log(document.getElementById("formContent").value);
+function align_left(){
+    let focused_item = choose_block();     // то получить элемент, на котором стоит фокус
+    if (focused_item.classList.contains('focused_img')){
+        focused_item.classList.remove('img_left');
+        focused_item.classList.remove('img_center');
+        focused_item.classList.remove('img_right');
+        if (focused_item.classList.contains('img_in_text_left')){
+        }
+        else if (focused_item.classList.contains('img_in_text_right')){
+            focused_item.classList.remove('img_in_text_right');
+            focused_item.classList.add('img_in_text_left');
+        }
+        else if (focused_item.classList.contains('img_out_text')){
+            focused_item.classList.add('img_left');
+        }
+    }
+    else{
+        focused_item.classList.remove('text_left');
+        focused_item.classList.remove('text_center');
+        focused_item.classList.remove('text_right');
+        focused_item.classList.remove('text_width');
+        focused_item.classList.add('text_left');
+    }
 }
 
+function align_center(){
+    let focused_item = choose_block();     // то получить элемент, на котором стоит фокус
+    if (focused_item.classList.contains('focused_img')){
+        if (focused_item.classList.contains('img_in_text_left')){
+            alert('Нельзя выровнять по центру пока картинка обтекается текстом');
+        }
+        else if (focused_item.classList.contains('img_in_text_right')){
+            alert('Нельзя выровнять по центру пока картинка обтекается текстом');
+        }
+        else if (focused_item.classList.contains('img_out_text')){
+            focused_item.classList.remove('img_left');
+            focused_item.classList.remove('img_center');
+            focused_item.classList.remove('img_right');
+            focused_item.classList.add('img_center');
+        }
+    }
+    else{
+        focused_item.classList.remove('text_left');
+        focused_item.classList.remove('text_center');
+        focused_item.classList.remove('text_right');
+        focused_item.classList.remove('text_width');
+        focused_item.classList.add('text_center');
+    }
+}
+
+function align_right(){
+    let focused_item = choose_block();     // то получить элемент, на котором стоит фокус
+    if (focused_item.classList.contains('focused_img')){
+        focused_item.classList.remove('img_left');
+        focused_item.classList.remove('img_center');
+        focused_item.classList.remove('img_right');
+        if (focused_item.classList.contains('img_in_text_left')){
+            focused_item.classList.remove('img_in_text_left');
+            focused_item.classList.add('img_in_text_right');
+        }
+        else if (focused_item.classList.contains('img_in_text_right')){
+        }
+        else if (focused_item.classList.contains('img_out_text')){
+            focused_item.classList.add('img_right');
+        }
+    }
+    else{
+        focused_item.classList.remove('text_left');
+        focused_item.classList.remove('text_center');
+        focused_item.classList.remove('text_right');
+        focused_item.classList.remove('text_width');
+        focused_item.classList.add('text_right');
+    }
+}
+
+function align_width(){
+    let focused_item = choose_block();     // то получить элемент, на котором стоит фокус
+    if (focused_item.classList.contains('focused_img')){
+        alert('Картинку нельзя выровнять по ширине');
+    }
+    else{
+        focused_item.classList.remove('text_left');
+        focused_item.classList.remove('text_center');
+        focused_item.classList.remove('text_right');
+        focused_item.classList.remove('text_width');
+        focused_item.classList.add('text_width');
+    }
+}
+
+function img_in_text(){
+    let focused_item = choose_block();     // то получить элемент, на котором стоит фокус
+    if (focused_item.classList.contains('focused_img')){
+        if (focused_item.classList.contains('img_left')){
+            focused_item.classList.remove('img_out_text');
+            focused_item.classList.remove('img_in_text_right');
+            focused_item.classList.remove('img_left');
+            focused_item.classList.add('img_in_text_left');
+        }
+        else if (focused_item.classList.contains('img_center')){
+            alert('Нельзя сделать обтекание по центру, сначала выровняй по левому или правому краю')
+        }
+        else if (focused_item.classList.contains('img_right')){
+            focused_item.classList.remove('img_out_text');
+            focused_item.classList.remove('img_in_text_left');
+            focused_item.classList.remove('img_right');
+            focused_item.classList.add('img_in_text_right');
+        }
+    }
+    else{}
+}
+
+function img_out_text(){
+    let focused_item = choose_block();     // то получить элемент, на котором стоит фокус
+    if (focused_item.classList.contains('focused_img')){
+        if (focused_item.classList.contains('img_in_text_right')){
+            focused_item.classList.remove('img_in_text_right');
+            focused_item.classList.remove('img_in_text_left');
+            focused_item.classList.add('img_right');
+            focused_item.classList.add('img_out_text');
+        }
+        else if (focused_item.classList.contains('img_in_text_left')){
+            focused_item.classList.remove('img_in_text_right');
+            focused_item.classList.remove('img_in_text_left');
+            focused_item.classList.add('img_left');
+            focused_item.classList.add('img_out_text');
+        }
+
+    }
+    else{}
+}
 
 
 //----------------------------------Женек, раскоменть!!!

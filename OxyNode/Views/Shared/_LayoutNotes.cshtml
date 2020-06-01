@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>@ViewBag.Title</title>
+
+        <!-- Подключение стилей через частичное представление-->
+        <partial name="Partial/_Styles" />
+        <link href="~/lib/OxyNode/css/notes.css" rel="stylesheet" />
+
+    </head>
+
+    <body>
+        <partial name="Partial/_Header" />
+
+        @RenderBody()
+
+        <partial name="Partial/_Footer" />
+
+        <partial name="Partial/_Scripts" />
+    </body>
+</html>
