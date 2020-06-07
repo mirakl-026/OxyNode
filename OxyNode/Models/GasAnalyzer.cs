@@ -18,27 +18,43 @@ namespace OxyNode.Models
         public string Id { get; set; }
 
         // Название
-        public string ga_Name { get; set; }
+        public string Name { get; set; }
 
         // Производитель
-        public string ga_Manufacturer { get; set; }
+        public string Manufacturer { get; set; }
 
         // Срок поставки
-        public string ga_DeliveryTime { get; set; }
+        public string DeliveryTime { get; set; }
+
+        // тип газонализатора - переносной / стационарный
+        public string Type { get; set; }
+
+        // сфера применения
+        public string ScopeOfApplication { get; set; }
 
         // Описание (html5)
-        public string ga_DescriptionHTML5 { get; set; }
+        public string DescriptionHTML5 { get; set; }
 
         // список - ссылки на картинки
-        public List<string> ga_Images { get; set; }
+        public List<string> Images { get; set; }
 
         // список - ссылки на аналоги
-        public List<string> ga_Analogues { get; set; }
+        public List<string> Analogues { get; set; }
+
+        // список - рабоче вещества
+        public List<string> Substances { get; set; }
 
         // список - <K,V> - характеристики
-        public Dictionary<string, string> ga_Values { get; set}
+        public Dictionary<string, string> Values { get; set; }
 
         // Цена
-        public decimal ga_Price { get; set; }
+        public decimal Price { get; set; }
     }
+
+    // в будущем для оптимизации - возможно надо будет использовать enum
+    // public enum GasAnalyzerType
+    // {
+    //     Portable,
+    //     Stationary
+    // }
 }
