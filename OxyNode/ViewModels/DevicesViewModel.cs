@@ -8,10 +8,10 @@ using OxyNode.Models;
 // вьюмодель для газоанализаторов
 namespace OxyNode.ViewModels
 {
-    public class GasAnalyzersViewModel
+    public class DevicesViewModel
     {
         // список объектов - газоанализаторов
-        public List<GasAnalyzer> gasAnalyzers { get; set; }
+        public List<Device> devices { get; set; }
 
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 // дополнитеьная сущность - фильтр для выборки газоанализаторов из БД
 namespace OxyNode.Infrastructure.Aditional
 {
-    public class GasAnalyzerFilter
+    public class DeviceFilter
     {
         // поля для фильтрации
         // фильтр по имени

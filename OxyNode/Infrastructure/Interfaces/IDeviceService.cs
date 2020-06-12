@@ -9,36 +9,36 @@ using OxyNode.Infrastructure.Aditional;
 // сервис для манипуляциями с газоанализаторами
 namespace OxyNode.Infrastructure.Interfaces
 {
-    public interface IGasAnalyzerService 
+    public interface IDeviceService 
     {
         // получить список всех газоанализаторов
-        public Task<List<GasAnalyzer>> GetAllGasAnalyzers();
+        public Task<List<Device>> GetAllDevices();
 
         // получить все газоанализаторы по фильтру
-        public Task<List<GasAnalyzer>> GetAllGasAnalyzersFiltered(GasAnalyzerFilter filter);
+        public Task<List<Device>> GetAllDevicesFiltered(DeviceFilter filter);
 
         // получить страницу газоанализаторов
-        public Task<List<GasAnalyzer>> GetPageOfGasAnalyzers(int pageNumber, int pageSize);
+        public Task<List<Device>> GetPageOfDevices(int pageNumber, int pageSize);
 
         // получить страницу газоанализаторов по фильтру
-        public Task<List<GasAnalyzer>> GetPageOfGasAnalyzersFiltered(int pageNumber, int pageSize, GasAnalyzerFilter filter);
+        public Task<List<Device>> GetPageOfDevicesFiltered(int pageNumber, int pageSize, DeviceFilter filter);
 
         // получить кол-во газоанализаторов в БД
-        public Task<long> GetGasAnalyzersCount();
+        public Task<long> GetDevicesCount();
 
 
         #region CRUD
         // Create
-        public Task CreateGasAnalyzer(GasAnalyzer ga);
+        public Task CreateDevice(Device dev);
 
         // Read
-        public Task<GasAnalyzer> ReadGasAnalyzer(string id);
+        public Task<Device> ReadDevice(string id);
 
         // update
-        public Task UpdateGasAnalyzer(GasAnalyzer newGa);
+        public Task UpdateDevice(Device newDev);
 
         // delete
-        public Task DeleteGasAnalyzer(string id);
+        public Task DeleteDevice(string id);
         #endregion
     }
 }

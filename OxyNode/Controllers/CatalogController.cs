@@ -15,10 +15,10 @@ namespace OxyNode.Controllers
 {
     public class CatalogController : Controller
     {
-        private IGasAnalyzerService _db;
+        private IDeviceService _db;
         private int pageSize = 6;
 
-        public CatalogController(IGasAnalyzerService context)
+        public CatalogController(IDeviceService context)
         {
             _db = context;
         }
@@ -27,9 +27,9 @@ namespace OxyNode.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var gasAnalyzers_vm = new GasAnalyzersViewModel();
-            gasAnalyzers_vm.gasAnalyzers = await _db.GetAllGasAnalyzers();
-            return View(gasAnalyzers_vm);
+            var dvm = new DevicesViewModel();
+            dvm.devices = await _db.GetAllDevices();
+            return View(dvm);
         }
     }
 }

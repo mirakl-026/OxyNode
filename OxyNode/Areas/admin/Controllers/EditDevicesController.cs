@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace OxyNode.Areas.admin.Controllers
 {
     [Area("admin")]
-    public class EditGasAnalyzersController : Controller
+    public class EditDevicesController : Controller
     {
         public IActionResult Index()
         {

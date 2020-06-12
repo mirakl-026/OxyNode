@@ -15,12 +15,12 @@ using MongoDB.Bson.Serialization;
 
 namespace OxyNode.Services.MongoDB
 {
-    public class MDB_GasAnalyzerService : IGasAnalyzerService
+    public class MDB_DeviceService : IDeviceService
     {
 
-        private IMongoCollection<GasAnalyzer> GasAnalyzerCollection;
+        private IMongoCollection<Device> DeviceCollection;
 
-        public MDB_GasAnalyzerService()
+        public MDB_DeviceService()
         {
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";
@@ -33,24 +33,24 @@ namespace OxyNode.Services.MongoDB
             IMongoDatabase db = client.GetDatabase(connection.DatabaseName);
 
             // обращаемся к коллекции статей NoteCollection
-            GasAnalyzerCollection = db.GetCollection<GasAnalyzer>("GasAnalyzerCollection");
+            DeviceCollection = db.GetCollection<Device>("DeviceCollection");
 
         }
 
 
         // получить все газоанализаторы
-        public async Task<List<GasAnalyzer>> GetAllGasAnalyzers()
+        public async Task<List<Device>> GetAllDevices()
         {
-            return await GasAnalyzerCollection.Find(new BsonDocument()).ToListAsync();
+            return await DeviceCollection.Find(new BsonDocument()).ToListAsync();
         }
 
 
         // полчить все газоанализаторы по фильтру
-        public async Task<List<GasAnalyzer>> GetAllGasAnalyzersFiltered(GasAnalyzerFilter filter)
+        public async Task<List<Device>> GetAllDevicesFiltered(DeviceFilter filter)
         {
-            var fb = Builders<GasAnalyzer>.Filter;
+            var fb = Builders<Device>.Filter;
 
-            FilterDefinition<GasAnalyzer> f =
+            FilterDefinition<Device> f =
                 fb.Eq("Name", filter.ByName) |
                 fb.Eq("Manufacturer", filter.ByManufacturer) |
                 fb.Eq("ScopeOfApplication", filter.ByScopeOfApplication) |
@@ -61,26 +61,26 @@ namespace OxyNode.Services.MongoDB
                 f |= fb.All("Substance", filter.BySubstance);
             }
 
-            return await GasAnalyzerCollection.Find(f).ToListAsync();
+            return await DeviceCollection.Find(f).ToListAsync();
         }
 
 
         // получить страницу газоанализаторов
-        public async Task<List<GasAnalyzer>> GetPageOfGasAnalyzers(int pageNumber, int pageSize)
+        public async Task<List<Device>> GetPageOfDevices(int pageNumber, int pageSize)
         {
             // выборка по номеру страницы - 
             // кол-во газоанализаторов/pageSize - кол-во возможных страниц
             // limit - pageSize, skip = (pageNumber-1)*pageSize
-            return await GasAnalyzerCollection.Find(new BsonDocument()).Skip((pageNumber - 1) * pageSize).Limit(pageSize).ToListAsync();
+            return await DeviceCollection.Find(new BsonDocument()).Skip((pageNumber - 1) * pageSize).Limit(pageSize).ToListAsync();
         }
 
 
         // получить страницу газоанализаторов с учётом фильтра
-        public async Task<List<GasAnalyzer>> GetPageOfGasAnalyzersFiltered(int pageNumber, int pageSize, GasAnalyzerFilter filter)
+        public async Task<List<Device>> GetPageOfDevicesFiltered(int pageNumber, int pageSize, DeviceFilter filter)
         {
-            var fb = Builders<GasAnalyzer>.Filter;
+            var fb = Builders<Device>.Filter;
 
-            FilterDefinition<GasAnalyzer> f =
+            FilterDefinition<Device> f =
                 fb.Eq("Name", filter.ByName) |
                 fb.Eq("Manufacturer", filter.ByManufacturer) |
                 fb.Eq("ScopeOfApplication", filter.ByScopeOfApplication) |
@@ -91,37 +91,37 @@ namespace OxyNode.Services.MongoDB
                 f |= fb.All("Substance", filter.BySubstance);
             }
 
-            return await GasAnalyzerCollection.Find(f).Skip((pageNumber - 1) * pageSize).Limit(pageSize).ToListAsync();
+            return await DeviceCollection.Find(f).Skip((pageNumber - 1) * pageSize).Limit(pageSize).ToListAsync();
         }
 
 
         // получить кол-во газоанализаторов в БД
-        public async Task<long> GetGasAnalyzersCount()
+        public async Task<long> GetDevicesCount()
         {
-            return await GasAnalyzerCollection.CountDocumentsAsync(new BsonDocument());
+            return await DeviceCollection.CountDocumentsAsync(new BsonDocument());
         }
 
 
 
         #region CRUD
-        public async Task CreateGasAnalyzer(GasAnalyzer ga)
+        public async Task CreateDevice(Device dev)
         {
-            await GasAnalyzerCollection.InsertOneAsync(ga);
+            await DeviceCollection.InsertOneAsync(dev);
         }
 
-        public async Task<GasAnalyzer> ReadGasAnalyzer(string id)
+        public async Task<Device> ReadDevice(string id)
         {
-            return await GasAnalyzerCollection.Find(new BsonDocument("_id", new ObjectId(id))).FirstOrDefaultAsync();
+            return await DeviceCollection.Find(new BsonDocument("_id", new ObjectId(id))).FirstOrDefaultAsync();
         }
 
-        public async Task UpdateGasAnalyzer(GasAnalyzer newGa)
+        public async Task UpdateDevice(Device newDev)
         {
-            await GasAnalyzerCollection.ReplaceOneAsync(new BsonDocument("_id", new ObjectId(newGa.Id)), newGa);
+            await DeviceCollection.ReplaceOneAsync(new BsonDocument("_id", new ObjectId(newDev.Id)), newDev);
         }
 
-        public async Task DeleteGasAnalyzer(string id)
+        public async Task DeleteDevice(string id)
         {
-            await GasAnalyzerCollection.DeleteOneAsync(new BsonDocument("_id", new ObjectId(id)));
+            await DeviceCollection.DeleteOneAsync(new BsonDocument("_id", new ObjectId(id)));
         }
         #endregion
 

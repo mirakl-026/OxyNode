@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-// модель газоанализатора
+// модель прибора
 namespace OxyNode.Models
 {
-    public class GasAnalyzer
+    public class Device
     {
         [BsonRepresentation(BsonType.ObjectId)]
         [HiddenInput(DisplayValue = false)]
@@ -26,7 +26,7 @@ namespace OxyNode.Models
         // Срок поставки
         public string DeliveryTime { get; set; }
 
-        // тип газонализатора - переносной / стационарный
+        // тип прибора - переносной / стационарный
         public string Type { get; set; }
 
         // сфера применения
@@ -52,7 +52,7 @@ namespace OxyNode.Models
     }
 
     // в будущем для оптимизации - возможно надо будет использовать enum
-    // public enum GasAnalyzerType
+    // public enum DeviceType
     // {
     //     Portable,
     //     Stationary
