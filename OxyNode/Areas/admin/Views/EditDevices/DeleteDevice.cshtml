@@ -1,0 +1,16 @@
+﻿@model OxyNode.Models.Device
+
+@{
+    Layout = "_LayoutAdminWithEditor";
+    ViewData["Title"] = "Admin | Devices | Delete";
+}
+
+<h4>Удаление прибора</h4>
+<hr />
+
+<p>Вы точно хотите удалить прибор? @Model.Id</p>
+
+<form asp-area="admin" asp-controller="EditDevices" asp-action="DeleteDeviceConfirmed" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
+    <input type="submit" value="Удалить">
+    <a asp-area="admin" asp-controller="EditDevices" asp-action="Index">Отмена</a>
+</form>

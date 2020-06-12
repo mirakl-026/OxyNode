@@ -1,0 +1,57 @@
+﻿@model OxyNode.Models.Device
+@using System.Web;
+
+@{
+    Layout = "_LayoutAdminWithEditor";
+    ViewData["Title"] = "Admin | Devices | Update";
+}
+
+<h4>Изменение прибора</h4>
+<hr />
+
+<form asp-area="admin" asp-controller="EditDevices" asp-action="UpdateDevice" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <table>
+        <tr>
+            <td><label asp-for="Name" class="control-label"></label></td>
+            <td><input asp-for="Name" value="@Model.Name" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Manufacturer" class="control-label"></label></td>
+            <td><input asp-for="Manufacturer" value="@Model.Manufacturer" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="DeliveryTime" class="control-label"></label></td>
+            <td><input asp-for="DeliveryTime" value="@Model.DeliveryTime" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Type" class="control-label"></label></td>
+            <td><input asp-for="Type" value="@Model.Type" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="ScopeOfApplication" class="control-label"></label></td>
+            <td><input asp-for="ScopeOfApplication" value="@Model.ScopeOfApplication" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Price" class="control-label"></label></td>
+            <td><input asp-for="Price" value="@Model.Price" class="form-control" /></td>
+        </tr>
+    </table>
+
+
+    <input id="formContent" value="" type="hidden" asp-for="DescriptionHTML5">
+    <input class="edit_panel__button save_button" type="submit" value="Сохранить"><span asp-validation-for="DescriptionHTML5" class="text-danger"></span>
+</form>
+
+@* Частичное представление редактора контента*@
+<partial name="Partial/_ContentEditor" />
+
+<script>
+    var saved_news = document.createElement("div");
+    saved_news.classList = "saved_news";
+
+    var data = "@Html.Raw(HttpUtility.JavaScriptStringEncode(Model.DescriptionHTML5))";
+    saved_news.innerHTML = data;
+    document.querySelector(".news").appendChild(saved_news);
+</script>

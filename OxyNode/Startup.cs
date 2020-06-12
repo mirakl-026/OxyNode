@@ -49,6 +49,8 @@ namespace OxyNode
 
             services.AddTransient<INewsService, MDB_NewsService>();
 
+            services.AddTransient<IDeviceService, MDB_DeviceService>();
+
 
             
             services.AddControllersWithViews();
