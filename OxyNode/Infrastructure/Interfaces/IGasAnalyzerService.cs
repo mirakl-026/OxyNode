@@ -18,10 +18,13 @@ namespace OxyNode.Infrastructure.Interfaces
         public Task<List<GasAnalyzer>> GetAllGasAnalyzersFiltered(GasAnalyzerFilter filter);
 
         // получить страницу газоанализаторов
-        public Task<List<GasAnalyzer>> GetPageOfGasAnalyzers();
+        public Task<List<GasAnalyzer>> GetPageOfGasAnalyzers(int pageNumber, int pageSize);
 
         // получить страницу газоанализаторов по фильтру
-        public Task<List<GasAnalyzer>> GetPageOfGasAnalyzersFiltered(GasAnalyzerFilter filter);
+        public Task<List<GasAnalyzer>> GetPageOfGasAnalyzersFiltered(int pageNumber, int pageSize, GasAnalyzerFilter filter);
+
+        // получить кол-во газоанализаторов в БД
+        public Task<long> GetGasAnalyzersCount();
 
 
         #region CRUD
@@ -32,7 +35,7 @@ namespace OxyNode.Infrastructure.Interfaces
         public Task<GasAnalyzer> ReadGasAnalyzer(string id);
 
         // update
-        public Task UpdateGasAnalyzer(GasAnalyzer new_id);
+        public Task UpdateGasAnalyzer(GasAnalyzer newGa);
 
         // delete
         public Task DeleteGasAnalyzer(string id);
