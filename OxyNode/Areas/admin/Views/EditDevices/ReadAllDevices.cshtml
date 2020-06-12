@@ -1,1 +1,19 @@
-﻿
+﻿@model OxyNode.ViewModels.DevicesViewModel
+
+@{
+    Layout = "_LayoutAdminWithEditor";
+    ViewData["Title"] = "Admin | All Devices";
+}
+
+<h4>Список приборов</h4>
+<hr />
+
+<table>
+    @foreach (var device in Model.devices)
+    {
+        <tr>
+            <td><a asp-area="admin" asp-controller="EditDevices" asp-action="ReadDevice" asp-route-id="@device.Id">@device.Name</a></td>
+            <td><br /></td>
+        </tr>
+    }
+</table>

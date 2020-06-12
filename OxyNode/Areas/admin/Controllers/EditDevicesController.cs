@@ -94,9 +94,9 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteDevice(Device delDev)
+        public async Task<IActionResult> DeleteDeviceConfirmed(string id)
         {
-            await _db.DeleteDevice(delDev.Id);
+            await _db.DeleteDevice(id);
             return RedirectToAction("Index", "EditDevices");
         }
 

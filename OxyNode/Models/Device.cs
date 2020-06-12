@@ -18,21 +18,27 @@ namespace OxyNode.Models
         public string Id { get; set; }
 
         // Название
+        [Display(Name = "Название прибора")]
         public string Name { get; set; }
 
         // Производитель
+        [Display(Name = "Производитель")]
         public string Manufacturer { get; set; }
 
         // Срок поставки
+        [Display(Name = "Срок поставки")]
         public string DeliveryTime { get; set; }
 
         // тип прибора - переносной / стационарный
+        [Display(Name = "Тип")]
         public string Type { get; set; }
 
         // сфера применения
+        [Display(Name = "Сфера применения")]
         public string ScopeOfApplication { get; set; }
 
         // Описание (html5)
+        [Display(Name = "Описание")]
         public string DescriptionHTML5 { get; set; }
 
         // список - ссылки на картинки
@@ -48,6 +54,7 @@ namespace OxyNode.Models
         public Dictionary<string, string> Values { get; set; }
 
         // Цена
+        [Display(Name = "Цена")]
         public decimal Price { get; set; }
     }
 

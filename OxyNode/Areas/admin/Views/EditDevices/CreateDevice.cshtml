@@ -1,1 +1,47 @@
-﻿
+﻿@model OxyNode.Models.Device
+
+@{
+    Layout = "_LayoutAdminWithEditor";
+    ViewData["Title"] = "Admin | Devices | Create";
+}
+
+<h4>Добавление прибора</h4>
+<hr />
+
+<form asp-area="admin" asp-controller="EditDevices" asp-action="CreateDevice" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <table>
+        <tr>
+            <td><label asp-for="Name" class="control-label"></label></td>
+            <td><input asp-for="Name" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Manufacturer" class="control-label"></label></td>
+            <td><input asp-for="Manufacturer" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="DeliveryTime" class="control-label"></label></td>
+            <td><input asp-for="DeliveryTime" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Type" class="control-label"></label></td>
+            <td><input asp-for="Type" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="ScopeOfApplication" class="control-label"></label></td>
+            <td><input asp-for="ScopeOfApplication" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Price" class="control-label"></label></td>
+            <td><input asp-for="Price" class="form-control" /></td>
+        </tr>
+    </table>
+
+
+    <input id="formContent" value="" type="hidden" asp-for="DescriptionHTML5">
+    <input class="edit_panel__button save_button" type="submit" value="Сохранить"><span asp-validation-for="DescriptionHTML5" class="text-danger"></span>
+</form>
+
+@* Частичное представление редактора контента*@
+<partial name="Partial/_ContentEditor" />
