@@ -90,5 +90,14 @@ namespace OxyNode.Areas.admin.Controllers
             return RedirectToAction("ReadAllNews", "EditNews");
         }
         #endregion
+
+        // удалить все новости
+        [HttpGet]
+        public async Task<IActionResult> DeleteAllNews ()
+        {
+            await _db.DeleteAllNewsItems();
+            return RedirectToAction("ReadAllNews", "EditNews");
+        }
+
     }
 }

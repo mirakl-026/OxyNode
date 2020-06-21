@@ -10,7 +10,8 @@ using OxyNode.Models;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
-
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace OxyNode.Services.MongoDB
 {
@@ -18,9 +19,12 @@ namespace OxyNode.Services.MongoDB
     public class MDB_KB_regularDocumentService : IKB_regularDocumentService
     {
         private IMongoCollection<KB_regularDocument> RegularDocumentCollection;
+        private IWebHostEnvironment _appEnvironment;
 
-        public MDB_KB_regularDocumentService()
+        public MDB_KB_regularDocumentService(IWebHostEnvironment appEnvironment)
         {
+            _appEnvironment = appEnvironment;
+
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";
             var connection = new MongoUrlBuilder(connectionString);
@@ -68,5 +72,42 @@ namespace OxyNode.Services.MongoDB
             await RegularDocumentCollection.DeleteOneAsync(new BsonDocument("_id", new ObjectId(id)));
         }
         #endregion
+
+        public async Task DeleteAllRegularDocuments()
+        {
+            // удалить все файлы 
+            var allDocuments = await GetAllRegularDocuments();
+            // ... все иконки
+            foreach (var document in allDocuments)
+            {
+                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + document.rd_IconPath);
+                if (fi.Exists)
+                {
+                    fi.Delete();
+                }
+            }
+
+            // ... сами файлы
+            foreach (var document in allDocuments)
+            {
+                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + document.rd_Path);
+                if (fi.Exists)
+                {
+                    fi.Delete();
+                }
+            }
+
+            // удалить коллекцию в БД
+            // строка подключения к БД
+            string connectionString = "mongodb://localhost:27017/OxyNode";
+            var connection = new MongoUrlBuilder(connectionString);
+
+            // получаем клиента для взаимодействия с БД
+            MongoClient client = new MongoClient(connectionString);
+
+            // получаем доступ к самой БД
+            IMongoDatabase db = client.GetDatabase(connection.DatabaseName);
+            await db.DropCollectionAsync("RegularDocumentCollection");
+        }
     }
 }

@@ -26,7 +26,6 @@ namespace OxyNode.Infrastructure.Interfaces
         // получить кол-во газоанализаторов в БД
         public Task<long> GetDevicesCount();
 
-
         #region CRUD
         // Create
         public Task CreateDevice(Device dev);
@@ -40,5 +39,7 @@ namespace OxyNode.Infrastructure.Interfaces
         // delete
         public Task DeleteDevice(string id);
         #endregion
+
+        public Task DeleteAllDevices();
     }
 }

@@ -35,5 +35,7 @@ namespace OxyNode.Infrastructure.Interfaces
         // Delete
         public Task DeleteQuestion(string id);
         #endregion
+
+        public Task DeleteAllQuestions();
     }
 }

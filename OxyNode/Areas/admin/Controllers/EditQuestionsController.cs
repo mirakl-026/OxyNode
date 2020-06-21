@@ -92,7 +92,13 @@ namespace OxyNode.Areas.admin.Controllers
             return RedirectToAction("GetAllQuestions", "EditQuestions");
         }
 
-        // редактировать вопрос
+        // удалить все вопросы
+        [HttpGet]
+        public async Task<IActionResult> DeleteAllQuestions ()
+        {
+            await _dbQ.DeleteAllQuestions();
+            return RedirectToAction("GetAllQuestions", "EditQuestions");
+        }
 
     }
 }

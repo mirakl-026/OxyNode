@@ -224,5 +224,13 @@ namespace OxyNode.Areas.admin.Controllers
 
         #endregion
 
+        // удалить все файлы сертификатов с сервера
+        [HttpGet]
+        public async Task<IActionResult> DeleteAllAboutSertificates()
+        {
+            await _db_aboutSertificate.DeleteAllAboutSertificates();
+            return RedirectToAction("Index", "Panel");
+        }
+
     }
 }

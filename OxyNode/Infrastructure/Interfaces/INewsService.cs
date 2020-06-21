@@ -35,5 +35,7 @@ namespace OxyNode.Infrastructure.Interfaces
         // Delete
         public Task DeleteNewsItem(string id);
         #endregion
+
+        public Task DeleteAllNewsItems();
     }
 }
