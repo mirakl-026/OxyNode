@@ -28,5 +28,7 @@ namespace OxyNode.Infrastructure.Interfaces
         public Task DeleteIndustrySolution(string id);
 
         #endregion
+
+        public Task DeleteAllIndustrySolutions();
     }
 }

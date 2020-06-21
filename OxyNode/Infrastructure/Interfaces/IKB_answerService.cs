@@ -32,7 +32,6 @@ namespace OxyNode.Infrastructure.Interfaces
         // получить кол-во ответов в БД, готовых к публикации на основной сайт
         public Task<long> GetPublisedAnswersCount();
 
-
         #region CRUD
 
         // Create
@@ -48,5 +47,7 @@ namespace OxyNode.Infrastructure.Interfaces
         public Task DeleteAnswer(string id);
 
         #endregion
+
+        public Task DeleteAllAnswers();
     }
 }

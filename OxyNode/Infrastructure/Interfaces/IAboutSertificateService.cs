@@ -25,5 +25,7 @@ namespace OxyNode.Infrastructure.Interfaces
         public Task DeleteAboutSertificate(string id);
 
         #endregion
+
+        public Task DeleteAllAboutSertificates();
     }
 }

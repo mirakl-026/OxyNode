@@ -28,5 +28,7 @@ namespace OxyNode.Infrastructure.Interfaces
         // Delete
         public Task DeleteRegularDocument(string id);
         #endregion
+
+        public Task DeleteAllRegularDocuments();
     }
 }

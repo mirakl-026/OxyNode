@@ -36,5 +36,7 @@ namespace OxyNode.Infrastructure.Interfaces
         public Task DeleteNote(string id);
 
         #endregion
+
+        public Task DeleteAllNotes();
     }
 }
