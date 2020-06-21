@@ -11,15 +11,19 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace OxyNode.Services.MongoDB
 {
     public class MDB_KB_noteService : IKB_noteService
     {
         private IMongoCollection<KB_note> NoteCollection;
+        private IWebHostEnvironment _appEnvironment;
 
-        public MDB_KB_noteService()
+        public MDB_KB_noteService(IWebHostEnvironment appEnvironment)
         {
+            _appEnvironment = appEnvironment
+
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";
             var connection = new MongoUrlBuilder(connectionString);
@@ -92,7 +96,7 @@ namespace OxyNode.Services.MongoDB
             var allNotes = await GetAllNotes();
             foreach (var note in allNotes)
             {
-                FileInfo fi = new FileInfo(note.note_LinkToPreviewImage);
+                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + note.note_LinkToPreviewImage);
                 if (fi.Exists)
                 {
                     fi.Delete();

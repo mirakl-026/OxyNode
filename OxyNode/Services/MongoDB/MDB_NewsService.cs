@@ -11,6 +11,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 
 // сервис управления новостями
@@ -19,9 +20,12 @@ namespace OxyNode.Services.MongoDB
     public class MDB_NewsService : INewsService
     {
         private IMongoCollection<NewsItem> NewsCollection;
+        private IWebHostEnvironment _appEnvironment;
 
-        public MDB_NewsService()
+        public MDB_NewsService(IWebHostEnvironment appEnvironment)
         {
+            _appEnvironment = appEnvironment;
+
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";
             var connection = new MongoUrlBuilder(connectionString);
@@ -92,7 +96,7 @@ namespace OxyNode.Services.MongoDB
             var allNewsItems = await GetAllNewsItems();
             foreach (var newsItem in allNewsItems)
             {
-                FileInfo fi = new FileInfo(newsItem.news_LinkToPreviewImage);
+                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + newsItem.news_LinkToPreviewImage);
                 if (fi.Exists)
                 {
                     fi.Delete();

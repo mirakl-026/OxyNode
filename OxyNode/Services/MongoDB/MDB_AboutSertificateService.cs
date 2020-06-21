@@ -10,6 +10,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace OxyNode.Services.MongoDB
 {
@@ -17,9 +18,12 @@ namespace OxyNode.Services.MongoDB
     public class MDB_AboutSertificateService : IAboutSertificateService
     {
         private IMongoCollection<AboutSertificate> AboutSertificateCollection;
+        private IWebHostEnvironment _appEnvironment;
 
-        public MDB_AboutSertificateService()
+        public MDB_AboutSertificateService(IWebHostEnvironment appEnvironment)
         {
+            _appEnvironment = appEnvironment;
+
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";
             var connection = new MongoUrlBuilder(connectionString);
@@ -76,7 +80,7 @@ namespace OxyNode.Services.MongoDB
             var allSertificates = await GetAllAboutSertificates();
             foreach (var sertificate in allSertificates)
             {
-                FileInfo fi = new FileInfo(sertificate.SertificatePath);
+                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + sertificate.SertificatePath);
                 if (fi.Exists)
                 {
                     fi.Delete();

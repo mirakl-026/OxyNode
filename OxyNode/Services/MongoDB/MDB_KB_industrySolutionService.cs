@@ -11,15 +11,19 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace OxyNode.Services.MongoDB
 {
     public class MDB_KB_industrySolutionService : IKB_industrySolutionService
     {
         private IMongoCollection<KB_industrySolution> IndustrySolutionCollection;
+        private IWebHostEnvironment _appEnvironment;
 
-        public MDB_KB_industrySolutionService()
+        public MDB_KB_industrySolutionService(IWebHostEnvironment appEnvironment)
         {
+            _appEnvironment = appEnvironment;
+
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";
             var connection = new MongoUrlBuilder(connectionString);
@@ -75,7 +79,7 @@ namespace OxyNode.Services.MongoDB
             // ... все иконки
             foreach (var solution in allSolutions)
             {
-                FileInfo fi = new FileInfo(solution.is_IconPath);
+                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + solution.is_IconPath);
                 if (fi.Exists)
                 {
                     fi.Delete();
@@ -85,7 +89,7 @@ namespace OxyNode.Services.MongoDB
             // ... сами файлы
             foreach (var solution in allSolutions)
             {
-                FileInfo fi = new FileInfo(solution.is_Path);
+                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + solution.is_Path);
                 if (fi.Exists)
                 {
                     fi.Delete();
