@@ -10,7 +10,7 @@ using OxyNode.Models;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
-
+using System.IO;
 
 namespace OxyNode.Services.MongoDB
 {
@@ -85,5 +85,31 @@ namespace OxyNode.Services.MongoDB
             await NoteCollection.DeleteOneAsync(new BsonDocument("_id", new ObjectId(id)));
         }
         #endregion
+
+        public async Task DeleteAllNotes()
+        {
+            // удалить все файлы 
+            var allNotes = await GetAllNotes();
+            foreach (var note in allNotes)
+            {
+                FileInfo fi = new FileInfo(note.note_LinkToPreviewImage);
+                if (fi.Exists)
+                {
+                    fi.Delete();
+                }
+            }
+
+            // удалить коллекцию в БД
+            // строка подключения к БД
+            string connectionString = "mongodb://localhost:27017/OxyNode";
+            var connection = new MongoUrlBuilder(connectionString);
+
+            // получаем клиента для взаимодействия с БД
+            MongoClient client = new MongoClient(connectionString);
+
+            // получаем доступ к самой БД
+            IMongoDatabase db = client.GetDatabase(connection.DatabaseName);
+            await db.DropCollectionAsync("NoteCollection");
+        }
     }
 }

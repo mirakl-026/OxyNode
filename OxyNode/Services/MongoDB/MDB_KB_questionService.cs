@@ -81,5 +81,20 @@ namespace OxyNode.Services.MongoDB
             await QuestionCollection.DeleteOneAsync(new BsonDocument("_id", new ObjectId(id)));
         }
         #endregion
+
+        public async Task DeleteAllQuestions()
+        {
+            // удалить коллекцию в БД
+            // строка подключения к БД
+            string connectionString = "mongodb://localhost:27017/OxyNode";
+            var connection = new MongoUrlBuilder(connectionString);
+
+            // получаем клиента для взаимодействия с БД
+            MongoClient client = new MongoClient(connectionString);
+
+            // получаем доступ к самой БД
+            IMongoDatabase db = client.GetDatabase(connection.DatabaseName);
+            await db.DropCollectionAsync("QuestionCollection");
+        }
     }
 }

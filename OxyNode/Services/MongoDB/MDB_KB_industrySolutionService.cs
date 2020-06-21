@@ -10,6 +10,7 @@ using OxyNode.Models;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
+using System.IO;
 
 namespace OxyNode.Services.MongoDB
 {
@@ -66,5 +67,42 @@ namespace OxyNode.Services.MongoDB
             await IndustrySolutionCollection.DeleteOneAsync(new BsonDocument("_id", new ObjectId(id)));
         }
         #endregion
+
+        public async Task DeleteAllIndustrySolutions()
+        {
+            // удалить все файлы 
+            var allSolutions = await GetAllIndustrySolutions();
+            // ... все иконки
+            foreach (var solution in allSolutions)
+            {
+                FileInfo fi = new FileInfo(solution.is_IconPath);
+                if (fi.Exists)
+                {
+                    fi.Delete();
+                }
+            }
+
+            // ... сами файлы
+            foreach (var solution in allSolutions)
+            {
+                FileInfo fi = new FileInfo(solution.is_Path);
+                if (fi.Exists)
+                {
+                    fi.Delete();
+                }
+            }
+
+            // удалить коллекцию в БД
+            // строка подключения к БД
+            string connectionString = "mongodb://localhost:27017/OxyNode";
+            var connection = new MongoUrlBuilder(connectionString);
+
+            // получаем клиента для взаимодействия с БД
+            MongoClient client = new MongoClient(connectionString);
+
+            // получаем доступ к самой БД
+            IMongoDatabase db = client.GetDatabase(connection.DatabaseName);
+            await db.DropCollectionAsync("IndustrySolutionCollection");
+        }
     }
 }

@@ -10,6 +10,7 @@ using OxyNode.Models;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
+using System.IO;
 
 
 // сервис управления новостями
@@ -84,5 +85,31 @@ namespace OxyNode.Services.MongoDB
             await NewsCollection.DeleteOneAsync(new BsonDocument("_id", new ObjectId(id)));
         }
         #endregion
+        
+        public async Task DeleteAllNewsItems()
+        {
+            // удалить все файлы 
+            var allNewsItems = await GetAllNewsItems();
+            foreach (var newsItem in allNewsItems)
+            {
+                FileInfo fi = new FileInfo(newsItem.news_LinkToPreviewImage);
+                if (fi.Exists)
+                {
+                    fi.Delete();
+                }
+            }
+
+            // удалить коллекцию в БД
+            // строка подключения к БД
+            string connectionString = "mongodb://localhost:27017/OxyNode";
+            var connection = new MongoUrlBuilder(connectionString);
+
+            // получаем клиента для взаимодействия с БД
+            MongoClient client = new MongoClient(connectionString);
+
+            // получаем доступ к самой БД
+            IMongoDatabase db = client.GetDatabase(connection.DatabaseName);
+            await db.DropCollectionAsync("NewsCollection");
+        }
     }
 }
