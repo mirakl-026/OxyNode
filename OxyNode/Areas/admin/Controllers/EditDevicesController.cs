@@ -103,6 +103,11 @@ namespace OxyNode.Areas.admin.Controllers
 
         #endregion
 
-
+        [HttpGet]
+        public async Task<IActionResult> DeleteAllDevices()
+        {
+            await _db.DeleteAllDevices();
+            return RedirectToAction("Index", "EditDevices");
+        }
     }
 }

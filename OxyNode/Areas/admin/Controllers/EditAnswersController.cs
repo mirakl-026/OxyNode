@@ -108,5 +108,14 @@ namespace OxyNode.Areas.admin.Controllers
             //return RedirectToAction("ReadOneAnswer", "EditAnswers", answerId);
             return new JsonResult(a.publishToSite);
         }
+
+
+        // удалить все ответы
+        [HttpGet]
+        public async Task<IActionResult> DeleteAllAnswers()
+        {
+            await _dbA.DeleteAllAnswers();
+            return RedirectToAction("ReadAllAnswers", "EditAnswers");
+        }
     }
 }

@@ -97,5 +97,12 @@ namespace OxyNode.Areas.admin.Controllers
         }
         #endregion
 
+        // удалить все статьи
+        [HttpGet]
+        public async Task<IActionResult> DeleteAllNotes()
+        {
+            await _db.DeleteAllNotes();
+            return RedirectToAction("Index", "Panel");
+        }
     }
 }

@@ -92,7 +92,7 @@ namespace OxyNode.Areas.admin.Controllers
 
                 await _db.CreateRegularDocument(rd);
                 return RedirectToAction("Index", "Panel");
-            }            
+            }
             return View(rd);
         }
 
@@ -218,6 +218,13 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
         #endregion
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteAllRegularDocuments()
+        {
+            await _db.DeleteAllRegularDocuments();
+            return RedirectToAction("Index", "Panel");
+        }
 
     }
 }

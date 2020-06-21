@@ -198,7 +198,7 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
 
-        // удалить файл сертификата с сервера
+        // удалить файл отраслевого решения с сервера
         [HttpGet]
         public async Task<IActionResult> DeleteIndustrySolution(string id)
         {
@@ -219,7 +219,14 @@ namespace OxyNode.Areas.admin.Controllers
 
             return RedirectToAction("Index", "Panel");
         }
-
         #endregion
+
+        // удалить все файлы отраслевых решений
+        [HttpGet]
+        public async Task<IActionResult> DeleteAllIndustrySolutions ()
+        {
+            await _db.DeleteAllIndustrySolutions();
+            return RedirectToAction("Index", "Panel");
+        }
     }
 }

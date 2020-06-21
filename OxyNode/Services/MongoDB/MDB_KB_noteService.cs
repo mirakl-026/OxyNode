@@ -22,7 +22,7 @@ namespace OxyNode.Services.MongoDB
 
         public MDB_KB_noteService(IWebHostEnvironment appEnvironment)
         {
-            _appEnvironment = appEnvironment
+            _appEnvironment = appEnvironment;
 
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";
