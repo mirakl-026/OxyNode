@@ -1,0 +1,90 @@
+﻿@model OxyNode.ViewModels.QAsViewModel
+@using System.Web;
+
+@{
+    ViewData["Title"] = "Admin | QA | Read all questions";
+}
+
+<h3>QA: Все вопросы-ответы</h3>
+<hr />
+
+<div>
+    @foreach (var q in Model.qas)
+    {
+        <p>
+            <div><a asp-area="admin" asp-controller="EditQAs" asp-action="ReadOneQA" asp-route-qaId="@q.Id">QA: @q.Id</a></div>
+            <div>Имя: @q.FullName</div>
+            <div>Адрес: @q.Address </div>
+            <div>E-mail: @q.e_mail</div>
+            <div>
+                Содержание:
+                @q.questionText
+            </div>
+            @if (q.answerText != null)
+            {
+                <div>
+                    Содержание ответа:
+                    @q.answerText
+                </div>
+                @if (q.publishToSite == false)
+                {
+                    <input type="checkbox" id="_publishQA" />
+                }
+                else
+                {
+                    <input type="checkbox" checked id="_publishQA" />
+                }
+                <label for="_publishQA">Опубликовать на сайт</label>
+
+                <script>
+                    var iQA = document.getElementById("_publishQA");
+
+                    iQA.onchange = function () {
+                        var request = new XMLHttpRequest();
+
+                        if (iQA.checked) {
+                            // опубликовать
+                            //console.log(iQA.value);
+                            console.log("опубликовать");
+                            let url = "PublishQA?qaId=" + "@HttpUtility.JavaScriptStringEncode(q.Id)";
+                            request.open("POST", url);
+                            request.send();
+                        }
+                        else {
+                            // скрыть
+                            //console.log(iQA.value);
+                            console.log("скрыть");
+                            let url = "HideQA?qaId=" + "@HttpUtility.JavaScriptStringEncode(q.Id)";
+                            request.open("POST", url);
+                            request.send();
+                        }
+                    }
+                </script>
+            }
+            else
+            {
+                <div>
+                    Содержание ответа:
+                    - ответа нет
+                </div>
+                <div><a asp-area="admin" asp-controller="EditQAs" asp-action="AnsToQuestion" asp-route-qaId="@q.Id">Ответить на вопрос</a></div>
+            }
+
+            <div><a asp-area="admin" asp-controller="EditQAs" asp-action="EditOneQA" asp-route-qaId="@q.Id">Редактировать QA</a></div>
+            <div><a asp-area="admin" asp-controller="EditQAs" asp-action="DeleteQA" asp-route-qaId="@q.Id">Удалить QA</a></div>
+            <br />
+            <br />
+        </p>
+    }
+
+</div>
+
+<hr />
+<div>
+    Страница QA: @Model.currentPageNumber
+</div>
+<div>
+    Всего QA: @Model.qaCount
+</div>
+
+

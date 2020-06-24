@@ -45,8 +45,6 @@ namespace OxyNode.Models
         // KB_answer
         // содержание ответа - текст
         [Display(Name = "Содержание ответа")]
-        [Required(ErrorMessage = "Содержание ответа обязательно", AllowEmptyStrings = false)]
-        [StringLength(500, MinimumLength = 10, ErrorMessage = "Ответ должен быть от 10 до 500 символов")]
         public string answerText { get; set; }
 
         // флаг публикации - если True - ответ виден на сайте

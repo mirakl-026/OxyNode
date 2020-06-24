@@ -65,8 +65,8 @@ namespace OxyNode.Areas.admin.Controllers
         [HttpGet]
         public async Task<IActionResult> AnsToQuestion(string qaId)
         {
-            var q = await _db.ReadQA(qaId);
-            return View(q);
+            var qa = await _db.ReadQA(qaId);
+            return View(qa);
         }
 
         [HttpPost]
