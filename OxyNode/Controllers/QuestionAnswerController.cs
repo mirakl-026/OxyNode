@@ -16,70 +16,57 @@ namespace OxyNode.Controllers
     [Route("KnowledgeBase/{controller}/{action}")]
     public class QuestionAnswerController : Controller
     {
-        private IKB_answerService _dbA;
-        private IKB_questionService _dbQ;
+        private IKB_QAService _db;
         private int pageSize = 6;
-        public QuestionAnswerController(IKB_answerService contextA, IKB_questionService contextQ)
+        public QuestionAnswerController(IKB_QAService context)
         {
-            _dbA = contextA;
-            _dbQ = contextQ;
+            _db = context;
         }
+
 
         // Index - основная страница Вопросов-ответов (первая страница из БД)
         public async Task<IActionResult> Index()
         {
             // вьюмодель для передачи в представления
-            QAViewModel qavm = new QAViewModel();
+            QAsViewModel qavm = new QAsViewModel();
 
             // передача во вьюмодель общего кол-ва ответов на вопросы
-            qavm.qaCount = await _dbA.GetPublisedAnswersCount();
+            qavm.qaCount = await _db.GetPublisedQAsCount();
 
             // номер текущей страницы
             qavm.currentPageNumber = 1;
 
             // сами вопрос-ответы
-            qavm.answers = await _dbA.GetPageOfPublishedAnswers(1, pageSize);
-            qavm.questions = new List<KB_question>();
-            foreach (var ans in qavm.answers)
-            {
-                var q = await _dbQ.ReadQuestion(ans.QuestionId);
-                qavm.questions.Add(q);
-            }
+            qavm.qas = await _db.GetPageOfPublishedQAs(1, pageSize);
 
             return View(qavm);
         }
+
 
         // конкретная страница с несколькими вопросами-ответами
         public async Task<IActionResult> Page(int pageNumber)
         {
             // вьюмодель для передачи в представления
-            QAViewModel qavm = new QAViewModel();
+            QAsViewModel qavm = new QAsViewModel();
 
             // передача во вьюмодель общего кол-ва ответов на вопросы
-            qavm.qaCount = await _dbA.GetPublisedAnswersCount();
+            qavm.qaCount = await _db.GetPublisedQAsCount();
 
             // номер текущей страницы
             qavm.currentPageNumber = pageNumber;
 
             // сами вопрос-ответы
-            qavm.answers = await _dbA.GetPageOfPublishedAnswers(pageNumber, pageSize);
-            foreach (var ans in qavm.answers)
-            {
-                var q = await _dbQ.ReadQuestion(ans.QuestionId);
-                qavm.questions.Add(q);
-            }
+            qavm.qas = await _db.GetPageOfPublishedQAs(pageNumber, pageSize);
 
             return View(qavm);
         }
 
 
         // конкретная страница вопроса - ответа
-        public async Task<IActionResult> ReadQA(string answerId, string questionId)
+        public async Task<IActionResult> ReadQA(string qaId)
         {
             OneQAViewModel oqavm = new OneQAViewModel();
-            oqavm.answer = await _dbA.ReadAnswer(answerId);
-            oqavm.question = await _dbQ.ReadQuestion(questionId);
-
+            oqavm.qa = await _db.ReadQA(qaId);
             return View(oqavm);
         }
 
@@ -91,19 +78,17 @@ namespace OxyNode.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AskQuestion(KB_question question)
+        public async Task<IActionResult> AskQuestion(KB_QA question)
         {
             if(ModelState.IsValid)
             {
                 // если форма заполнениа правильно
                 // добавить вопрос в коллекцию вопросов
-                await _dbQ.CreateQuestion(question);
+                await _db.CreateQA(question);
 
                 return RedirectToAction("Index", "QuestionAnswer");
             }           
             return View(question);
         }
-
-
     }
 }
