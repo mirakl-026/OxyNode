@@ -5,16 +5,13 @@ using System.Threading.Tasks;
 
 using OxyNode.Models;
 
-// модель вопрос-ответ, содержащая и вопросы и ответы - нужна для главного сайта
+// вьюмодель для QA
 namespace OxyNode.ViewModels
 {
-    public class QAViewModel
+    public class QAsViewModel
     {
-        // список вопросов как объектов
-        public List<KB_question> questions { get; set; }
-
-        // список ответов как объектов
-        public List<KB_answer> answers { get; set; }
+        // список QA как объектов
+        public List<KB_QA> qas { get; set; }
 
         // номер текущей страницы вопрос-ответов (смотрится по ответам, у них должен быть флаг публикации true)
         public int currentPageNumber;

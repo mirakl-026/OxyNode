@@ -1,0 +1,51 @@
+﻿@model OxyNode.Models.KB_QA
+@{
+    ViewData["Title"] = "Admin | QA | One question";
+}
+
+<h4> Ответить на вопрос</h4>
+<hr />
+
+<div>
+    <div>Id вопроса: @Model.Id</div>
+    <div>Имя: @Model.FullName</div>
+    <div>Адрес: @Model.Address</div>
+    <div>E-mail: @Model.e_mail</div>
+    <div>
+        Содержание:
+        @Model.questionText
+    </div>
+
+    <a asp-area="admin" asp-controller="EditQAs" asp-action="DeleteQA" asp-route-qaId="@Model.Id">Удалить вопрос-ответ</a>
+    <br />
+    <br />
+</div>
+
+
+<form asp-area="admin" asp-controller="EditQAs" asp-action="AnsToQuestion" method="post">
+    <div>
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+                <input type="hidden" asp-for="FullName" value="@Model.FullName" />
+                <input type="hidden" asp-for="Address" value="@Model.Address" />
+                <input type="hidden" asp-for="e_mail" value="@Model.e_mail" />
+                <input type="hidden" asp-for="questionText" value="@Model.questionText" />
+                <input type="hidden" asp-for="publishToSite" value="@Model.publishToSite" />
+                <table>
+                    <tr>
+                        <td><label asp-for="@Model.answerText" class="control-label"></label></td>
+                        <td><textarea asp-for="@Model.answerText" class="form-control"></textarea><span asp-validation-for="@Model.answerText" class="text-danger"></span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Сохранить" />
+            </div>
+        </div>
+    </div>
+</form>
+

@@ -1,4 +1,4 @@
-﻿@model OxyNode.Models.KB_question
+﻿@model OxyNode.Models.KB_QA
 @{
     ViewData["Title"] = "OxyNode | Question & Answers | Ask question";
 }
@@ -23,7 +23,7 @@
                     </tr>
                     <tr>
                         <td><label asp-for="questionText" class="control-label"></label></td>
-                        <td><textarea asp-for="questionText" class="form-control" ></textarea><span asp-validation-for="questionText" class="text-danger"></span></td>
+                        <td><textarea asp-for="questionText" class="form-control"></textarea><span asp-validation-for="questionText" class="text-danger"></span></td>
                     </tr>
                     <tr>
                         <td><label asp-for="e_mail" class="control-label"></label></td>

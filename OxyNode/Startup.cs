@@ -44,8 +44,9 @@ namespace OxyNode
             
             services.AddTransient<IKB_noteService, MDB_KB_noteService>();
 
-            services.AddTransient<IKB_questionService, MDB_KB_questionService>();
-            services.AddTransient<IKB_answerService, MDB_KB_answerService>();
+            //services.AddTransient<IKB_questionService, MDB_KB_questionService>();
+            //services.AddTransient<IKB_answerService, MDB_KB_answerService>();
+            services.AddTransient<IKB_QAService, MDB_KB_QAService>();
 
             services.AddTransient<INewsService, MDB_NewsService>();
 

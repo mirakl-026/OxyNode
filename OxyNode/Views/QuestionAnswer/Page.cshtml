@@ -1,33 +1,23 @@
-﻿@model OxyNode.ViewModels.QAViewModel
+﻿@model OxyNode.ViewModels.QAsViewModel
 @{
-    ViewData["Title"] = "OxyNode | Qestion & Answers | Page "+Model.currentPageNumber;
+    ViewData["Title"] = "OxyNode | Qestion & Answers | Page " + Model.currentPageNumber;
 }
-
-
 
 
 <div>
     @if (Model.qaCount > 0)
     {
         <table>
-            @for (int i = 0; i < Model.answers.Count; i++)
+            @foreach (var qa in Model.qas)
             {
-                @*<p>
-                        <div style="background-color:beige"><a asp-controller="QuestionAnswer" asp-action="ReadQA" asp-route-id="@Model.questions[i].AnswerId"> @Model.questions[i].FullName спрашивает </a>:
-                        @Model.questions[i].questionText</div>
-
-                        <div style="background-color:lightgreen">Ответ:
-                        @Model.answers[i].answerText</div>
-                    </p>*@
-
                 <tr style="background-color:beige">
                     <td>
-                        <div>@Model.questions[i].FullName,</div>
-                        <div>@Model.questions[i].Address</div>
+                        <div>@qa.FullName,</div>
+                        <div>@qa.Address</div>
                     </td>
                     <td>
-                        <div><a asp-controller="QuestionAnswer" asp-action="ReadQA" asp-route-answerId="@Model.questions[i].AnswerId" asp-route-questionId="@Model.questions[i].Id">Вопрос:</a></div>
-                        <div>@Model.questions[i].questionText</div>
+                        <div><a asp-controller="QuestionAnswer" asp-action="ReadQA" asp-route-qaId="@qa.Id">Вопрос:</a></div>
+                        <div>@qa.questionText</div>
                     </td>
                 </tr>
 
@@ -36,7 +26,7 @@
                     </td>
                     <td>
                         <div>Ответ: </div>
-                        <div>@Model.answers[i].answerText</div>
+                        <div>@qa.answerText</div>
                     </td>
                 </tr>
                 <tr>
