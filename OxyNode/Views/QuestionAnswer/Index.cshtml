@@ -1,0 +1,52 @@
+﻿@model OxyNode.ViewModels.QAsViewModel
+@{
+    ViewData["Title"] = "OxyNode | Question & Answers";
+}
+
+<hr />
+<a asp-controller="QuestionAnswer" asp-action="AskQuestion">Задать вопрос</a>
+
+
+<div>
+    @if (Model.qaCount > 0)
+    {
+        <table>
+            @foreach (var qa in Model.qas)
+            {
+                <tr style="background-color:beige">
+                    <td>
+                        <div>@qa.FullName,</div>
+                        <div>@qa.Address</div>
+                    </td>
+                    <td>
+                        <div><a asp-controller="QuestionAnswer" asp-action="ReadQA" asp-route-qaId="@qa.Id">Вопрос:</a></div>
+                        <div>@qa.questionText</div>
+                    </td>
+                </tr>
+
+                <tr style="background-color:lightgreen">
+                    <td>
+                    </td>
+                    <td>
+                        <div>Ответ: </div>
+                        <div>@qa.answerText</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <br />
+                    </td>
+                </tr>
+
+            }
+        </table>
+    }
+</div>
+
+<div>
+    Страница: @Model.currentPageNumber
+</div>
+<div>
+    Всего QA: @Model.qaCount
+</div>
