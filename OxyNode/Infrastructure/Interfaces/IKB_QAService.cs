@@ -12,13 +12,13 @@ namespace OxyNode.Infrastructure.Interfaces
     public interface IKB_QAService
     {
         // получить все объекты коллекции - QA (нужно для админки)
-        public Task<List<KB_QA>> GetAllQuestions();
+        public Task<List<KB_QA>> GetAllQAs();
 
         // получить страницу QA (pageSize штук)
-        public Task<List<KB_QA>> GetPageOfQuestions(int pageNumber, int pageSize);
+        public Task<List<KB_QA>> GetPageOfQAs(int pageNumber, int pageSize);
 
         // получить кол-во QA в БД
-        public Task<long> GetQuestionsCount();
+        public Task<long> GetQAsCount();
 
 
         // получить все объекты коллекции - QA, с флагом публикации "publishToSite" : true
