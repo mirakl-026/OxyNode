@@ -51,7 +51,7 @@ namespace OxyNode.Services.FileSystem
             }
         }
 
-        public Task DeleteAllAboutSertificates()
+        public void DeleteAllAboutSertificates()
         {
             throw new NotImplementedException();
         }

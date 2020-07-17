@@ -18,8 +18,13 @@ namespace OxyNode.Models
         [HiddenInput(DisplayValue = false)]
         public string Id { get; set; }
 
+
+        [Display(Name = "Заголовок к сертификату")]
+        public string SertificateLabel { get; set; }
+
+
         [Display(Name = "Название файла сертификата")]
-        public string SertificateName { get; set; }
+        public string SertificateFileName { get; set; }
 
 
         [Display(Name = "Путь к файлу сертификата")]

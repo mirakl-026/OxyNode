@@ -117,19 +117,10 @@ namespace OxyNode.Areas.admin.Controllers
                 await _fsContext.AddAboutSertificate(uploadedSertificate);
 
                 // Сохранение в БД
-                string newSertLabel;
-                if (sertificateLabel == null || sertificateLabel.Length == 0)
-                {
-                    newSertLabel = uploadedSertificate.FileName;
-                }
-                else
-                {
-                    newSertLabel = sertificateLabel;
-                }
-
                 AboutSertificate newSertificate = new AboutSertificate()
                 {
-                    SertificateName = newSertLabel,
+                    SertificateLabel = sertificateLabel,
+                    SertificateFileName = uploadedSertificate.FileName,
                     SertificatePath = path
                 };
 
@@ -164,7 +155,7 @@ namespace OxyNode.Areas.admin.Controllers
             var sertificate = await _db_aboutSertificate.ReadAboutSertificate(id);
 
             // удаление файла с сервера
-            _fsContext.DeleteAboutSertificate(sertificate.SertificateName);
+            _fsContext.DeleteAboutSertificate(sertificate.SertificateFileName);
 
             // удаление файла из Бд
             await _db_aboutSertificate.DeleteAboutSertificate(id);
