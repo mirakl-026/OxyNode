@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\resources\aboutSertificates\" />
-    <Folder Include="wwwroot\resources\regularDocumets\" />
+    <Folder Include="wwwroot\resources\regularDocuments\" />
     <Folder Include="wwwroot\resources\industrySolutions\" />
     <Folder Include="wwwroot\resources\images\" />
     <Folder Include="wwwroot\resources\_etc\" />
