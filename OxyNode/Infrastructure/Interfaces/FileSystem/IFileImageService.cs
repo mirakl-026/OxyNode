@@ -9,16 +9,19 @@ namespace OxyNode.Infrastructure.Interfaces.FileSystem
 {
     public interface IFileImageService
     {
+        // получить путь к папке с картинками
+        public string GetFSImagesPath();
+
         // добавить файл картинки на сервер
         public Task AddImage(IFormFile file);
 
         // получить список картинок на сервере
-        public Task<List<string>> GetImagesFilesList();
+        public string[] GetImagesFilesList();
 
         // удалить картинку по имени файла
-        public Task DeleteImage(string fileName);
+        public void DeleteImage(string fileName);
 
         // удалить все картинки
-        public Task DeleteAllImages();
+        public void DeleteAllImages();
     }
 }

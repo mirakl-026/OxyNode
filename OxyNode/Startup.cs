@@ -32,12 +32,15 @@ namespace OxyNode
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // File System
+            services.AddTransient<IFileAboutSertificateService, FS_AboutSertificateService>();
+            services.AddTransient<IFileImageService, FS_ImageService>();
 
+            // Mongo DB
             services.AddTransient<IContactsService, MDB_ContactsService>();
 
             services.AddTransient<IAboutService, MDB_AboutService>();
             services.AddTransient<IAboutSertificateService, MDB_AboutSertificateService>();
-            services.AddTransient<IFileAboutSertificateService, FS_AboutSertificateService>();
           
             services.AddTransient<IKnowledgeBaseService, MDB_KnowledgeBaseService>();
             

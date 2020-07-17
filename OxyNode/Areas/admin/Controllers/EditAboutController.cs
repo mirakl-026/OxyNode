@@ -159,8 +159,6 @@ namespace OxyNode.Areas.admin.Controllers
             return RedirectToAction("Index", "Panel");
         }
 
-        #endregion
-
         // удалить все файлы сертификатов с сервера
         [HttpGet]
         public async Task<IActionResult> DeleteAllAboutSertificates()
@@ -173,6 +171,6 @@ namespace OxyNode.Areas.admin.Controllers
 
             return RedirectToAction("Index", "Panel");
         }
-
+        #endregion
     }
 }
