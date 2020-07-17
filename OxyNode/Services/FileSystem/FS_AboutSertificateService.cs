@@ -53,12 +53,22 @@ namespace OxyNode.Services.FileSystem
 
         public void DeleteAllAboutSertificates()
         {
-            throw new NotImplementedException();
+            // получение списка всех файлов
+            string[] filesPaths = Directory.GetFiles(FullServerAboutSertificatesPath);
+            foreach (var filePath in filesPaths)
+            {
+                // удаление файла сертификата с сервера
+                FileInfo fi = new FileInfo(filePath);
+                if (fi.Exists)
+                {
+                    fi.Delete();
+                }
+            }
         }
 
-        public Task<List<string>> GetAboutSertificatesFilesList()
+        public List<string> GetAboutSertificatesFilesList()
         {
-            throw new NotImplementedException();
+            return Directory.GetFiles(FullServerAboutSertificatesPath).ToList();
         }
     }
 }

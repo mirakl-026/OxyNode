@@ -16,7 +16,7 @@ namespace OxyNode.Infrastructure.Interfaces.FileSystem
         public Task AddAboutSertificate(IFormFile file);
 
         // получить список файлов сертификатов на сервере
-        public Task<List<string>> GetAboutSertificatesFilesList();
+        public List<string> GetAboutSertificatesFilesList();
 
         // удалить файл сертификата по имени файла
         public void DeleteAboutSertificate(string fileName);

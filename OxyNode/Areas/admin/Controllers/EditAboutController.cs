@@ -20,16 +20,12 @@ namespace OxyNode.Areas.admin.Controllers
     {
         // контроллер для редактирования содержимого страницы "О нас"
 
-        private string FilesPath = "/resources/about/sertificates/";
-        private IWebHostEnvironment _appEnvironment;
-
         private IAboutService _db_about;
         private IAboutSertificateService _db_aboutSertificate;
         private IFileAboutSertificateService _fsContext;
 
-        public EditAboutController(IWebHostEnvironment appEnvironment, IAboutService aboutContext, IAboutSertificateService aboutSertificateContext, IFileAboutSertificateService fsContext)
+        public EditAboutController(IAboutService aboutContext, IAboutSertificateService aboutSertificateContext, IFileAboutSertificateService fsContext)
         {
-            _appEnvironment = appEnvironment;
             _db_about = aboutContext;
             _db_aboutSertificate = aboutSertificateContext;
             _fsContext = fsContext;
@@ -169,7 +165,12 @@ namespace OxyNode.Areas.admin.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteAllAboutSertificates()
         {
+            // удалить все файлы
+            _fsContext.DeleteAllAboutSertificates();
+
+            // удалить все элементы коллекции
             await _db_aboutSertificate.DeleteAllAboutSertificates();
+
             return RedirectToAction("Index", "Panel");
         }
 
