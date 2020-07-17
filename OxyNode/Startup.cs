@@ -13,7 +13,9 @@ using Microsoft.Extensions.Hosting;
 //using OxyNode.Services;
 
 using OxyNode.Infrastructure.Interfaces;
+using OxyNode.Infrastructure.Interfaces.FileSystem;
 using OxyNode.Services.MongoDB;
+using OxyNode.Services.FileSystem;
 
 namespace OxyNode
 {
@@ -30,7 +32,11 @@ namespace OxyNode
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // File System
+            services.AddTransient<IFileAboutSertificateService, FS_AboutSertificateService>();
+            services.AddTransient<IFileImageService, FS_ImageService>();
 
+            // Mongo DB
             services.AddTransient<IContactsService, MDB_ContactsService>();
 
             services.AddTransient<IAboutService, MDB_AboutService>();

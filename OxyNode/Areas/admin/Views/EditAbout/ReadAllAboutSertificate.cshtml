@@ -15,10 +15,7 @@
             @foreach (var file in Model)
             {
                 <tr>
-                    <td><a href="@file.SertificatePath">@file.SertificateName</a></td>
-                </tr>
-                <tr>
-                    <td><a asp-area="admin" asp-controller="EditAbout" asp-action="UpdateAboutSertificate" asp-route-id="@file.Id">Обновить файл сертификата</a></td>
+                    <td><a href="@file.SertificatePath">@file.SertificateLabel</a></td>
                 </tr>
                 <tr>
                     <td><a asp-area="admin" asp-controller="EditAbout" asp-action="DeleteAboutSertificate" asp-route-id="@file.Id">Удалить файл сертификата</a></td>

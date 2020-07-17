@@ -14,14 +14,12 @@
             <td>@Model.Id</td>
         </tr>
         <tr>
-            <td>@Model.SertificateName</td>
+            <td>@Model.SertificateLabel</td>
         </tr>
         <tr>
             <td>@Model.SertificatePath</td>
         </tr>
     </table>
-
-    <a asp-area="admin" asp-controller="EditAbout" asp-action="UpdateAboutSertificate" asp-route-id="@Model.Id">Обновить файл сертификата</a>
 }
 
 

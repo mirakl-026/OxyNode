@@ -76,17 +76,6 @@ namespace OxyNode.Services.MongoDB
 
         public async Task DeleteAllAboutSertificates()
         {
-            // удалить все файлы 
-            var allSertificates = await GetAllAboutSertificates();
-            foreach (var sertificate in allSertificates)
-            {
-                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + sertificate.SertificatePath);
-                if (fi.Exists)
-                {
-                    fi.Delete();
-                }
-            }
-
             // удалить коллекцию в БД
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";

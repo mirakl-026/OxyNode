@@ -8,8 +8,11 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
+using OxyNode.Infrastructure.Interfaces.FileSystem;
+
 namespace OxyNode.Areas.admin.Controllers
 {
+    /*
     [Area("admin")]
     public class ImageManagerController : Controller
     {
@@ -59,6 +62,56 @@ namespace OxyNode.Areas.admin.Controllers
             {
                 images[i] = images[i].Substring(_appEnvironment.WebRootPath.Length);
             }
+            return new JsonResult(images);
+        }
+
+
+        // удалить картинку
+
+
+
+        #endregion
+
+    }
+    */
+
+    [Area("admin")]
+    public class ImageManagerController : Controller
+    {
+        private readonly IFileImageService _fsContext;
+
+        public ImageManagerController(IFileImageService fsContext)
+        {
+            _fsContext = fsContext;
+        }
+
+        #region Image load routing
+
+        // загрузить картинку
+        [HttpPost]
+        [RequestSizeLimit(52428800)]
+        public async Task<IActionResult> LoadImage(IFormFile uploadedImage)
+        {
+            if (uploadedImage != null)
+            {
+                // Определение пути 
+                string path = _fsContext.GetFSImagesPath() + uploadedImage.FileName;
+
+                // удаление файла картинки с сервера
+                _fsContext.DeleteImage(uploadedImage.FileName);
+
+                // Сохранение файла на сервере
+                await _fsContext.AddImage(uploadedImage);
+                return new JsonResult(path);
+            }
+            return new JsonResult("");
+        }
+
+        // получить ссылки всех картинок
+        [HttpGet]
+        public IActionResult GetAllImages()
+        {
+            string[] images = _fsContext.GetImagesFilesList();
             return new JsonResult(images);
         }
 

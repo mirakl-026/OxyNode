@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\resources\partial\**" />
+    <Content Remove="wwwroot\resources\partial\**" />
+    <EmbeddedResource Remove="wwwroot\resources\partial\**" />
+    <None Remove="wwwroot\resources\partial\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
     <PackageReference Include="MongoDB.Bson" Version="2.10.3" />
     <PackageReference Include="MongoDB.Driver" Version="2.10.3" />
@@ -13,12 +20,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\resources\about\sertificates\" />
-    <Folder Include="wwwroot\resources\knowledgeBase\notes\" />
-    <Folder Include="wwwroot\resources\knowledgeBase\regularDocuments\" />
-    <Folder Include="wwwroot\resources\knowledgeBase\industrySolutions\" />
-    <Folder Include="wwwroot\resources\partial\" />
+    <Folder Include="wwwroot\resources\aboutSertificates\" />
+    <Folder Include="wwwroot\resources\regularDocumets\" />
+    <Folder Include="wwwroot\resources\industrySolutions\" />
     <Folder Include="wwwroot\resources\images\" />
+    <Folder Include="wwwroot\resources\_etc\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties libman_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
