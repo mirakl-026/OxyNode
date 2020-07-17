@@ -338,8 +338,10 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-/OxyNode/wwwroot/resources/about/sertificates
-/OxyNode/wwwroot/resources/partial
-/OxyNode/wwwroot/resources/knowledgeBase/regularDocuments
-/OxyNode/wwwroot/resources/knowledgeBase/industrySolutions
+
+
+/OxyNode/wwwroot/resources/_etc
+/OxyNode/wwwroot/resources/aboutSertificates
 /OxyNode/wwwroot/resources/images
+/OxyNode/wwwroot/resources/industrySolutions
+/OxyNode/wwwroot/resources/regularDocuments

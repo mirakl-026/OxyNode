@@ -13,7 +13,9 @@ using Microsoft.Extensions.Hosting;
 //using OxyNode.Services;
 
 using OxyNode.Infrastructure.Interfaces;
+using OxyNode.Infrastructure.Interfaces.FileSystem;
 using OxyNode.Services.MongoDB;
+using OxyNode.Services.FileSystem;
 
 namespace OxyNode
 {
@@ -35,6 +37,7 @@ namespace OxyNode
 
             services.AddTransient<IAboutService, MDB_AboutService>();
             services.AddTransient<IAboutSertificateService, MDB_AboutSertificateService>();
+            services.AddTransient<IFileAboutSertificateService, FS_AboutSertificateService>();
           
             services.AddTransient<IKnowledgeBaseService, MDB_KnowledgeBaseService>();
             

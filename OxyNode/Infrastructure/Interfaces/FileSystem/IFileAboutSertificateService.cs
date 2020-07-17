@@ -9,6 +9,9 @@ namespace OxyNode.Infrastructure.Interfaces.FileSystem
 {
     public interface IFileAboutSertificateService
     {
+        // получить путь к папке с файлами
+        public string GetFSAboutSertificatePath();
+
         // добавить файл сертификата на сервер
         public Task AddAboutSertificate(IFormFile file);
 
@@ -16,9 +19,9 @@ namespace OxyNode.Infrastructure.Interfaces.FileSystem
         public Task<List<string>> GetAboutSertificatesFilesList();
 
         // удалить файл сертификата по имени файла
-        public Task DeleteAboutSertificate(string fileName);
+        public void DeleteAboutSertificate(string fileName);
 
         // удалить все файлы сертификатов
-        public Task DeleteAllAboutSertificates();
+        public void DeleteAllAboutSertificates();
     }
 }

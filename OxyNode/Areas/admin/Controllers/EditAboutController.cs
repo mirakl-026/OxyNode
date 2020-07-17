@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+
 using OxyNode.Infrastructure.Interfaces;
+using OxyNode.Infrastructure.Interfaces.FileSystem;
 using OxyNode.Models;
 using OxyNode.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -23,12 +25,14 @@ namespace OxyNode.Areas.admin.Controllers
 
         private IAboutService _db_about;
         private IAboutSertificateService _db_aboutSertificate;
+        private IFileAboutSertificateService _fsContext;
 
-        public EditAboutController(IWebHostEnvironment appEnvironment, IAboutService aboutContext, IAboutSertificateService aboutSertificateContext)
+        public EditAboutController(IWebHostEnvironment appEnvironment, IAboutService aboutContext, IAboutSertificateService aboutSertificateContext, IFileAboutSertificateService fsContext)
         {
             _appEnvironment = appEnvironment;
             _db_about = aboutContext;
             _db_aboutSertificate = aboutSertificateContext;
+            _fsContext = fsContext;
         }
 
         #region Edit "About"
@@ -107,13 +111,10 @@ namespace OxyNode.Areas.admin.Controllers
             if (uploadedSertificate != null)
             {
                 // Определение пути 
-                string path = FilesPath + uploadedSertificate.FileName;
+                string path = _fsContext.GetFSAboutSertificatePath() + uploadedSertificate.FileName;
 
                 // Сохранение файла на сервере
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
-                {
-                    await uploadedSertificate.CopyToAsync(fileStream);
-                }
+                await _fsContext.AddAboutSertificate(uploadedSertificate);
 
                 // Сохранение в БД
                 string newSertLabel;
@@ -138,7 +139,6 @@ namespace OxyNode.Areas.admin.Controllers
             return RedirectToAction("Index", "Panel");
         }
 
-
         // показать файлы сертификатов на сервере
         [HttpGet]
         public async Task<IActionResult> ReadAllAboutSertificate()
@@ -157,64 +157,14 @@ namespace OxyNode.Areas.admin.Controllers
         }
 
 
-        // обновить файл сертификат на сервере
-        [HttpGet]
-        public async Task<IActionResult> UpdateAboutSertificate(string id)
-        {
-            var sertificate = await _db_aboutSertificate.ReadAboutSertificate(id);
-            return View(sertificate);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> UpdateAboutSertificate(string id, IFormFile newSertificate)
-        {
-            if (newSertificate != null)
-            {
-                var currentSertificate = await _db_aboutSertificate.ReadAboutSertificate(id);
-
-                // Определение пути по текущему файлу сертификата
-                string pathToUpdate = currentSertificate.SertificatePath;
-
-                // удаление файла сертификата с сервера
-                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToUpdate);
-                if (fi.Exists)
-                {
-                    fi.Delete();
-                }
-
-                // Определение пути 
-                string path = FilesPath + newSertificate.FileName;
-
-                // Сохранение файла на сервере
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
-                {
-                    await newSertificate.CopyToAsync(fileStream);
-                }
-
-                currentSertificate.SertificatePath = path;
-
-                await _db_aboutSertificate.UpdateAboutSertificate(currentSertificate);
-
-            }
-            return RedirectToAction("Index", "Panel");
-        }
-
-
         // удалить файл сертификата с сервера
         [HttpGet]
         public async Task<IActionResult> DeleteAboutSertificate(string id)
         {
             var sertificate = await _db_aboutSertificate.ReadAboutSertificate(id);
 
-            // Определение пути
-            string pathToDelete = sertificate.SertificatePath;
-
             // удаление файла с сервера
-            FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToDelete);
-            if (fi.Exists)
-            {
-                fi.Delete();
-            }
+            _fsContext.DeleteAboutSertificate(sertificate.SertificateName);
 
             // удаление файла из Бд
             await _db_aboutSertificate.DeleteAboutSertificate(id);
