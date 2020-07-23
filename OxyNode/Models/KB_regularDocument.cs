@@ -27,6 +27,9 @@ namespace OxyNode.Models
         [Display(Name = "Текст ссылки на файл")]
         public string rd_Name { get; set; }
 
+        [Display(Name = "Название файла нормативного документа")]
+        public string rd_FileName { get; set; }
+
         // путь к файлу
         [Display(Name = "Путь к файлу")]
         public string rd_Path { get; set; }
