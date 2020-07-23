@@ -31,10 +31,6 @@ namespace OxyNode.Models
         [Display(Name = "Путь к файлу")]
         public string rd_Path { get; set; }
 
-        // ссылка на иконку файла
-        [Display(Name = "Иконка")]
-        public string rd_IconPath { get; set; }
-
         // цвет поля
         [Display(Name = "Цвет поля файла")]
         public string rd_fieldCssColor { get; set; }
