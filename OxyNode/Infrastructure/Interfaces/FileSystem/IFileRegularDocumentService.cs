@@ -9,16 +9,19 @@ namespace OxyNode.Infrastructure.Interfaces.FileSystem
 {
     public interface IFileRegularDocumentService
     {
+        // получить путь к папке с файлами
+        public string GetFSRegularDocumentsPath();
+
         // добавить файл нормативного документа на сервер
-        public Task AddIndustrySolution(IFormFile file);
+        public Task AddRegularDocument(IFormFile file);
 
         // получить список файлов нормативных документов на сервере
-        public Task<List<string>> GetIndustrySolutionsFilesList();
+        public List<string> GetRegularDocumentsFilesList();
 
         // удалить нормативный документ по имени файла
-        public Task DeleteIndustrySolution(string fileName);
+        public void DeleteRegularDocument(string fileName);
 
         // удалить все файлы нормативных документов
-        public Task DeleteAllIndustrySolutions();
+        public void DeleteAllRegularDocuments();
     }
 }

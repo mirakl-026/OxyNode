@@ -10,16 +10,19 @@ namespace OxyNode.Infrastructure.Interfaces.FileSystem
 {
     public interface IFileIndustrySolutionService
     {
+        // получить путь к папке с файлами
+        public string GetFSIndustrySolutionsPath();
+
         // добавить файл отраслевого решения на сервер
         public Task AddIndustrySolution(IFormFile file);
 
         // получить список файлов отраслевых решений на сервере
-        public Task<List<string>> GetIndustrySolutionsFilesList();
+        public List<string> GetIndustrySolutionsFilesList();
 
         // удалить отраслевое решение по имени файла
-        public Task DeleteIndustrySolution(string fileName);
+        public void DeleteIndustrySolution(string fileName);
 
         // удалить все файлы отраслевых решений
-        public Task DeleteAllIndustrySolutions();
+        public void DeleteAllIndustrySolutions();
     }
 }

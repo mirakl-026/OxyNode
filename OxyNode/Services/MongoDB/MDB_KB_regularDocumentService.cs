@@ -75,28 +75,6 @@ namespace OxyNode.Services.MongoDB
 
         public async Task DeleteAllRegularDocuments()
         {
-            // удалить все файлы 
-            var allDocuments = await GetAllRegularDocuments();
-            // ... все иконки
-            foreach (var document in allDocuments)
-            {
-                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + document.rd_IconPath);
-                if (fi.Exists)
-                {
-                    fi.Delete();
-                }
-            }
-
-            // ... сами файлы
-            foreach (var document in allDocuments)
-            {
-                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + document.rd_Path);
-                if (fi.Exists)
-                {
-                    fi.Delete();
-                }
-            }
-
             // удалить коллекцию в БД
             // строка подключения к БД
             string connectionString = "mongodb://localhost:27017/OxyNode";

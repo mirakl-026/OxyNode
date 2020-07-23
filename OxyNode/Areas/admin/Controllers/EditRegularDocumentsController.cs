@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using OxyNode.Infrastructure.Interfaces;
+using OxyNode.Infrastructure.Interfaces.FileSystem;
 using OxyNode.ViewModels;
 using OxyNode.Models;
 using System.IO;
@@ -18,14 +19,15 @@ namespace OxyNode.Areas.admin.Controllers
     public class EditRegularDocumentsController : Controller
     {
         // Контроллер для редактирования "Нормативные документы" - файлов этой категории
-        private string FilesPath = "/resources/knowledgeBase/regularDocuments/";
         private IWebHostEnvironment _appEnvironment;
         private IKB_regularDocumentService _db;
+        private IFileRegularDocumentService _fsContext;
 
-        public EditRegularDocumentsController(IWebHostEnvironment appEnvironment, IKB_regularDocumentService context)
+        public EditRegularDocumentsController(IWebHostEnvironment appEnvironment, IKB_regularDocumentService context, IFileRegularDocumentService fsContext)
         {
             _appEnvironment = appEnvironment;
             _db = context;
+            _fsContext = fsContext;
         }
 
 
@@ -45,13 +47,10 @@ namespace OxyNode.Areas.admin.Controllers
             if (ModelState.IsValid & uploadedRd != null)
             {
                 // Определение пути 
-                string path = FilesPath + uploadedRd.FileName;
+                string path = _fsContext.GetFSRegularDocumentsPath() + uploadedRd.FileName;
 
                 // Сохранение файла на сервере
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
-                {
-                    await uploadedRd.CopyToAsync(fileStream);
-                }
+                await _fsContext.AddRegularDocument(uploadedRd);
 
                 // Сохранение в БД
                 // Надпись
@@ -60,35 +59,29 @@ namespace OxyNode.Areas.admin.Controllers
                     rd.rd_Name = uploadedRd.FileName;
                 }
 
-                // иконка и цвет поля
+                // цвет поля
                 var ext = uploadedRd.FileName.Split('.').Last();
-                string icon_path = "/resources/partial/text.png";
                 rd.rd_fieldCssColor = "background-color:lightgrey";
                 if (ext.Equals("pdf"))
                 {
-                    icon_path = "/resources/partial/pdf.png";
                     rd.rd_fieldCssColor = "background-color:lightpink";
                 }
                 else if (ext.Equals("doc") || ext.Equals("docx"))
                 {
-                    icon_path = "/resources/partial/word.png";
                     rd.rd_fieldCssColor = "background-color:lightblue";
                 }
                 else if (ext.Equals("zip") || ext.Equals("rar") || ext.Equals("7z"))
                 {
-                    icon_path = "/resources/partial/zip.png";
                     rd.rd_fieldCssColor = "background-color:lightyellow";
                 }
                 else if (ext.Equals("xls") || ext.Equals("xlsx"))
                 {
-                    icon_path = "/resources/partial/excel.png";
                     rd.rd_fieldCssColor = "background-color:lightgreen";
                 }
 
-                rd.rd_IconPath = icon_path;
-
                 // путь к файлу
                 rd.rd_Path = path;
+                rd.rd_FileName = uploadedRd.FileName;
 
                 await _db.CreateRegularDocument(rd);
                 return RedirectToAction("Index", "Panel");
@@ -132,21 +125,13 @@ namespace OxyNode.Areas.admin.Controllers
                 var currentRd = await _db.ReadRegularDocument(id);
 
                 // Определение пути по текущему файлу нормативного документа
-                string pathToDelete = currentRd.rd_Path;
-                string pathToUpdate = FilesPath + newUploadedRd.FileName;
+                string pathToUpdate = _fsContext.GetFSRegularDocumentsPath() + newUploadedRd.FileName;
 
                 // удаление файла нормативного документа с сервера
-                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToDelete);
-                if (fi.Exists)
-                {
-                    fi.Delete();
-                }
+                _fsContext.DeleteRegularDocument(currentRd.rd_FileName);
 
                 // Сохранение файла на сервере
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + pathToUpdate, FileMode.Create))
-                {
-                    await newUploadedRd.CopyToAsync(fileStream);
-                }
+                await _fsContext.AddRegularDocument(newUploadedRd);
 
                 // Сохранение в БД
                 // Надпись
@@ -155,38 +140,32 @@ namespace OxyNode.Areas.admin.Controllers
                     nrd.rd_Name = newUploadedRd.FileName;
                 }
 
-                // иконка и цвет поля
+                // цвет поля
                 var ext = newUploadedRd.FileName.Split('.').Last();
-                string icon_path = "/resources/partial/text.png";
                 nrd.rd_fieldCssColor = "background-color:lightgrey";
                 if (ext.Equals("pdf"))
                 {
-                    icon_path = "/resources/partial/pdf.png";
                     nrd.rd_fieldCssColor = "background-color:lightpink";
                 }
                 else if (ext.Equals("doc") || ext.Equals("docx"))
                 {
-                    icon_path = "/resources/partial/word.png";
                     nrd.rd_fieldCssColor = "background-color:lightblue";
                 }
                 else if (ext.Equals("zip") || ext.Equals("rar") || ext.Equals("7z"))
                 {
-                    icon_path = "/resources/partial/zip.png";
                     nrd.rd_fieldCssColor = "background-color:lightyellow";
                 }
                 else if (ext.Equals("xls") || ext.Equals("xlsx"))
                 {
-                    icon_path = "/resources/partial/excel.png";
                     nrd.rd_fieldCssColor = "background-color:lightgreen";
                 }
-
-                nrd.rd_IconPath = icon_path;
 
                 // путь к файлу
                 nrd.rd_Path = pathToUpdate;
 
                 // id
                 nrd.Id = id;
+                nrd.rd_FileName = newUploadedRd.FileName;
 
                 await _db.UpdateRegularDocument(nrd);
                 return RedirectToAction("Index", "Panel");
@@ -201,15 +180,8 @@ namespace OxyNode.Areas.admin.Controllers
         {
             var currentRd = await _db.ReadRegularDocument(id);
 
-            // Определение пути
-            string pathToDelete = currentRd.rd_Path;
-
             // удаление файла с сервера
-            FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToDelete);
-            if (fi.Exists)
-            {
-                fi.Delete();
-            }
+            _fsContext.DeleteRegularDocument(currentRd.rd_FileName);
 
             // удаление файла из Бд
             await _db.DeleteRegularDocument(id);
@@ -222,6 +194,10 @@ namespace OxyNode.Areas.admin.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteAllRegularDocuments()
         {
+            // удаление файлов
+            _fsContext.DeleteAllRegularDocuments();
+
+            // удаление из БД
             await _db.DeleteAllRegularDocuments();
             return RedirectToAction("Index", "Panel");
         }

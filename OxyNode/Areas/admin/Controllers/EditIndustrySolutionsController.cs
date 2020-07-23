@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using OxyNode.Infrastructure.Interfaces;
+using OxyNode.Infrastructure.Interfaces.FileSystem;
 using OxyNode.ViewModels;
 using OxyNode.Models;
 using System.IO;
@@ -19,15 +20,16 @@ namespace OxyNode.Areas.admin.Controllers
     public class EditIndustrySolutionsController : Controller
     {
         // Контроллер для редактирования "Нормативные документы" - файлов этой категории
-        private string FilesPath = "/resources/knowledgeBase/industrySolutions/";
         private IWebHostEnvironment _appEnvironment;
         private IKB_industrySolutionService _db;
+        private IFileIndustrySolutionService _fsContext;
 
 
-        public EditIndustrySolutionsController (IWebHostEnvironment appEnvironment, IKB_industrySolutionService context)
+        public EditIndustrySolutionsController (IWebHostEnvironment appEnvironment, IKB_industrySolutionService context, IFileIndustrySolutionService fsContext)
         {
             _appEnvironment = appEnvironment;
             _db = context;
+            _fsContext = fsContext;
         }
 
 
@@ -48,13 +50,10 @@ namespace OxyNode.Areas.admin.Controllers
             if (ModelState.IsValid & uploadedIS != null)
             {
                 // Определение пути 
-                string path = FilesPath + uploadedIS.FileName;
+                string path = _fsContext.GetFSIndustrySolutionsPath() + uploadedIS.FileName;
 
                 // Сохранение файла на сервере
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
-                {
-                    await uploadedIS.CopyToAsync(fileStream);
-                }
+                await _fsContext.AddIndustrySolution(uploadedIS);
 
                 // Сохранение в БД
                 // Надпись
@@ -63,35 +62,29 @@ namespace OxyNode.Areas.admin.Controllers
                     IS.is_Name = uploadedIS.FileName;
                 }
 
-                // иконка
+                // цвет
                 var ext = uploadedIS.FileName.Split('.').Last();
-                string icon_path = "/resources/partial/text.png";
                 IS.is_fieldCssColor = "background-color:lightgrey";
                 if (ext.Equals("pdf"))
                 {
-                    icon_path = "/resources/partial/pdf.png";
                     IS.is_fieldCssColor = "background-color:lightpink";
                 }
                 else if (ext.Equals("doc") || ext.Equals("docx"))
                 {
-                    icon_path = "/resources/partial/word.png";
                     IS.is_fieldCssColor = "background-color:lightblue";
                 }
                 else if (ext.Equals("zip") || ext.Equals("rar") || ext.Equals("7z"))
                 {
-                    icon_path = "/resources/partial/zip.png";
                     IS.is_fieldCssColor = "background-color:lightyellow";
                 }
                 else if (ext.Equals("xls") || ext.Equals("xlsx"))
                 {
-                    icon_path = "/resources/partial/excel.png";
                     IS.is_fieldCssColor = "background-color:lightgreen";
                 }
 
-                IS.is_IconPath = icon_path;
-
                 // путь к файлу
                 IS.is_Path = path;
+                IS.is_FileName = uploadedIS.FileName;
 
                 await _db.CreateIndustrySolution(IS);
                 return RedirectToAction("Index", "Panel");
@@ -135,21 +128,13 @@ namespace OxyNode.Areas.admin.Controllers
                 var currentIS = await _db.ReadIndustrySolution(id);
 
                 // Определение пути по текущему файлу нормативного документа
-                string pathToDelete = currentIS.is_Path;
-                string pathToUpdate = FilesPath + newUploadedIS.FileName;
+                string pathToUpdate = _fsContext.GetFSIndustrySolutionsPath() + newUploadedIS.FileName;
 
                 // удаление файла нормативного документа с сервера
-                FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToDelete);
-                if (fi.Exists)
-                {
-                    fi.Delete();
-                }
+                _fsContext.DeleteIndustrySolution(currentIS.is_FileName);
 
                 // Сохранение файла на сервере
-                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + pathToUpdate, FileMode.Create))
-                {
-                    await newUploadedIS.CopyToAsync(fileStream);
-                }
+                await _fsContext.AddIndustrySolution(newUploadedIS);
 
                 // Сохранение в БД
                 // Надпись
@@ -158,35 +143,29 @@ namespace OxyNode.Areas.admin.Controllers
                     nIS.is_Name = newUploadedIS.FileName;
                 }
 
-                // иконка
+                // цвет
                 var ext = newUploadedIS.FileName.Split('.').Last();
-                string icon_path = "/resources/partial/text.png";
                 nIS.is_fieldCssColor = "background-color:lightgrey";
                 if (ext.Equals("pdf"))
                 {
-                    icon_path = "/resources/partial/pdf.png";
                     nIS.is_fieldCssColor = "background-color:lightpink";
                 }
                 else if (ext.Equals("doc") || ext.Equals("docx"))
                 {
-                    icon_path = "/resources/partial/word.png";
                     nIS.is_fieldCssColor = "background-color:lightblue";
                 }
                 else if (ext.Equals("zip") || ext.Equals("rar") || ext.Equals("7z"))
                 {
-                    icon_path = "/resources/partial/zip.png";
                     nIS.is_fieldCssColor = "background-color:lightyellow";
                 }
                 else if (ext.Equals("xls") || ext.Equals("xlsx"))
                 {
-                    icon_path = "/resources/partial/excel.png";
                     nIS.is_fieldCssColor = "background-color:lightgreen";
                 }
 
-                nIS.is_IconPath = icon_path;
-
                 // путь к файлу
                 nIS.is_Path = pathToUpdate;
+                nIS.is_FileName = newUploadedIS.FileName;
 
                 // id
                 nIS.Id = id;
@@ -204,15 +183,8 @@ namespace OxyNode.Areas.admin.Controllers
         {
             var currentIS = await _db.ReadIndustrySolution(id);
 
-            // Определение пути
-            string pathToDelete = currentIS.is_Path;
-
             // удаление файла с сервера
-            FileInfo fi = new FileInfo(_appEnvironment.WebRootPath + pathToDelete);
-            if (fi.Exists)
-            {
-                fi.Delete();
-            }
+            _fsContext.DeleteIndustrySolution(currentIS.is_FileName);
 
             // удаление файла из Бд
             await _db.DeleteIndustrySolution(id);
@@ -225,6 +197,10 @@ namespace OxyNode.Areas.admin.Controllers
         [HttpGet]
         public async Task<IActionResult> DeleteAllIndustrySolutions ()
         {
+            // удалить все файлы
+            _fsContext.DeleteAllIndustrySolutions();
+
+            // удалить из БД
             await _db.DeleteAllIndustrySolutions();
             return RedirectToAction("Index", "Panel");
         }

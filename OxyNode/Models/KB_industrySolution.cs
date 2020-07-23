@@ -29,13 +29,12 @@ namespace OxyNode.Models
         [Display(Name = "Текст ссылки на файл")]
         public string is_Name { get; set; }
 
+        [Display(Name = "Название файла отраслевого решения")]
+        public string is_FileName { get; set; }
+
         // путь к файлу
         [Display(Name = "Путь к файлу")]
         public string is_Path { get; set; }
-
-        // ссылка на иконку файла
-        [Display(Name = "Иконка")]
-        public string is_IconPath { get; set; }
 
         // цвет поля
         [Display(Name = "Цвет поля файла")]
