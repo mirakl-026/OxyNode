@@ -35,6 +35,8 @@ namespace OxyNode
             // File System
             services.AddTransient<IFileAboutSertificateService, FS_AboutSertificateService>();
             services.AddTransient<IFileImageService, FS_ImageService>();
+            services.AddTransient<IFileRegularDocumentService, FS_RegularDocumentService>();
+            services.AddTransient<IFileIndustrySolutionService, FS_IndustrySolutionService>();
 
             // Mongo DB
             services.AddTransient<IContactsService, MDB_ContactsService>();
