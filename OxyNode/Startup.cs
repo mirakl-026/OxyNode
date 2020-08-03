@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 //using OxyNode.Services;
 
@@ -16,6 +17,8 @@ using OxyNode.Infrastructure.Interfaces;
 using OxyNode.Infrastructure.Interfaces.FileSystem;
 using OxyNode.Services.MongoDB;
 using OxyNode.Services.FileSystem;
+using OxyNode.Services.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace OxyNode
 {
@@ -37,6 +40,12 @@ namespace OxyNode
             services.AddTransient<IFileImageService, FS_ImageService>();
             services.AddTransient<IFileRegularDocumentService, FS_RegularDocumentService>();
             services.AddTransient<IFileIndustrySolutionService, FS_IndustrySolutionService>();
+
+            // SQL Server Express
+            services.AddDbContext<OxyNodeEntitiesContext>(opt =>
+                opt.UseSqlServer(Config.GetConnectionString("MS_SQL_Server_Express")));
+
+
 
             // Mongo DB
             services.AddTransient<IContactsService, MDB_ContactsService>();
