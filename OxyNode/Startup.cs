@@ -79,7 +79,6 @@ namespace OxyNode
             // ImagesPath = "/resources/images/";
             // IndustrySolutionsPath = "/resources/industrySolutions/";
             // RegularDocumentsPath = "/resources/regularDocuments/";
-
             DirectoryInfo di_aboutSertificates = new DirectoryInfo(path + "/aboutSertificates/");
             if(!di_aboutSertificates.Exists)
             {
