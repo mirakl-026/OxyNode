@@ -74,48 +74,34 @@ namespace OxyNode
 
             
             string path = env.WebRootPath + "/resources/";
-            // "/resources/about/sertificates/";
-            DirectoryInfo di_about = new DirectoryInfo(path + "/about/");
-            if(!di_about.Exists)
-            {
-                di_about.Create();
-            }
-            DirectoryInfo di_about_sertificates = new DirectoryInfo(path + "/about/sertificates/");
-            if (!di_about_sertificates.Exists)
-            {
-                di_about_sertificates.Create();
-            }
 
-            // "/resources/knowledgeBase/industrySolutions/";
-            // "/resources/knowledgeBase/regularDocuments/";
-            // "/resources/knowledgeBase/notes/";
-            DirectoryInfo di_knowledgeBase = new DirectoryInfo(path + "/knowledgeBase/");
-            if (!di_knowledgeBase.Exists)
-            {
-                di_knowledgeBase.Create();
-            }
-            DirectoryInfo di_knowledgeBase_IS = new DirectoryInfo(path + "/knowledgeBase/industrySolutions/");
-            if (!di_knowledgeBase_IS.Exists)
-            {
-                di_knowledgeBase_IS.Create();
-            }
-            DirectoryInfo di_knowledgeBase_RD = new DirectoryInfo(path + "/knowledgeBase/regularDocuments/");
-            if (!di_knowledgeBase_RD.Exists)
-            {
-                di_knowledgeBase_RD.Create();
-            }
-            DirectoryInfo di_knowledgeBase_NT = new DirectoryInfo(path + "/knowledgeBase/notes/");
-            if (!di_knowledgeBase_NT.Exists)
-            {
-                di_knowledgeBase_NT.Create();
-            }
+            // AboutSertificatesPath = "/resources/aboutSertificates/";
+            // ImagesPath = "/resources/images/";
+            // IndustrySolutionsPath = "/resources/industrySolutions/";
+            // RegularDocumentsPath = "/resources/regularDocuments/";
 
-            // "/resources/images/";
+            DirectoryInfo di_aboutSertificates = new DirectoryInfo(path + "/aboutSertificates/");
+            if(!di_aboutSertificates.Exists)
+            {
+                di_aboutSertificates.Create();
+            }
             DirectoryInfo di_images = new DirectoryInfo(path + "/images/");
             if (!di_images.Exists)
             {
                 di_images.Create();
             }
+            DirectoryInfo di_industrySolutions = new DirectoryInfo(path + "/industrySolutions/");
+            if (!di_industrySolutions.Exists)
+            {
+                di_industrySolutions.Create();
+            }
+            DirectoryInfo di_regularDocuments = new DirectoryInfo(path + "/regularDocuments/");
+            if (!di_regularDocuments.Exists)
+            {
+                di_regularDocuments.Create();
+            }
+
+
 
             app.UseStaticFiles();
             app.UseDefaultFiles();
