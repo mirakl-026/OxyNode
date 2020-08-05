@@ -37,21 +37,18 @@ namespace OxyNode
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // File System
-            services.AddTransient<IFileAboutSertificateService, FS_AboutSertificateService>();
-            services.AddTransient<IFileImageService, FS_ImageService>();
-            services.AddTransient<IFileRegularDocumentService, FS_RegularDocumentService>();
-            services.AddTransient<IFileIndustrySolutionService, FS_IndustrySolutionService>();
-
             // SQL Server Express
             services.AddDbContext<OxyNodeEntitiesContext>(opt =>
-                opt.UseSqlServer(Config.GetConnectionString("MS_SQL_Server_Express")));
+                opt.UseSqlServer(Config.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<OxyNodeEntitiesContextInitializer>();
 
             // Identity
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<OxyNodeEntitiesContext>()
                 .AddDefaultTokenProviders();
 
+            
             services.Configure<IdentityOptions>(opt => 
             {
                 // параметры системы identity
@@ -74,7 +71,7 @@ namespace OxyNode
             {
                 opt.Cookie.Name = "OxyNode";     // имя Cookie в браузере
                 opt.Cookie.HttpOnly = true; // передача толькопо http
-                opt.Cookie.Expiration = System.TimeSpan.FromDays(30);   // время жизни Cookie - 30 дней
+                opt.ExpireTimeSpan = System.TimeSpan.FromDays(30); // время жизни Cookie - 30 дней
 
                 opt.LoginPath = "/Account/Login";   // автоматические перенаправление, при отсутствии логина и запрету ресурсов
                 opt.LogoutPath = "/Account/Logout";
@@ -83,8 +80,14 @@ namespace OxyNode
                 opt.SlidingExpiration = true;   // автоматически изменять идентификатор сеанса если пользователь меняет состояние
 
             });
+            
 
 
+            // File System
+            services.AddTransient<IFileAboutSertificateService, FS_AboutSertificateService>();
+            services.AddTransient<IFileImageService, FS_ImageService>();
+            services.AddTransient<IFileRegularDocumentService, FS_RegularDocumentService>();
+            services.AddTransient<IFileIndustrySolutionService, FS_IndustrySolutionService>();
 
             // Mongo DB
             services.AddTransient<IContactsService, MDB_ContactsService>();
@@ -107,14 +110,14 @@ namespace OxyNode
             services.AddTransient<INewsService, MDB_NewsService>();
 
             services.AddTransient<IDeviceService, MDB_DeviceService>();
-
-
             
             services.AddControllersWithViews();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, OxyNodeEntitiesContextInitializer db)
         {
+            db.InitializeAsync().Wait();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -154,12 +157,10 @@ namespace OxyNode
             app.UseDefaultFiles();
             app.UseCookiePolicy();
 
-            app.UseAuthentication();
-            //app.UseAuthorization();
-
-            app.UseSession();
-
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
