@@ -78,7 +78,6 @@ namespace OxyNode
 
                 opt.LoginPath = "/Account/Login";   // автоматические перенаправление, при отсутствии логина и запрету ресурсов
                 opt.LogoutPath = "/Account/Logout";
-
                 opt.AccessDeniedPath = "/Account/AccessDenied"; // путь при отказе в доступе
 
                 opt.SlidingExpiration = true;   // автоматически изменять идентификатор сеанса если пользователь меняет состояние
@@ -153,7 +152,12 @@ namespace OxyNode
 
             app.UseStaticFiles();
             app.UseDefaultFiles();
+            app.UseCookiePolicy();
 
+            app.UseAuthentication();
+            //app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseRouting();
 
